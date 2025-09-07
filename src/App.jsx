@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./pages/AppLayout";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
+import Products from "./pages/Products";
 function App() {
   const router = createBrowserRouter([
     {
@@ -13,8 +14,8 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/about",
-          element: <div>about</div>,
+          path: "/products",
+          element: <Products />,
         },
       ],
     },

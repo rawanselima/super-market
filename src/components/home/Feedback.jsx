@@ -2,10 +2,18 @@ import React from "react";
 import { SwiperSlide } from "swiper/react";
 import SliderContainer from "../common/SliderContainer";
 import FeedbackBox from "./FeedbackBox";
-
+import { motion } from "framer-motion";
+import { containerVariant } from "../../animation/animationVariable";
+import { childVariant } from "../../animation/animationVariable";
 const Feedback = () => {
   return (
-    <div className="my-5" >
+    <motion.div
+      className="my-5"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.3 }}
+    >
       <SliderContainer
         header="Customers FeedBack"
         largeScreen={4}
@@ -13,16 +21,22 @@ const Feedback = () => {
         smallScreen={1}
       >
         <SwiperSlide>
-          <FeedbackBox />
+          <motion.div variants={childVariant}>
+            <FeedbackBox />
+          </motion.div>
         </SwiperSlide>
         <SwiperSlide>
-          <FeedbackBox />
+          <motion.div variants={childVariant}>
+            <FeedbackBox />
+          </motion.div>
         </SwiperSlide>
         <SwiperSlide>
-          <FeedbackBox />
+          <motion.div variants={childVariant}>
+            <FeedbackBox />
+          </motion.div>
         </SwiperSlide>
       </SliderContainer>
-    </div>
+    </motion.div>
   );
 };
 

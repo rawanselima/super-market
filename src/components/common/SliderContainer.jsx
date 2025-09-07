@@ -30,7 +30,7 @@ const SliderContainer = ({
           </button>
         </div>
       </div>
-      <div className="mx-2 md:px-0 px-3" >
+      <div className="mx-2 md:px-0 px-3">
         <Swiper
           slidesPerView={smallScreen}
           spaceBetween={10}
@@ -58,7 +58,7 @@ const SliderContainer = ({
               spaceBetween: 50,
             },
           }}
-          className="mySwiper"
+          className="mySwiper !py-10 !px-3"
         >
           {children}
         </Swiper>

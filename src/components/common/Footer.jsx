@@ -9,6 +9,10 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io5";
 import { RiYoutubeLine } from "react-icons/ri";
 import { IoLogoWhatsapp } from "react-icons/io";
+import { IoHomeOutline } from "react-icons/io5";
+import { FaPlateWheat } from "react-icons/fa6";
+import { IoCartOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Footer = () => {
   const styleIconSocialMedia =
     "text-sm mx-1 my-3 text-white bg-green rounded-full p-2 hover:bg-dark-green transition-all duration-300 cursor-pointer";
@@ -94,23 +98,33 @@ const Footer = () => {
         </ul>
       </div>
       <div>
-        <h3 className="text-dark-green font-bold text-xl"> Account </h3>
+        <h3 className="text-dark-green font-bold text-xl mb-3"> Account </h3>
         <ul>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            Home
+          <li>
+            <Link
+              to="/"
+              className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1"
+            >
+              <span className=" text-green mr-1 ">
+                <IoHomeOutline />
+              </span>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/products"
+              className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1"
+            >
+              <span className=" text-green mr-1 ">
+                <FaPlateWheat />
+              </span>
+              Products
+            </Link>
           </li>
           <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            Products
-          </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
+            <span className=" text-green mr-1">
+              <IoCartOutline />
             </span>
             cart
           </li>
