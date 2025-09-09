@@ -3,6 +3,9 @@ import AppLayout from "./pages/AppLayout";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import Products from "./pages/Products";
+import DetailsProduct from "./pages/DetailsProduct";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 function App() {
   const router = createBrowserRouter([
     {
@@ -16,6 +19,18 @@ function App() {
         {
           path: "/products",
           element: <Products />,
+        },
+        {
+          path: "/products/:id",
+          element: <DetailsProduct />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
+        },
+        {
+          path: "/checkout",
+          element: <Checkout />,
         },
       ],
     },

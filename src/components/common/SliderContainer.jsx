@@ -20,7 +20,7 @@ const SliderContainer = ({
   return (
     <section>
       <div className="flex justify-between items-center">
-        <HeaderSection> {header} </HeaderSection>
+        <HeaderSection showByMargin={true}> {header} </HeaderSection>
         <div className="md:px-0 px-3">
           <button ref={prevRef} className={styleArrowBtn}>
             <IoIosArrowBack />

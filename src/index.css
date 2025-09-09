@@ -18,10 +18,22 @@
 
 @theme {
   --color-green: #3bb77e;
+  /* --color-green: #358c62; */
   --color-dark-green: #253d4e;
   --color-light-green: #def9ec;
   --color-white: #ffffff;
   --color-light-gray: #e8e8e8;
   --color-dark-gray: #7e7e7e;
   --font-family-quicksand: "Quicksand", sans-serif;
+}
+
+.mySwiper.slider-products .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper.slider-products .swiper-slide-thumb-active {
+  opacity: 1;
+  border: 1px solid var(--color-green);
 }

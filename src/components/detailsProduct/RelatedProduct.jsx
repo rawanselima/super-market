@@ -4,10 +4,10 @@ import HeaderSection from "../common/HeaderSection";
 import { motion } from "framer-motion";
 import { containerVariant } from "../../animation/animationVariable";
 import { childVariant } from "../../animation/animationVariable";
-const TopSales = () => {
+const RelatedProduct = () => {
   return (
-    <section>
-      <HeaderSection showByMargin={true} > Best Sellers </HeaderSection>
+    <>
+      <HeaderSection showByMargin={true}> Related Products </HeaderSection>
       <motion.div
         className="grid xl:grid-cols-5 lg:grid-cols-3 grid-cols-2 gap-4 md:px-0 px-3"
         variants={containerVariant}
@@ -31,8 +31,8 @@ const TopSales = () => {
           <ProductCard />
         </motion.div>
       </motion.div>
-    </section>
+    </>
   );
 };
 
-export default TopSales;
+export default RelatedProduct;

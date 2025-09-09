@@ -7,6 +7,7 @@ import { childTextVariants } from "../../animation/animationVariable";
 import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const navigate = useNavigate();
+  
   return (
     <section className="bg-[url(/assets/heroSection.png)] min-h-[500px] bg-no-repeat bg-cover bg-right rounded-3xl mt-7">
       <motion.div

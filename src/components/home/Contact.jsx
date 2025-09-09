@@ -32,7 +32,7 @@ const Contact = () => {
   return (
     <section className="bg-[url(/assets/background.png)] bg-no-repeat bg-cover bg-left rounded-3xl flex flex-wrap justify-between items-center my-10">
       <div className="px-10">
-        <HeaderSection>
+        <HeaderSection showByMargin={true} >
           Stay home & get your daily <br /> needs from our shop
         </HeaderSection>
         <p className="text-dark-gray mb-3">

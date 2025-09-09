@@ -4,6 +4,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { GrLanguage } from "react-icons/gr";
 import { IoMoonOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
+import { Link, Links } from "react-router-dom";
 
 const Header = () => {
   const styleLinks =
@@ -11,13 +12,15 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center font-quicksand py-5 px-3 xl:px-0 ">
-      <div>
+      <Link to="/">
         <img src="/assets/logo.svg fill.png" alt="logo" />
-      </div>
+      </Link>
       <nav>
         <ul className="flex items-center">
           <li className={styleLinks}>
-            <IoCartOutline />
+            <Link to="/cart">
+              <IoCartOutline />
+            </Link>
           </li>
           <li className={styleLinks}>
             <GrLanguage />

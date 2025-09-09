@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 const HeaderProducts = () => {
   return (
-    <section className="p-4 col-span-12 text-lg font-bold rounded bg-green text-white flex flex-wrap items-center justify-between">
+    <section className="px-4 py-6 col-span-12 text-lg font-bold rounded bg-green text-white flex flex-wrap items-center justify-between">
       <p className="flex items-center gap-2">
         <span>
           <RiShoppingBag3Fill />
