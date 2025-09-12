@@ -9,6 +9,7 @@ import Checkout from "./pages/Checkout";
 import AppLayout from "./pages/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import AllProducts from "./pages/AllProducts";
+import Category from "./pages/Category";
 function App() {
   const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ function App() {
         {
           path: "allProducts",
           element: <AllProducts />,
+        },
+        {
+          path: "category",
+          element: <Category />,
         },
       ],
     },

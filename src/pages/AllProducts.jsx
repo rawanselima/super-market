@@ -5,20 +5,18 @@ import Button from "@/components/common/Button";
 import { TiPlus } from "react-icons/ti";
 import PopUp from "@/components/common/PopUp";
 import AddProduct from "@/components/allProducts/AddProduct";
+import TitleDashboardPages from "@/components/common/TitleDashboardPages";
 const AllProducts = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <main>
-      <section className="flex justify-between items-center">
-        <HeaderSection showByMargin={true}> ALl Products </HeaderSection>
-        <Button navigate={() => setIsOpen(!isOpen)}>
-          <span className="mr-2">
-            <TiPlus />
-          </span>
-          Add Product
-        </Button>
-      </section>
+      <TitleDashboardPages
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={"All Products"}
+        textBtn={"add product"}
+      />
       <section className="overflow-x-auto w-full">
         <TableProducts />
       </section>

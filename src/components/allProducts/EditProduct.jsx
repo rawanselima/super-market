@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../common/Button";
-const AddProduct = () => {
+import { RiDeleteBin5Line } from "react-icons/ri";
+const EditProduct = () => {
   const styleInput =
     "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green";
   const styleLabel = "block text-sm font-bold text-dark-green mb-2";
@@ -10,13 +11,29 @@ const AddProduct = () => {
         <label htmlFor="image" className={styleLabel}>
           Image *
         </label>
-        <input
-          type="file"
-          id="image"
-          required
-          className={styleInput}
-          placeholder="Enter product Images"
-        />
+        <input type="file" id="image" required className={styleInput} />
+      </div>
+      <div className="flex gap-2 flex-wrap">
+        <div>
+          <img
+            src="/assets/product-8.png"
+            alt="ProductImage"
+            className="w-28 h-28"
+          />
+          <p className="text-red-800 cursor-pointer w-fit mx-auto text-lg">
+            <RiDeleteBin5Line />
+          </p>
+        </div>
+        <div className="flex flex-col justify-center">
+          <img
+            src="/assets/product-7.png"
+            alt="ProductImage"
+            className="w-28 h-28"
+          />
+          <p className="text-red-800 cursor-pointer w-fit mx-auto text-lg">
+            <RiDeleteBin5Line />
+          </p>
+        </div>
       </div>
       <div>
         <label htmlFor="productName" className={styleLabel}>
@@ -27,7 +44,7 @@ const AddProduct = () => {
           id="productName"
           required
           className={styleInput}
-          placeholder="Enter your last name"
+          defaultValue={"hello"}
         />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -40,7 +57,7 @@ const AddProduct = () => {
             id="price"
             required
             className={styleInput}
-            placeholder="Enter your first name"
+            defaultValue={300}
           />
         </div>
         <div>
@@ -51,9 +68,8 @@ const AddProduct = () => {
             type="text"
             id="discount"
             required
-            defaultValue={0}
             className={styleInput}
-            placeholder="Enter your last name"
+            defaultValue={0}
           />
         </div>
       </div>
@@ -68,7 +84,7 @@ const AddProduct = () => {
             id="size"
             required
             className={styleInput}
-            placeholder="Enter your first name"
+            defaultValue={20}
           />
         </div>
         <div>
@@ -80,7 +96,7 @@ const AddProduct = () => {
             id="stock"
             required
             className={styleInput}
-            placeholder="Enter your last name"
+            defaultValue={30}
           />
         </div>
       </div>
@@ -89,8 +105,13 @@ const AddProduct = () => {
         <label htmlFor="category" className={styleLabel}>
           Category *
         </label>
-        <select id="category" required className={styleInput}>
-          <option value="" disabled>
+        <select
+          id="category"
+          required
+          className={styleInput}
+          defaultValue={"feedback"}
+        >
+          <option value={"select"} disabled>
             Select a Category{" "}
           </option>
           <option value="general">General Inquiry</option>
@@ -109,7 +130,7 @@ const AddProduct = () => {
           rows={4}
           required
           className={styleInput}
-          placeholder="Please describe your inquiry..."
+          defaultValue={"hello world"}
         />
       </div>
 
@@ -118,11 +139,11 @@ const AddProduct = () => {
           Cancel
         </Button>
         <Button type="submit" variant="default">
-          Add Product
+          Edit Product
         </Button>
       </div>
     </form>
   );
 };
 
-export default AddProduct;
+export default EditProduct;

@@ -37,7 +37,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
     {
       icon: <FaPlateWheat />,
       text: "Category",
-      function: null,
+      function: "category",
     },
     {
       icon: <FaBoxes />,
