@@ -1,32 +1,23 @@
 import React from "react";
-import { RxPerson } from "react-icons/rx";
-import { IoCartOutline } from "react-icons/io5";
 import { TfiWorld } from "react-icons/tfi";
-import { IoMoonOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
-import { Link } from "react-router-dom";
-
-const Header = () => {
+import { RxPerson } from "react-icons/rx";
+import { FaBarsStaggered } from "react-icons/fa6";
+const HeaderDashboard = ({ setShowSidebar, showSidebar }) => {
   const styleLinks =
     "mx-1 text-lg cursor-pointer  transition-all text-dark-green hover:text-green duration-300 transition-all";
-
   return (
-    <header className="flex justify-between items-center font-quicksand py-5 px-3 xl:px-0 ">
-      <Link to="/">
-        <img src="/assets/logo.svg fill.png" alt="logo" />
-      </Link>
+    <header className="bg-white px-3 py-5 rounded fixed top-2 z-10 xl:w-[calc(100%-15rem)] md:w-[calc(100%-6rem)] w-[calc(100%-2rem)] shadow">
       <nav>
-        <ul className="flex items-center">
-          <li className={styleLinks}>
-            <Link to="/cart">
-              <IoCartOutline />
-            </Link>
+        <ul className="flex items-center justify-end-safe">
+          <li
+            className={`${styleLinks} block sm:hidden`}
+            onClick={() => setShowSidebar(!showSidebar)}
+          >
+            <FaBarsStaggered />
           </li>
           <li className={styleLinks}>
             <TfiWorld />
-          </li>
-          <li className={styleLinks}>
-            <IoMoonOutline />
           </li>
           <li className={styleLinks}>
             <IoIosLogOut />
@@ -41,4 +32,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderDashboard;

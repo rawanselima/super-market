@@ -42,7 +42,7 @@ const RowCart = () => {
         $150
       </td>
 
-      <td className="px-2 sm:px-6 py-2 sm:py-4 text-end text-xs sm:text-sm font-medium rounded w-16 sm:w-20 whitespace-nowrap">
+      <td className="px-2 sm:px-6 py-2 sm:py-4 text-end text-xs sm:text-sm font-medium rounded w-24 md:w-20 whitespace-nowrap">
         <Button size={"small"} danger={true}>
           <span className="mr-1">
             <RiDeleteBin6Line />

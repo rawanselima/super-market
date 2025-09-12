@@ -21,7 +21,7 @@ const TableCart = () => {
           <th scope="col" className="px-2 sm:px-3 py-2 sm:py-5 w-20">
             Total
           </th>
-          <th scope="col" className="px-2 sm:px-3 py-2 sm:py-5 w-16 sm:w-20">
+          <th scope="col" className="px-2 sm:px-3 py-2 sm:py-5 w-24 md:w-20">
             Action
           </th>
         </tr>

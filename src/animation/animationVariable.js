@@ -69,3 +69,29 @@ export const tabVariant = {
     mass: 3,
   },
 };
+
+export const containerSidebarVariant = (showSidebar) => ({
+  hidden: { x: -20, opacity: 0 },
+  visible: {
+    x: showSidebar ? 0 : -20,
+    opacity: showSidebar ? 1 : 0,
+    transition: {
+      duration: 0.5,
+      staggerChildren: 0.3,
+    },
+  },
+});
+
+export const sidebarVariant = {
+  hidden: { x: -50, opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      type: "spring",
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+};
