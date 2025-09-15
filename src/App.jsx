@@ -10,6 +10,10 @@ import AppLayout from "./pages/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import AllProducts from "./pages/AllProducts";
 import Category from "./pages/Category";
+import Order from "./pages/Order";
+import OrderDetails from "./pages/OrderDetails";
+import Customer from "./pages/Customer";
+import ReportCustomer from "./pages/ReportCustomer";
 function App() {
   const router = createBrowserRouter([
     {
@@ -54,6 +58,22 @@ function App() {
           path: "category",
           element: <Category />,
         },
+        {
+          path: "order",
+          element: <Order />,
+        },
+        {
+          path: "order/:id",
+          element: <OrderDetails />,
+        },
+        {
+          path: "customer",
+          element: <Customer />,
+        },
+        {
+          path: "customer/:id",
+          element: <ReportCustomer />,
+        },
       ],
     },
   ]);
@@ -85,7 +105,6 @@ function App() {
           },
         }}
       />
-      ,
     </>
   );
 }

@@ -8,7 +8,7 @@ const TitleDashboardPages = ({ isOpen, setIsOpen, title, textBtn }) => {
 
   return (
     <section className="flex justify-between items-center">
-      <HeaderSection showByMargin={true}> {title} </HeaderSection>
+      <HeaderSection smallMargin={true} > {title} </HeaderSection>
       {isMobile ? (
         <Button navigate={() => setIsOpen(!isOpen)} size={"small"}>
           <span className="mr-2">
@@ -19,7 +19,7 @@ const TitleDashboardPages = ({ isOpen, setIsOpen, title, textBtn }) => {
       ) : (
         <Button navigate={() => setIsOpen(!isOpen)}>
           <span className="mr-2">
-            <TiPlus/>
+            <TiPlus />
           </span>
           {textBtn}
         </Button>

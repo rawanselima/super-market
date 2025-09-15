@@ -18,14 +18,14 @@ const AppLayout = () => {
   if (state === "loading" || state === "submitting") return <Loader />;
 
   return (
-    <div className="flex font-family-quicksand ">
+    <div className="flex font-family-quicksand bg-light-green">
       <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-      <div className="xl:ml-52 md:ml-16 w-full pt-2 px-4 bg-light-green min-h-screen">
+      <div className="xl:ml-52 md:ml-16 w-full pt-2 px-4 pb-32 bg-light-green min-h-screen ">
         <HeaderDashboard
           setShowSidebar={setShowSidebar}
           showSidebar={showSidebar}
         />
-        <div className="rounded bg-white min-h-screen p-3 mt-20">
+        <div className="rounded bg-white p-3 mt-20">
           <Outlet />
         </div>
       </div>

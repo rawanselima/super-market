@@ -7,12 +7,13 @@ const AddProduct = () => {
   return (
     <form className="space-y-4">
       <div>
-        <label htmlFor="image" className={styleLabel}>
+        <label htmlFor="image" multiple className={styleLabel}>
           Image *
         </label>
         <input
           type="file"
-          id="image"
+          name="image"
+          multiple
           required
           className={styleInput}
           placeholder="Enter product Images"
@@ -24,7 +25,7 @@ const AddProduct = () => {
         </label>
         <input
           type="text"
-          id="productName"
+          name="productName"
           required
           className={styleInput}
           placeholder="Enter your last name"
@@ -37,7 +38,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
-            id="price"
+            name="price"
             required
             className={styleInput}
             placeholder="Enter your first name"
@@ -49,7 +50,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
-            id="discount"
+            name="discount"
             required
             defaultValue={0}
             className={styleInput}
@@ -65,7 +66,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
-            id="size"
+            name="size"
             required
             className={styleInput}
             placeholder="Enter your first name"
@@ -77,7 +78,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
-            id="stock"
+            name="stock"
             required
             className={styleInput}
             placeholder="Enter your last name"
@@ -89,7 +90,7 @@ const AddProduct = () => {
         <label htmlFor="category" className={styleLabel}>
           Category *
         </label>
-        <select id="category" required className={styleInput}>
+        <select name="category" required className={styleInput}>
           <option value="" disabled>
             Select a Category{" "}
           </option>
@@ -105,7 +106,7 @@ const AddProduct = () => {
           Description *
         </label>
         <textarea
-          id="description"
+          name="description"
           rows={4}
           required
           className={styleInput}

@@ -11,7 +11,7 @@ const EditProduct = () => {
         <label htmlFor="image" className={styleLabel}>
           Image *
         </label>
-        <input type="file" id="image" required className={styleInput} />
+        <input type="file" name="image" multiple className={styleInput} />
       </div>
       <div className="flex gap-2 flex-wrap">
         <div>
@@ -41,7 +41,7 @@ const EditProduct = () => {
         </label>
         <input
           type="text"
-          id="productName"
+          name="productName"
           required
           className={styleInput}
           defaultValue={"hello"}
@@ -54,7 +54,7 @@ const EditProduct = () => {
           </label>
           <input
             type="text"
-            id="price"
+            name="price"
             required
             className={styleInput}
             defaultValue={300}
@@ -66,7 +66,7 @@ const EditProduct = () => {
           </label>
           <input
             type="text"
-            id="discount"
+            name="discount"
             required
             className={styleInput}
             defaultValue={0}
@@ -81,7 +81,7 @@ const EditProduct = () => {
           </label>
           <input
             type="text"
-            id="size"
+            name="size"
             required
             className={styleInput}
             defaultValue={20}
@@ -93,7 +93,7 @@ const EditProduct = () => {
           </label>
           <input
             type="text"
-            id="stock"
+            name="stock"
             required
             className={styleInput}
             defaultValue={30}
@@ -106,7 +106,7 @@ const EditProduct = () => {
           Category *
         </label>
         <select
-          id="category"
+          name="category"
           required
           className={styleInput}
           defaultValue={"feedback"}
@@ -126,7 +126,7 @@ const EditProduct = () => {
           Description *
         </label>
         <textarea
-          id="description"
+          name="description"
           rows={4}
           required
           className={styleInput}

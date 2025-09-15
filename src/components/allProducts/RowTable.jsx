@@ -7,7 +7,6 @@ import DeletePopup from "../common/DeletePopup";
 import SliderImages from "./SliderImages";
 import PopUp from "../common/PopUp";
 import EditProduct from "./EditProduct";
-
 const RowTable = () => {
   const descriptionText =
     "Uninhibited carnally hired played in whimpered dear gorilla koaladepending and much yikes off far quetzal goodness and from for grimacedgoodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. Spluttered";
@@ -18,7 +17,7 @@ const RowTable = () => {
   const [isOpenEditProduct, setIsOpenEditProduct] = useState(false);
 
   return (
-    <TableRow className="border-b-2 b-light-green">
+    <TableRow className="border-b-1 border-light-gray b-light-green">
       <TableCell className={`${styleTableCell} w-20 `}>
         <button onClick={() => setIsOpenSliderImages(!isOpenSliderImages)}>
           <img
@@ -54,7 +53,7 @@ const RowTable = () => {
         className={`${styleTableCell} font-bold text-xl text-green w-20`}
       >
         <button
-          className="mr-3 cursor-pointer"
+          className="mr-3 cursor-pointer text-red-800"
           onClick={() => setIsOpenConfirmDelete(!isOpenConfirmDelete)}
         >
           <RiDeleteBin5Line />
@@ -75,7 +74,11 @@ const RowTable = () => {
         isOpen={isOpenSliderImages}
         setIsOpen={setIsOpenSliderImages}
       />
-      <PopUp isOpen={isOpenEditProduct} setIsOpen={setIsOpenEditProduct}>
+      <PopUp
+        isOpen={isOpenEditProduct}
+        setIsOpen={setIsOpenEditProduct}
+        title={"Edit Category"}
+      >
         <EditProduct />
       </PopUp>
     </TableRow>

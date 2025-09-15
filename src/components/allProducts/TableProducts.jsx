@@ -11,7 +11,7 @@ function TableProducts() {
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
-        <TableRow className="uppercase font-bold text-dark-green text-left">
+        <TableRow className="uppercase font-bold text-dark-green text-left  border-b-1 border-light-gray">
           <TableHead className={`${styleTableHead} w-20 `}>image</TableHead>
           <TableHead className={`${styleTableHead}  md:w-52 w-32 `}>
             name

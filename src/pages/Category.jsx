@@ -1,4 +1,5 @@
 import TableProducts from "@/components/allProducts/TableProducts";
+import AddCategory from "@/components/Category/AddCategory";
 import TableCategory from "@/components/Category/TableCategory";
 import PopUp from "@/components/common/PopUp";
 import TitleDashboardPages from "@/components/common/TitleDashboardPages";
@@ -19,8 +20,8 @@ const Category = () => {
       <section className="overflow-x-auto w-full md:max-w-3/4 max-w-full mx-auto rounded">
         <TableCategory />
       </section>
-      <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Product"}>
-        hello
+      <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Category"}>
+        <AddCategory />
       </PopUp>
     </main>
   );

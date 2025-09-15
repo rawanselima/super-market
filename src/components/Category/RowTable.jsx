@@ -4,6 +4,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
 import DeletePopup from "../common/DeletePopup";
 import PopUp from "../common/PopUp";
+import EditCategory from "./EditCategory";
 
 const RowTable = () => {
   const descriptionText =
@@ -47,8 +48,12 @@ const RowTable = () => {
         setIsOpen={setIsOpenConfirmDelete}
       />
 
-      <PopUp isOpen={isOpenEditProduct} setIsOpen={setIsOpenEditProduct}>
-        {/* <EditProduct /> */}
+      <PopUp
+        isOpen={isOpenEditProduct}
+        setIsOpen={setIsOpenEditProduct}
+        title={"Edit Category"}
+      >
+        <EditCategory />
       </PopUp>
     </TableRow>
   );

@@ -32,7 +32,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
     {
       icon: <BsFillPeopleFill />,
       text: "Customers",
-      function: null,
+      function: "customer",
     },
     {
       icon: <FaPlateWheat />,
@@ -47,7 +47,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
     {
       icon: <IoIosListBox />,
       text: "Orders",
-      function: null,
+      function: "order",
     },
     {
       icon: <FaShippingFast />,
