@@ -2,6 +2,7 @@ import TableProducts from "@/components/allProducts/TableProducts";
 import AddCategory from "@/components/Category/AddCategory";
 import TableCategory from "@/components/Category/TableCategory";
 import HeaderSection from "@/components/common/HeaderSection";
+import Pagination from "@/components/common/Pagination";
 import TitleDashboardPages from "@/components/common/TitleDashboardPages";
 import TableOrders from "@/components/order/TableOrder";
 import React, { useState } from "react";
@@ -35,6 +36,9 @@ const Category = () => {
       </section>
       <section className="overflow-x-auto w-full">
         <TableOrders />
+      </section>
+         <section className="mx-auto w-fit" >
+        <Pagination />
       </section>
     </main>
   );

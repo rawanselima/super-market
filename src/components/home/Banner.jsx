@@ -8,15 +8,15 @@ const Banner = () => {
 
   const dataBanners = [
     {
-      image: "bg-[url('/assets/banner-1.png')]",
+      image: "bg-[url('/assets/banner-1.webp')]",
       text: "Everyday Fresh & Clean with Our Products",
     },
     {
-      image: "bg-[url('/assets/banner-2.png')]",
+      image: "bg-[url('/assets/banner-2.webp')]",
       text: "Make your Breakfast Healthy and Easy",
     },
     {
-      image: "bg-[url('/assets/banner-3.png')]",
+      image: "bg-[url('/assets/banner-3.webp')]",
       text: "The Best Organic Products Online",
     },
   ];

@@ -9,7 +9,7 @@ import { MdLogout } from "react-icons/md";
 import { FaFacebookF, FaLinkedinIn, FaPlateWheat } from "react-icons/fa6";
 import { IoLogoInstagram, IoLogoWhatsapp } from "react-icons/io5";
 import { RiYoutubeLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   containerSidebarVariant,
   hoverVariant,
@@ -18,7 +18,7 @@ import {
 } from "../../animation/animationVariable";
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const styleList =
-    "relative flex items-center gap-2 px-2 py-3 cursor-pointer ";
+    "relative flex items-center gap-2 px-2 py-3 cursor-pointer rounded ";
   const styleIconSocialMedia =
     "text-xs mx-1 mt-5 mb-1 text-green bg-dark-green rounded-full p-1.5 hover:bg-green hover:text-dark-green transition-all duration-300 cursor-pointer";
   const styleSpan = "md:hidden xl:block block";
@@ -52,12 +52,12 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
     {
       icon: <FaShippingFast />,
       text: "Shipping",
-      function: null,
+      function: "shipping",
     },
     {
       icon: <MdLogout />,
       text: "Logout",
-      function: null,
+      function: "logout",
     },
   ];
 
@@ -80,14 +80,14 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
         className="h-screen font-bold text-light-green bg-[linear-gradient(45deg,#def9ec_0%,#4eca92_15%,#3bb77e_30%,#2a7d64_50%,#253d4e_100%)] fixed top-0 left-0 xl:w-52 md:w-16 p-2 z-50"
       >
         <motion.div variants={sidebarVariant} className="py-5">
-          <Link to="/">
+          <NavLink to="/">
             <img
-              src="/assets/logo.svg fill.png"
+              src="/assets/logo.svg fill.webp"
               alt="logo"
               loading="lazy"
               className="xl:w-32 md:w-full xl:ml-3"
             />
-          </Link>
+          </NavLink>
 
           <motion.div
             variants={sidebarVariant}
@@ -141,10 +141,18 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
                   whileHover={hoverVariant}
                   whileTap={tabVariant}
                 >
-                  <Link to={ele.function} className={`${styleList}`}>
+                  <NavLink
+                    to={ele.function}
+                    end
+                    className={({ isActive }) =>
+                      isActive
+                        ? `${styleList} bg-dark-green`
+                        : `${styleList} bg-transparent`
+                    }
+                  >
                     {ele.icon}
                     <span className={styleSpan}> {ele.text} </span>
-                  </Link>
+                  </NavLink>
                 </motion.li>
               );
             })}

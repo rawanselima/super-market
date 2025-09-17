@@ -16,7 +16,7 @@ const Category = () => {
       viewport={{ once: false, amount: 0.3 }}
     >
       <SliderContainer
-        header="Featured Categories"
+        header={"Featured Categories"}
         largeScreen={7}
         mediumScreen={4}
         smallScreen={2}

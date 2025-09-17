@@ -30,9 +30,9 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-[url(/assets/background.png)] bg-no-repeat bg-cover bg-left rounded-3xl flex flex-wrap justify-between items-center my-10">
+    <section className="bg-[url(/assets/background.webp)] bg-no-repeat bg-cover bg-left rounded-3xl flex flex-wrap justify-between items-center my-10">
       <div className="px-10">
-        <HeaderSection showByMargin={true} >
+        <HeaderSection showByMargin={true}>
           Stay home & get your daily <br /> needs from our shop
         </HeaderSection>
         <p className="text-dark-gray mb-3">
@@ -71,7 +71,7 @@ const Contact = () => {
       </div>
       <div>
         <img
-          src="/assets/contact.png"
+          src="/assets/contact.webp"
           alt="contactImage"
           loading="lazy"
           className="object-cover xl:mt-20"

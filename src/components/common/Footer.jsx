@@ -122,12 +122,14 @@ const Footer = () => {
               Products
             </Link>
           </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className=" text-green mr-1">
-              <IoCartOutline />
-            </span>
-            cart
-          </li>
+          <Link to="/cart">
+            <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
+              <span className=" text-green mr-1">
+                <IoCartOutline />
+              </span>
+              cart
+            </li>
+          </Link>
         </ul>
       </div>
       <div>

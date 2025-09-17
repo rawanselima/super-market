@@ -9,7 +9,7 @@ const FeedbackBox = () => {
     >
       <div className="flex items-center">
         <img
-          src="/assets/profile.jpeg"
+          src="/assets/profile.webp"
           alt="feedback"
           loading="lazy"
           className="rounded-full w-10 h-10 mr-3 border-3 border-green/25 object-cover"

@@ -1,9 +1,9 @@
 import HeaderSection from "@/components/common/HeaderSection";
+import Pagination from "@/components/common/Pagination";
 import TableCustomer from "@/components/customer/TableCusromer";
 import React from "react";
 
 const Customer = () => {
-    
   return (
     <main>
       <section className="flex justify-between items-center flex-wrap">
@@ -18,6 +18,10 @@ const Customer = () => {
       </section>
       <section>
         <TableCustomer />
+      </section>
+
+      <section className="mx-auto w-fit">
+        <Pagination />
       </section>
     </main>
   );

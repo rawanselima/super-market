@@ -9,7 +9,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="bg-[url(/assets/heroSection.png)] min-h-[500px] bg-no-repeat bg-cover bg-right rounded-3xl mt-7">
+    <section className="bg-[url(/assets/heroSection.webp)] min-h-[500px] bg-no-repeat bg-cover bg-right rounded-3xl mt-7">
       <motion.div
         className="py-30 md:px-20 px-5"
         variants={containerVariant}

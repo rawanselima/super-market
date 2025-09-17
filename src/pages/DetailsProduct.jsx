@@ -3,6 +3,8 @@ import Slider from "../components/detailsProduct/Slider";
 import Description from "../components/detailsProduct/Description";
 import RelatedProduct from "../components/detailsProduct/RelatedProduct";
 import HeaderProducts from "../components/products/HeaderProducts";
+import { motion } from "framer-motion";
+import { containerVariant } from "@/animation/animationVariable";
 const DetailsProduct = () => {
   return (
     <main>
@@ -16,7 +18,13 @@ const DetailsProduct = () => {
         </section>
       </div>
 
-      <RelatedProduct />
+      <motion.section
+        variants={containerVariant}
+        initial="hidden"
+        whileInView="visible"
+      >
+        <RelatedProduct />
+      </motion.section>
     </main>
   );
 };

@@ -14,6 +14,7 @@ import Order from "./pages/Order";
 import OrderDetails from "./pages/OrderDetails";
 import Customer from "./pages/Customer";
 import ReportCustomer from "./pages/ReportCustomer";
+import Shipping from "./pages/Shipping";
 function App() {
   const router = createBrowserRouter([
     {
@@ -25,19 +26,19 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/products",
+          path: "products",
           element: <Products />,
         },
         {
-          path: "/products/:id",
+          path: "products/:id",
           element: <DetailsProduct />,
         },
         {
-          path: "/cart",
+          path: "cart",
           element: <Cart />,
         },
         {
-          path: "/checkout",
+          path: "checkout",
           element: <Checkout />,
         },
       ],
@@ -73,6 +74,10 @@ function App() {
         {
           path: "customer/:id",
           element: <ReportCustomer />,
+        },
+        {
+          path: "shipping",
+          element: <Shipping />,
         },
       ],
     },

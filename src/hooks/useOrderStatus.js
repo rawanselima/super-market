@@ -1,5 +1,5 @@
 export default function useOrderStatus(statusOrder) {
-  const styleStatus = `p-2 rounded text-sm ${
+  const styleStatus = `rounded-full px-4 py-2 text-sm ${
     statusOrder === "pending"
       ? "bg-yellow-100 text-yellow-800"
       : statusOrder === "processing"

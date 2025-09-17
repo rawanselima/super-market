@@ -7,7 +7,7 @@ const RowTable = () => {
 
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">
-      <TableCell rowspan={3} className={`${styleTableCell} w-20 font-bold`}>
+      <TableCell rowspan={3} className={`${styleTableCell} text-lg w-20 font-bold`}>
         #123
       </TableCell>
       <TableCell className={`${styleTableCell} w-48`}>
@@ -29,7 +29,7 @@ const RowTable = () => {
         rowspan={3}
         className={`${styleTableCell} font-bold w-24 px-3`}
       >
-        <span className={styleStatus}> cancel </span>
+        <span className={`${styleStatus} py-4 px-8`}> cancel </span>
       </TableCell>
     </TableRow>
   );

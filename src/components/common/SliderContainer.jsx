@@ -47,15 +47,15 @@ const SliderContainer = ({
           breakpoints={{
             640: {
               slidesPerView: smallScreen,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             768: {
               slidesPerView: mediumScreen,
-              spaceBetween: 20,
+              spaceBetween: 10,
             },
             1024: {
               slidesPerView: largeScreen,
-              spaceBetween: 50,
+              spaceBetween: 20,
             },
           }}
           className="mySwiper !py-10 !px-3"

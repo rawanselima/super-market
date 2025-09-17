@@ -4,6 +4,7 @@ import HeaderSection from "@/components/common/HeaderSection";
 import PopUp from "@/components/common/PopUp";
 import AddProduct from "@/components/allProducts/AddProduct";
 import TitleDashboardPages from "@/components/common/TitleDashboardPages";
+import Pagination from "@/components/common/Pagination";
 const AllProducts = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +40,10 @@ const AllProducts = () => {
       <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Product"}>
         <AddProduct />
       </PopUp>
+
+      <section className="mx-auto w-fit" >
+        <Pagination />
+      </section>
     </main>
   );
 };
