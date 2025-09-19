@@ -2,38 +2,50 @@ import React from "react";
 import { RxPerson } from "react-icons/rx";
 import { IoCartOutline } from "react-icons/io5";
 import { TfiWorld } from "react-icons/tfi";
-import { IoMoonOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const styleLinks =
-    "mx-1 text-lg cursor-pointer  transition-all text-dark-green hover:text-green duration-300 transition-all";
+    "mx-1 text-lg cursor-pointer hover:text-green duration-300 transition-all";
 
   return (
     <header className="flex justify-between items-center font-quicksand py-5 px-3 xl:px-0 ">
-      <Link to="/">
+      <NavLink to="/">
         <img src="/assets/logo.svg fill.webp" alt="logo" />
-      </Link>
+      </NavLink>
       <nav>
         <ul className="flex items-center">
-          <li className={styleLinks}>
-            <Link to="/cart">
+          <li className={`${styleLinks}`}>
+            <NavLink
+              to="/cart"
+              className={({ isActive }) => {
+              return  isActive
+                  ? `${styleLinks} text-green`
+                  : `${styleLinks} text-dark-green`;
+              }}
+            >
               <IoCartOutline />
-            </Link>
+            </NavLink>
           </li>
           <li className={styleLinks}>
             <TfiWorld />
           </li>
           <li className={styleLinks}>
-            <IoMoonOutline />
-          </li>
-          <li className={styleLinks}>
             <IoIosLogOut />
           </li>
-          <li className={`flex items-center ${styleLinks}`}>
-            <RxPerson />
-            <span className="font-light text-dark-gray text-sm">Account</span>
+          <li>
+            <NavLink
+              to="/profile"
+              className={({ isActive }) => {
+               return isActive
+                  ? `${styleLinks} text-green flex items-center`
+                  : `${styleLinks} text-dark-green flex items-center`;
+              }}
+            >
+              <RxPerson />
+              <span className="font-light text-dark-gray text-sm">account</span>
+            </NavLink>
           </li>
         </ul>
       </nav>

@@ -46,7 +46,7 @@ const Footer = () => {
   return (
     <footer className="text-dark-green text-sm p-4 mt-14 grid xl:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-10 border-b-2 border-light-gray">
       <div className="col-span-2">
-        <img src="/assets/logo.svg fill.png" alt="logoFooter" loading="lazy" />
+        <img src="/assets/logo.svg fill.webp" alt="logoFooter" loading="lazy" />
         <p className="my-5 text-dark-gray">
           we always seek to introduce best quality and products <br />
           and always interested in your comfortable shopping

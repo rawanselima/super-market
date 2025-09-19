@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import HeaderSection from "../common/HeaderSection";
 import Button from "../common/Button";
 import { IoCartOutline } from "react-icons/io5";
+import { MdOutlineFeed } from "react-icons/md";
+import { FaStar } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import {
   containerVariant,
   childTextVariants,
 } from "../../animation/animationVariable";
+import PopUp from "../common/PopUp";
+import UserFeedback from "./UserFeedback";
 const Description = () => {
   const styleSizeBtn =
     "p-1.5 border-1 border-green rounded cursor-pointer hover:bg-green hover:text-white duration-300 transition-all";
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <motion.div
@@ -23,6 +28,26 @@ const Description = () => {
           Seeds of Change Organic Quinoa, Brown
         </HeaderSection>
       </motion.div>
+      <motion.div variants={childTextVariants}>
+        <p className="mt-5 flex items-center gap-1 text-xl text-yellow-500 cursor-pointer">
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span className="text-dark-gray text-sm" > (5) </span>
+        </p>
+      </motion.div>
       <motion.div
         className="flex items-center gap-3 my-4 "
         variants={childTextVariants}
@@ -33,6 +58,7 @@ const Description = () => {
           <p className="text-dark-gray font-bold text-xl line-through"> $60 </p>
         </div>
       </motion.div>
+
       <motion.p
         className="text-dark-gray text-sm my-5"
         variants={childTextVariants}
@@ -77,6 +103,21 @@ const Description = () => {
           Add to cart
         </Button>
       </motion.form>
+      <Button navigate={() => setIsOpen(!isOpen)}>
+        <span className="mr-2">
+          <MdOutlineFeed />
+        </span>{" "}
+        Give Your Feedback
+      </Button>
+      {isOpen && (
+        <PopUp
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          title={"Give Your Feedback"}
+        >
+          <UserFeedback />
+        </PopUp>
+      )}
     </motion.div>
   );
 };

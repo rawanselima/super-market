@@ -5,6 +5,7 @@ import { boxVariant } from "../../animation/animationVariable";
 import { hoverVariant } from "../../animation/animationVariable";
 import { tabVariant } from "../../animation/animationVariable";
 import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa6";
 const ProductCard = () => {
   return (
     <Link to="/products/1">
@@ -24,6 +25,24 @@ const ProductCard = () => {
         <h2 className="font-bold sm:text-[16px] text-sm text-dark-green my-3">
           Seeds of Change Organic Quinoa, Brown, & Red Rice
         </h2>
+        <p className="flex items-center gap-1 text-sm text-yellow-500 cursor-pointer">
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span>
+            <FaStar />
+          </span>
+          <span className="text-light-gray" >
+            <FaStar />
+          </span>
+          <span className="text-dark-gray text-sm"> (4) </span>
+        </p>
         <p className="font-bold">
           <span className="text-green text-lg">$350</span>
           <span className="text-dark-gray line-through text-sm mx-1">$530</span>

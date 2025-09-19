@@ -15,6 +15,8 @@ import OrderDetails from "./pages/OrderDetails";
 import Customer from "./pages/Customer";
 import ReportCustomer from "./pages/ReportCustomer";
 import Shipping from "./pages/Shipping";
+import Feedback from "./pages/Feedback";
+import ProfileUser from "./pages/ProfileUser";
 function App() {
   const router = createBrowserRouter([
     {
@@ -40,6 +42,10 @@ function App() {
         {
           path: "checkout",
           element: <Checkout />,
+        },
+        {
+          path: "profile",
+          element: <ProfileUser />,
         },
       ],
     },
@@ -78,6 +84,10 @@ function App() {
         {
           path: "shipping",
           element: <Shipping />,
+        },
+        {
+          path: "feedback",
+          element: <Feedback />,
         },
       ],
     },

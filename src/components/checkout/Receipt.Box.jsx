@@ -19,6 +19,9 @@ const ReceiptBox = () => {
         <p className="text-dark-gray font-bold">
           quantity / <span className=" text-green"> 5 baskets </span>
         </p>
+        <p className="text-dark-gray font-bold">
+          price / <span className=" text-green"> $60 </span>
+        </p>
       </div>
     </div>
   );
