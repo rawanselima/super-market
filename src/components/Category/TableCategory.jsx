@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -9,7 +9,11 @@ import {
 import RowTable from "./RowTable";
 const TableCategory = () => {
   const styleTableHead = "font-bold text-lg px-3 py-5";
-
+  useEffect(() => {
+    fetch("http://localhost:3000/posts")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <Table className=" border-2 rounded border-light-green">
       <TableHeader className="bg-light-green">
