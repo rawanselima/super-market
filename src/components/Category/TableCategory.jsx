@@ -7,28 +7,33 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
+import useFetchCategory from "./useFetchCategory";
+import Loader from "../common/Loader";
 const TableCategory = () => {
   const styleTableHead = "font-bold text-lg px-3 py-5";
-  useEffect(() => {
-    fetch("http://localhost:3000/posts")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
+  const { isPending, isError, data } = useFetchCategory();
+
+  if (isPending) return <Loader />;
+
   return (
     <Table className=" border-2 rounded border-light-green">
       <TableHeader className="bg-light-green">
         <TableRow className="uppercase font-bold text-dark-green text-left border-b-1 border-light-gray">
           <TableHead className={`${styleTableHead} w-28`}>image</TableHead>
-          <TableHead className={`${styleTableHead}`}>name</TableHead>
-          <TableHead className={`${styleTableHead} sm:w-auto  w-20`}>
+          <TableHead className={`${styleTableHead} text-center `}>
+            name
+          </TableHead>
+          <TableHead
+            className={`${styleTableHead} sm:w-auto  w-20 text-center `}
+          >
             Action
           </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {data.map((category) => (
+          <RowTable key={category.id} category={category} />
+        ))}
       </TableBody>
     </Table>
   );

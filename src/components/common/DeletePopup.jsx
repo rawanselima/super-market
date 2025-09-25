@@ -1,8 +1,9 @@
 import React from "react";
 import Button from "./Button";
 import PopUp from "./PopUp";
+import Spinner from "./Spinner";
 
-const DeletePopup = ({ isOpen, setIsOpen }) => {
+const DeletePopup = ({ isOpen, setIsOpen, mutate, isPending, id }) => {
   return (
     <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Delete Product"}>
       <div className="space-y-4">
@@ -58,9 +59,15 @@ const DeletePopup = ({ isOpen, setIsOpen }) => {
         </div>
 
         <div className="flex justify-end space-x-3">
-          <Button variant="secondary">Cancel</Button>
-          <Button variant="destructive" danger={true}>
-            Delete
+          <Button variant="secondary" navigate={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            danger={true}
+            navigate={() => mutate(id)}
+          >
+            {isPending ? <Spinner /> : "Delete"}
           </Button>
         </div>
       </div>

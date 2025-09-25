@@ -21,7 +21,7 @@ const Category = () => {
         <TableCategory />
       </section>
       <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Category"}>
-        <AddCategory />
+        <AddCategory setIsOpen={setIsOpen}  />
       </PopUp>
     </main>
   );

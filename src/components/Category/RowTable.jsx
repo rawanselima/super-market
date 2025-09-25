@@ -5,30 +5,33 @@ import { TbEdit } from "react-icons/tb";
 import DeletePopup from "../common/DeletePopup";
 import PopUp from "../common/PopUp";
 import EditCategory from "./EditCategory";
+import useDeleteCategory from "./useDeleteCategory";
 
-const RowTable = () => {
+const RowTable = ({ category }) => {
   const descriptionText =
     "Uninhibited carnally hired played in whimpered dear gorilla koaladepending and much yikes off far quetzal goodness and from for grimacedgoodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. Spluttered";
-  const styleTableCell = "p-2 text-sm";
+  const styleTableCell = "p-2 text-lg";
 
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
   const [isOpenEditProduct, setIsOpenEditProduct] = useState(false);
+
+  const { avatar, name } = category;
+
+  const { mutate, isPending } = useDeleteCategory();
 
   return (
     <TableRow className="border-b-1 border-light-gray b-light-green">
       <TableCell className={`${styleTableCell} `}>
         <img
-          src="/assets/product-8.png"
-          alt="productImg"
-          className="w-full object-cover cursor-pointer"
+          src={avatar}
+          alt={name}
+          className="w-full h-20 object-cover cursor-pointer"
           loading="lazy"
         />
       </TableCell>
-      <TableCell className={`${styleTableCell} `}>
-        Blue Diamond Almonds Lightly Naturel
-      </TableCell>
+      <TableCell className={`${styleTableCell} text-center `}>{name}</TableCell>
 
-      <TableCell className={`${styleTableCell} font-bold text-xl text-green`}>
+      <TableCell className={`${styleTableCell} font-bold text-xl text-green text-center `}>
         <button
           className="mr-3 cursor-pointer"
           onClick={() => setIsOpenConfirmDelete(!isOpenConfirmDelete)}
@@ -46,6 +49,9 @@ const RowTable = () => {
       <DeletePopup
         isOpen={isOpenConfirmDelete}
         setIsOpen={setIsOpenConfirmDelete}
+        mutate={mutate}
+        id={category.id}
+        isPending={isPending}
       />
 
       <PopUp
@@ -53,7 +59,10 @@ const RowTable = () => {
         setIsOpen={setIsOpenEditProduct}
         title={"Edit Category"}
       >
-        <EditCategory />
+        <EditCategory
+          categoryId={category.id}
+          setIsOpen={setIsOpenEditProduct}
+        />
       </PopUp>
     </TableRow>
   );

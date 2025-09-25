@@ -1,3 +1,5 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainAppLayout from "./pages/MainAppLayout";
 import Home from "./pages/Home";
@@ -18,6 +20,7 @@ import Shipping from "./pages/Shipping";
 import Feedback from "./pages/Feedback";
 import ProfileUser from "./pages/ProfileUser";
 function App() {
+  const queryClient = new QueryClient();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -94,7 +97,7 @@ function App() {
   ]);
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <Toaster
         position="top-center"
@@ -120,7 +123,8 @@ function App() {
           },
         }}
       />
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
