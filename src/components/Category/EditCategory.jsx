@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Button from "../common/Button";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import useCategoryId from "./useCategoryId";
@@ -8,9 +8,10 @@ import useEditCategory from "./useEditCategory";
 import Spinner from "../common/Spinner";
 import Loader from "../common/Loader";
 import ErrorMessage from "../common/ErrorMessage";
+
 const EditCategory = ({ categoryId, setIsOpen }) => {
   const styleInput =
-    "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green";
+    "w-full px-3 py-2 border-2 border-light-green rounded focus:outline-none focus:ring-2 focus:ring-green";
   const styleLabel = "block text-sm font-bold text-dark-green mb-2";
 
   const { uploadImage, isUploading } = useUploadImage();
@@ -21,6 +22,7 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -29,20 +31,23 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
     },
   });
 
+  const [previewImage, setPreviewImage] = useState(null);
+
   useEffect(() => {
     if (data) {
       reset({
         image: data.avatar,
         categoryName: data.name,
       });
+      setPreviewImage(data.avatar);
     }
   }, [data, reset]);
 
   async function submit(newCategory) {
-    let imageUrl = data.avatar;
+    let imageUrl = previewImage || data.avatar;
 
-    if (typeof newCategory.image !== "string") {
-      const avatarFile = newCategory.image?.[0];
+    if (typeof newCategory.image !== "string" && newCategory.image?.[0]) {
+      const avatarFile = newCategory.image[0];
       imageUrl = await uploadImage(avatarFile);
     }
 
@@ -50,10 +55,15 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
       id: categoryId,
       newCategory: {
         ...data,
-        avatar: imageUrl || data?.avatar,
+        avatar: imageUrl || null,
         name: newCategory.categoryName || data?.name,
       },
     });
+  }
+
+  function handleDeleteImage() {
+    setPreviewImage(null);
+    setValue("image", ""); // تصفير قيمة الفورم
   }
 
   if (isLoading) return <Loader />;
@@ -71,14 +81,20 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
           {...register("image")}
         />
       </div>
-      <div className="flex gap-2 flex-wrap">
-        <div>
-          <img src={data?.avatar} alt="ProductImage" className="w-28 h-28" />
-          <p className="text-red-800 cursor-pointer w-fit mx-auto text-lg">
-            <RiDeleteBin5Line />
-          </p>
+
+      {previewImage && (
+        <div className="flex gap-2 flex-wrap">
+          <div>
+            <img src={previewImage} alt="Category" className="w-28 h-28" />
+            <p
+              onClick={handleDeleteImage}
+              className="text-red-800 cursor-pointer w-fit mx-auto text-lg"
+            >
+              <RiDeleteBin5Line />
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div>
         <label htmlFor="categoryName" className={styleLabel}>
@@ -108,4 +124,4 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
   );
 };
 
-export default EditCategory;
+export default memo(EditCategory);

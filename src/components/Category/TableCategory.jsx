@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -9,11 +9,13 @@ import {
 import RowTable from "./RowTable";
 import useFetchCategory from "./useFetchCategory";
 import Loader from "../common/Loader";
+import Error from "../common/Error";
 const TableCategory = () => {
   const styleTableHead = "font-bold text-lg px-3 py-5";
   const { isPending, isError, data } = useFetchCategory();
 
   if (isPending) return <Loader />;
+  if (isError) return <Error />;
 
   return (
     <Table className=" border-2 rounded border-light-green">
@@ -39,4 +41,4 @@ const TableCategory = () => {
   );
 };
 
-export default TableCategory;
+export default memo(TableCategory);

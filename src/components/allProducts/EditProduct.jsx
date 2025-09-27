@@ -1,39 +1,97 @@
-import React from "react";
+import React, { memo, useState } from "react";
 import Button from "../common/Button";
 import { RiDeleteBin5Line } from "react-icons/ri";
-const EditProduct = () => {
+import { useForm } from "react-hook-form";
+import useEditProduct from "./useEditProduct";
+import Spinner from "../common/Spinner";
+import useFetchCategory from "../Category/useFetchCategory";
+import ErrorMessage from "../common/ErrorMessage";
+import useUploadImage from "@/hooks/useUploadImage";
+const EditProduct = ({ product, setIsOpen }) => {
   const styleInput =
     "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green";
   const styleLabel = "block text-sm font-bold text-dark-green mb-2";
+
+  const [currentImages, setCurrentImages] = useState(product.avatar);
+  const { data: categories } = useFetchCategory();
+  const { mutate, isPending } = useEditProduct(setIsOpen);
+  const { uploadImage, isUploading } = useUploadImage();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      productName: product.name,
+      price: product.price,
+      discount: product.offer || 0,
+      size: product.size,
+      stock: product.stock,
+      category: product.categoryId,
+      description: product.description,
+    },
+  });
+
+  function removeImage(index) {
+    const updateImages = currentImages.filter((img, i) => i !== index);
+    setCurrentImages(updateImages);
+  }
+
+  async function submit(data) {
+    console.log("data", data, "product", product);
+    const imageFiles = Array.from(data.image);
+
+    const imageUrls = await Promise.all(
+      imageFiles.map(async (file) => {
+        const image = await uploadImage(file);
+        return image;
+      })
+    );
+
+    mutate({
+      productId: product.id,
+      updatedProduct: {
+        avatar: [...currentImages, ...imageUrls],
+        name: data.productName,
+        price: parseFloat(data.price),
+        size: parseFloat(data.size),
+        stock: parseInt(data.stock),
+        offer: parseFloat(data.discount),
+        categoryId: data.category,
+        description: data.description,
+      },
+    });
+  }
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit(submit)}>
       <div>
         <label htmlFor="image" className={styleLabel}>
           Image *
         </label>
-        <input type="file" name="image" multiple className={styleInput} />
+        <input
+          type="file"
+          name="image"
+          multiple
+          className={styleInput}
+          {...register("image")}
+        />
       </div>
       <div className="flex gap-2 flex-wrap">
-        <div>
-          <img
-            src="/assets/product-8.png"
-            alt="ProductImage"
-            className="w-28 h-28"
-          />
-          <p className="text-red-800 cursor-pointer w-fit mx-auto text-lg">
-            <RiDeleteBin5Line />
-          </p>
-        </div>
-        <div className="flex flex-col justify-center">
-          <img
-            src="/assets/product-7.png"
-            alt="ProductImage"
-            className="w-28 h-28"
-          />
-          <p className="text-red-800 cursor-pointer w-fit mx-auto text-lg">
-            <RiDeleteBin5Line />
-          </p>
-        </div>
+        {product.avatar.length > 0 &&
+          product.avatar.map((img, index) => {
+            return (
+              <div className="flex flex-col justify-center" key={img}>
+                <img src={img} alt="ProductImage" className="w-28 h-28" />
+                <button
+                  className="text-red-800 cursor-pointer w-fit mx-auto text-lg"
+                  onClick={() => removeImage(index)}
+                >
+                  <RiDeleteBin5Line />
+                </button>
+              </div>
+            );
+          })}
       </div>
       <div>
         <label htmlFor="productName" className={styleLabel}>
@@ -42,10 +100,13 @@ const EditProduct = () => {
         <input
           type="text"
           name="productName"
-          required
           className={styleInput}
-          defaultValue={"hello"}
+          defaultValue={product.name}
+          {...register("productName", { required: true })}
         />
+        {errors.productName && (
+          <ErrorMessage>Product name is required</ErrorMessage>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
@@ -55,10 +116,11 @@ const EditProduct = () => {
           <input
             type="text"
             name="price"
-            required
             className={styleInput}
-            defaultValue={300}
+            defaultValue={product.price}
+            {...register("price", { required: true })}
           />
+          {errors.price && <ErrorMessage>price is required</ErrorMessage>}
         </div>
         <div>
           <label htmlFor="discount" className={styleLabel}>
@@ -67,10 +129,11 @@ const EditProduct = () => {
           <input
             type="text"
             name="discount"
-            required
             className={styleInput}
-            defaultValue={0}
+            defaultValue={product.offer || 0}
+            {...register("discount", { required: true })}
           />
+          {errors.discount && <ErrorMessage>discount is required</ErrorMessage>}
         </div>
       </div>
 
@@ -82,10 +145,11 @@ const EditProduct = () => {
           <input
             type="text"
             name="size"
-            required
             className={styleInput}
-            defaultValue={20}
+            defaultValue={product.size}
+            {...register("size", { required: true })}
           />
+          {errors.size && <ErrorMessage>size is required</ErrorMessage>}
         </div>
         <div>
           <label htmlFor="stock" className={styleLabel}>
@@ -94,10 +158,11 @@ const EditProduct = () => {
           <input
             type="text"
             name="stock"
-            required
             className={styleInput}
-            defaultValue={30}
+            defaultValue={product.stock}
+            {...register("stock", { required: true })}
           />
+          {errors.stock && <ErrorMessage>stock is required</ErrorMessage>}
         </div>
       </div>
 
@@ -107,18 +172,21 @@ const EditProduct = () => {
         </label>
         <select
           name="category"
-          required
           className={styleInput}
-          defaultValue={"feedback"}
+          defaultValue={product.categoryId}
+          {...register("category", { required: true })}
         >
           <option value={"select"} disabled>
-            Select a Category{" "}
+            Select a Category
           </option>
-          <option value="general">General Inquiry</option>
-          <option value="support">Technical Support</option>
-          <option value="billing">Billing Question</option>
-          <option value="feedback">Feedback</option>
+          {categories &&
+            categories.map((category) => (
+              <option value={category.id} key={category.id}>
+                {category.name}
+              </option>
+            ))}
         </select>
+        {errors.category && <ErrorMessage>category is required</ErrorMessage>}
       </div>
 
       <div>
@@ -128,22 +196,29 @@ const EditProduct = () => {
         <textarea
           name="description"
           rows={4}
-          required
           className={styleInput}
-          defaultValue={"hello world"}
+          defaultValue={product.description}
+          {...register("description", { required: true })}
         />
+        {errors.description && (
+          <ErrorMessage>description is required</ErrorMessage>
+        )}
       </div>
 
       <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-        <Button type="reset" variant="secondary">
+        <Button
+          type="reset"
+          variant="secondary"
+          navigate={() => setIsOpen(false)}
+        >
           Cancel
         </Button>
         <Button type="submit" variant="default">
-          Edit Product
+          {isPending || isUploading ? <Spinner /> : "Edit Product"}
         </Button>
       </div>
     </form>
   );
 };
 
-export default EditProduct;
+export default memo(EditProduct);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { TableCell, TableRow } from "../ui/table";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
@@ -68,4 +68,4 @@ const RowTable = ({ category }) => {
   );
 };
 
-export default RowTable;
+export default memo(RowTable);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { TableCell, TableRow } from "../ui/table";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
@@ -7,21 +7,24 @@ import DeletePopup from "../common/DeletePopup";
 import SliderImages from "./SliderImages";
 import PopUp from "../common/PopUp";
 import EditProduct from "./EditProduct";
-const RowTable = () => {
-  const descriptionText =
-    "Uninhibited carnally hired played in whimpered dear gorilla koaladepending and much yikes off far quetzal goodness and from for grimacedgoodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart. Spluttered";
+import useDeleteProduct from "./useDeleteProduct";
+import { BsFillStarFill } from "react-icons/bs";
+const RowTable = ({ product }) => {
+  const descriptionText = product.description;
   const styleTableCell = "p-2 text-sm";
 
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
   const [isOpenSliderImages, setIsOpenSliderImages] = useState(false);
   const [isOpenEditProduct, setIsOpenEditProduct] = useState(false);
 
+  const { mutate, isPending } = useDeleteProduct();
+
   return (
     <TableRow className="border-b-1 border-light-gray b-light-green">
       <TableCell className={`${styleTableCell} w-20 `}>
         <button onClick={() => setIsOpenSliderImages(!isOpenSliderImages)}>
           <img
-            src="/assets/product-8.png"
+            src={product.avatar[0]}
             alt="productImg"
             className="w-full object-cover cursor-pointer"
             loading="lazy"
@@ -29,25 +32,41 @@ const RowTable = () => {
         </button>
       </TableCell>
       <TableCell className={`${styleTableCell} md:w-52 w-20 `}>
-        Blue Diamond Almonds Lightly Naturel
+        {product.name}
       </TableCell>
       <TableCell className={`${styleTableCell} text-green font-bold w-28`}>
-        Milk & Cheese
+        {product.category.name}
       </TableCell>
-      <TableCell className={`${styleTableCell} md:w-96 w-60`}>
-        {descriptionText.slice(0, 100)}
+      <TableCell className={`${styleTableCell} w-20 flex items-center gap-1`}>
+        <span className="text-yellow-400">
+          <BsFillStarFill />
+        </span>
+        {product.rating}
+      </TableCell>
+
+      <TableCell className={`${styleTableCell} md:w-80 w-52`}>
+        <span className="flex items-end gap-1">
+          {descriptionText.slice(0, 90)}
+          <span className="text-green">
+            <HiDotsHorizontal />
+          </span>
+        </span>
       </TableCell>
 
       <TableCell
         className={`${styleTableCell} text-green font-bold w-20 text-[16px]`}
       >
-        $250
+        ${product.price}
+      </TableCell>
+
+      <TableCell className={`${styleTableCell} w-20 text-[16px]`}>
+        ${product.offer}
       </TableCell>
       <TableCell className={`${styleTableCell} font-bold w-20 text-[16px]`}>
-        10
+        {product.stock}
       </TableCell>
       <TableCell className={`${styleTableCell} w-32 text-[16px]`}>
-        25g
+        {product.size}g
       </TableCell>
       <TableCell
         className={`${styleTableCell} font-bold text-xl text-green w-20`}
@@ -69,20 +88,24 @@ const RowTable = () => {
       <DeletePopup
         isOpen={isOpenConfirmDelete}
         setIsOpen={setIsOpenConfirmDelete}
+        mutate={mutate}
+        isPending={isPending}
+        id={product.id}
       />
       <SliderImages
         isOpen={isOpenSliderImages}
         setIsOpen={setIsOpenSliderImages}
+        imageProduct={product.avatar}
       />
       <PopUp
         isOpen={isOpenEditProduct}
         setIsOpen={setIsOpenEditProduct}
         title={"Edit Category"}
       >
-        <EditProduct />
+        <EditProduct product={product} setIsOpen={setIsOpenEditProduct} />
       </PopUp>
     </TableRow>
   );
 };
 
-export default RowTable;
+export default memo(RowTable);

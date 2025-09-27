@@ -1,24 +1,26 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainAppLayout from "./pages/MainAppLayout";
-import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
-import Products from "./pages/Products";
-import DetailsProduct from "./pages/DetailsProduct";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import AppLayout from "./pages/AppLayout";
-import Dashboard from "./pages/Dashboard";
-import AllProducts from "./pages/AllProducts";
-import Category from "./pages/Category";
-import Order from "./pages/Order";
-import OrderDetails from "./pages/OrderDetails";
-import Customer from "./pages/Customer";
-import ReportCustomer from "./pages/ReportCustomer";
-import Shipping from "./pages/Shipping";
-import Feedback from "./pages/Feedback";
-import ProfileUser from "./pages/ProfileUser";
+import { lazy } from "react";
+const MainAppLayout = lazy(() => import("./pages/MainAppLayout"));
+const Home = lazy(() => import("./pages/Home"));
+const Products = lazy(() => import("./pages/Products"));
+const DetailsProduct = lazy(() => import("./pages/DetailsProduct"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const AppLayout = lazy(() => import("./pages/AppLayout"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const AllProducts = lazy(() => import("./pages/AllProducts"));
+const Category = lazy(() => import("./pages/Category"));
+const Order = lazy(() => import("./pages/Order"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
+const Customer = lazy(() => import("./pages/Customer"));
+const ReportCustomer = lazy(() => import("./pages/ReportCustomer"));
+const Shipping = lazy(() => import("./pages/Shipping"));
+const Feedback = lazy(() => import("./pages/Feedback"));
+const ProfileUser = lazy(() => import("./pages/ProfileUser"));
+
 function App() {
   const queryClient = new QueryClient();
   const router = createBrowserRouter([

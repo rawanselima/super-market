@@ -6,8 +6,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
-function TableProducts() {
+import Loader from "../common/Loader";
+import Error from "../common/Error";
+import { memo } from "react";
+function TableProducts({ products, isLoading, isError }) {
   const styleTableHead = "font-bold px-2 py-5";
+
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -17,10 +24,12 @@ function TableProducts() {
             name
           </TableHead>
           <TableHead className={`${styleTableHead} w-28`}>Category</TableHead>
-          <TableHead className={`${styleTableHead} md:w-96 w-60`}>
+          <TableHead className={`${styleTableHead} w-20`}>rating</TableHead>
+          <TableHead className={`${styleTableHead} md:w-80 w-52`}>
             description
           </TableHead>
           <TableHead className={`${styleTableHead} w-20`}>price</TableHead>
+          <TableHead className={`${styleTableHead} w-20`}>discount</TableHead>
           <TableHead className={`${styleTableHead} w-20`}>stock</TableHead>
           <TableHead className={`${styleTableHead} w-32`}>
             size/weight
@@ -29,12 +38,12 @@ function TableProducts() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {products.map((product) => (
+          <RowTable key={product.id} product={product} />
+        ))}
       </TableBody>
     </Table>
   );
 }
 
-export default TableProducts;
+export default memo(TableProducts);

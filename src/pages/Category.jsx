@@ -3,7 +3,7 @@ import AddCategory from "@/components/Category/AddCategory";
 import TableCategory from "@/components/Category/TableCategory";
 import PopUp from "@/components/common/PopUp";
 import TitleDashboardPages from "@/components/common/TitleDashboardPages";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 const Category = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +21,10 @@ const Category = () => {
         <TableCategory />
       </section>
       <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Category"}>
-        <AddCategory setIsOpen={setIsOpen}  />
+        <AddCategory setIsOpen={setIsOpen} />
       </PopUp>
     </main>
   );
 };
 
-export default Category;
+export default memo(Category);
