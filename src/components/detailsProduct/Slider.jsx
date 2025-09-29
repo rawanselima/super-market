@@ -10,7 +10,7 @@ import {
   containerVariant,
   childVariant,
 } from "../../animation/animationVariable";
-export default function Slider() {
+export default function Slider({ productImages }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const styleArrowBtn =
     "p-2 mx-1 bg-light-gray text-dark-gray rounded-full hover:bg-green hover:text-white cursor-pointer transition-all duration-300";
@@ -48,70 +48,20 @@ export default function Slider() {
               <IoIosArrowForward />
             </button>
           </div>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-1.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-2.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-3.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-4.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-5.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-6.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-7.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-8.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
+
+          {productImages &&
+            productImages.map((img, index) => {
+              return (
+                <SwiperSlide className={styleSlider} key={index}>
+                  <img
+                    src={img}
+                    className={styleImg}
+                    loading="lazy"
+                    alt="productImg"
+                  />
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </motion.div>
       <motion.div variants={childVariant}>
@@ -125,70 +75,19 @@ export default function Slider() {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper slider-products my-2 rounded w-full h-32 py-2"
         >
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-1.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-2.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-3.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-4.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-5.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-6.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-7.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className={styleSlider}>
-            <img
-              src="/assets/product-8.png"
-              className={styleImg}
-              loading="lazy"
-              alt="productImg"
-            />
-          </SwiperSlide>
+          {productImages &&
+            productImages.map((img, index) => {
+              return (
+                <SwiperSlide className={styleSlider} key={index}>
+                  <img
+                    src={img}
+                    className={styleImg}
+                    loading="lazy"
+                    alt="productImg"
+                  />
+                </SwiperSlide>
+              );
+            })}
         </Swiper>
       </motion.div>
     </motion.div>

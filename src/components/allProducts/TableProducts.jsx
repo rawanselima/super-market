@@ -1,6 +1,7 @@
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -38,9 +39,15 @@ function TableProducts({ products, isLoading, isError }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {products.map((product) => (
-          <RowTable key={product.id} product={product} />
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <RowTable key={product.id} product={product} />
+          ))
+        ) : (
+          <TableRow className="text-dark-green font-bold text-center text-xl">
+            <TableCell colSpan="10"> ❌ Not Products Yet </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );

@@ -2,7 +2,6 @@ import React, { memo, useState } from "react";
 import { TableCell, TableRow } from "../ui/table";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbEdit } from "react-icons/tb";
-import { HiDotsHorizontal } from "react-icons/hi";
 import DeletePopup from "../common/DeletePopup";
 import SliderImages from "./SliderImages";
 import PopUp from "../common/PopUp";
@@ -10,7 +9,6 @@ import EditProduct from "./EditProduct";
 import useDeleteProduct from "./useDeleteProduct";
 import { BsFillStarFill } from "react-icons/bs";
 const RowTable = ({ product }) => {
-  const descriptionText = product.description;
   const styleTableCell = "p-2 text-sm";
 
   const [isOpenConfirmDelete, setIsOpenConfirmDelete] = useState(false);
@@ -22,7 +20,12 @@ const RowTable = ({ product }) => {
   return (
     <TableRow className="border-b-1 border-light-gray b-light-green">
       <TableCell className={`${styleTableCell} w-20 `}>
-        <button onClick={() => setIsOpenSliderImages(!isOpenSliderImages)}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpenSliderImages(true);
+          }}
+        >
           <img
             src={product.avatar[0]}
             alt="productImg"
@@ -37,7 +40,9 @@ const RowTable = ({ product }) => {
       <TableCell className={`${styleTableCell} text-green font-bold w-28`}>
         {product.category.name}
       </TableCell>
-      <TableCell className={`${styleTableCell} w-20 flex items-center gap-1`}>
+      <TableCell
+        className={`${styleTableCell} w-20 flex items-center gap-1 mt-7`}
+      >
         <span className="text-yellow-400">
           <BsFillStarFill />
         </span>
@@ -45,12 +50,7 @@ const RowTable = ({ product }) => {
       </TableCell>
 
       <TableCell className={`${styleTableCell} md:w-80 w-52`}>
-        <span className="flex items-end gap-1">
-          {descriptionText.slice(0, 90)}
-          <span className="text-green">
-            <HiDotsHorizontal />
-          </span>
-        </span>
+        <span>{product.description.slice(0, 90)}</span>
       </TableCell>
 
       <TableCell

@@ -6,7 +6,13 @@ import SliderContainer from "../common/SliderContainer";
 import { motion } from "framer-motion";
 import { containerVariant } from "../../animation/animationVariable";
 import { childVariant } from "../../animation/animationVariable";
+import useFetchCategory from "../Category/useFetchCategory";
+import Loader from "../common/Loader";
 const Category = () => {
+  const { data, isLoading } = useFetchCategory();
+
+  if (isLoading) return <Loader />;
+
   return (
     <motion.div
       className="mt-16"
@@ -17,33 +23,20 @@ const Category = () => {
     >
       <SliderContainer
         header={"Featured Categories"}
-        largeScreen={7}
-        mediumScreen={4}
+        largeScreen={6}
+        mediumScreen={3}
         smallScreen={2}
       >
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <CategoryBox />
-          </motion.div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <CategoryBox />
-          </motion.div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <CategoryBox />
-          </motion.div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <CategoryBox />
-          </motion.div>
-        </SwiperSlide>
+        {data &&
+          data.map((item) => {
+            return (
+              <SwiperSlide key={item.id}>
+                <motion.div variants={childVariant}>
+                  <CategoryBox item={item} />
+                </motion.div>
+              </SwiperSlide>
+            );
+          })}
       </SliderContainer>
     </motion.div>
   );

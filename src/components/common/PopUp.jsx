@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "../ui/modal";
-import Button from "../common/Button";
 function PopUp({ isOpen, setIsOpen, children, title }) {
   return (
     <Modal

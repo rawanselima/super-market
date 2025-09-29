@@ -1,17 +1,23 @@
 import { useSearchParams } from "react-router-dom";
 
-export default function useFilterProducts() {
+export default function useFilterProducts(setPage) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const category = searchParams.get("category") || "all";
+  const categoryId = searchParams.get("categoryId") || "all";
 
   const setCategoryId = (newCategory) => {
+
+    setPage(1);
+
+    const newParams = new URLSearchParams(searchParams);
     if (newCategory && newCategory !== "all") {
-      searchParams.set("category", newCategory);
+      newParams.set("categoryId", newCategory);
     } else {
-      searchParams.set("category", "all");
+      newParams.set("categoryId", "all");
     }
-    setSearchParams(searchParams);
+    newParams.set("page", 1);
+    setSearchParams(newParams);
   };
-  return { category, setCategoryId };
+
+  return { categoryId, setCategoryId };
 }

@@ -11,7 +11,7 @@ import {
 } from "../../animation/animationVariable";
 import PopUp from "../common/PopUp";
 import UserFeedback from "./UserFeedback";
-const Description = () => {
+const Description = ({ product }) => {
   const styleSizeBtn =
     "p-1.5 border-1 border-green rounded cursor-pointer hover:bg-green hover:text-white duration-300 transition-all";
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +24,7 @@ const Description = () => {
       whileInView="visible"
     >
       <motion.div variants={childTextVariants}>
-        <HeaderSection showByMargin={false}>
-          Seeds of Change Organic Quinoa, Brown
-        </HeaderSection>
+        <HeaderSection showByMargin={false}>{product.name}</HeaderSection>
       </motion.div>
       <motion.div variants={childTextVariants}>
         <p className="mt-5 flex items-center gap-1 text-xl text-yellow-500 cursor-pointer">
@@ -45,17 +43,19 @@ const Description = () => {
           <span>
             <FaStar />
           </span>
-          <span className="text-dark-gray text-sm" > (5) </span>
+          <span className="text-dark-gray text-sm"> ( {product.rating} ) </span>
         </p>
       </motion.div>
       <motion.div
         className="flex items-center gap-3 my-4 "
         variants={childTextVariants}
       >
-        <p className="font-bold text-5xl text-green"> $32 </p>
+        <p className="font-bold text-5xl text-green"> ${product.price} </p>
         <div>
-          <p className="text-amber-300 text-sm"> 23% off </p>
-          <p className="text-dark-gray font-bold text-xl line-through"> $60 </p>
+          <p className="text-amber-300 text-sm"> {product.offer}% off </p>
+          <p className="text-dark-gray font-bold text-xl line-through">
+            ${Math.abs[product.price - product.offer]}
+          </p>
         </div>
       </motion.div>
 
@@ -63,15 +63,7 @@ const Description = () => {
         className="text-dark-gray text-sm my-5"
         variants={childTextVariants}
       >
-        Uninhibited carnally hired played in whimpered dear gorilla koala
-        depending and much yikes off far quetzal goodness and from for grimaced
-        goodness unaccountably and meadowlark near unblushingly crucial scallop
-        tightly neurotic hungrily some and dear furiously this apart. Spluttered
-        narrowly yikes left moth in yikes bowed this that grizzly much hello on
-        spoon-fed that alas rethought much decently richly and wow against the
-        frequent fluidly at formidable acceptably flapped besides and much circa
-        far over the bucolically hey precarious goldfinch mastodon goodness
-        gnashed a jellyfish and one however because.
+        {product.description}
       </motion.p>
       <motion.div
         className="flex items-center flex-wrap gap-5 text-dark-gray"

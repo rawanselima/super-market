@@ -11,7 +11,7 @@ import PopUp from "../common/PopUp";
 const SliderImages = ({ isOpen, setIsOpen, imageProduct }) => {
   return (
     <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Image Products"}>
-      <div className="relative w-full max-w-lg mx-auto">
+      <div className="relative w-full max-w-lg mx-auto z-50">
         <Carousel className="relative overflow-hidden">
           <CarouselContent className="w-full">
             {imageProduct.map((img, index) => {

@@ -1,18 +1,20 @@
 import { fetchProducts } from "@/services/APIProducts";
 import { useQuery } from "@tanstack/react-query";
 import useFetchCategory from "../Category/useFetchCategory";
-
-export default function useFetchProducts() {
+export default function useFetchProducts(categoryId, page, limit, searchValue) {
   const {
-    data: products = [],
+    data: queryData,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
+    queryKey: ["products", categoryId, page, limit, searchValue],
+    queryFn: () => fetchProducts(categoryId, page, limit, searchValue),
   });
 
   const { data: categories = [] } = useFetchCategory();
+
+  const products = queryData?.data || [];
+  const totalPages = queryData?.totalPages || 1;
 
   const data = products.map((p) => {
     const category = categories.find((c) => c.id === p.categoryId);
@@ -25,5 +27,5 @@ export default function useFetchProducts() {
     };
   });
 
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, totalPages };
 }

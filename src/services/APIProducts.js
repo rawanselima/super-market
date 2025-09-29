@@ -1,15 +1,56 @@
 import { API_BASE } from "./APIBase";
 
-export async function fetchProducts() {
+export async function fetchProducts(categoryId, page, limit, searchValue) {
   try {
-    const response = await fetch(`${API_BASE}products`);
+    let response;
+    let allResponse;
+
+    const searchParam =
+      searchValue && searchValue !== "all" ? `&name=${searchValue}` : "";
+
+    if (categoryId === "all") {
+      response = await fetch(
+        `${API_BASE}products?page=${page}&limit=${limit}${searchParam}`
+      );
+      allResponse = await fetch(`${API_BASE}products?${searchParam}`);
+    } else {
+      response = await fetch(
+        `${API_BASE}products?categoryId=${categoryId}&page=${page}&limit=${limit}${searchParam}`
+      );
+      allResponse = await fetch(
+        `${API_BASE}products?categoryId=${categoryId}${searchParam}`
+      );
+    }
+
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
+
     const data = await response.json();
+    const allData = await allResponse.json();
+
+    const countProducts = allData.length;
+    const totalPages = Math.ceil(countProducts / limit);
+
+    return { data, totalPages };
+  } catch (error) {
+    console.error("Error fetching products:", error.message);
+    return { data: [], totalPages: 0 };
+  }
+}
+
+export async function fetchProductsDetails(productId) {
+  try {
+    const response = await fetch(`${API_BASE}products/${productId}`);
+    if (!response.ok) {
+      throw new Error("Failed Fetch Details For This Product");
+    }
+
+    const data = response.json();
+    console.log("data", data);
     return data;
   } catch (error) {
-    console.error("Error fetching products:", error);
+    console.error(error.message);
     throw error;
   }
 }
@@ -69,23 +110,6 @@ export async function editProduct({ productId, updatedProduct }) {
     return data;
   } catch (error) {
     console.error("Error updating product:", error);
-    throw error;
-  }
-}
-
-export async function filterProductsByCategory(categoryId) {
-  if (categoryId === "all") return;
-  try {
-    const response = await fetch(
-      `${API_BASE}products?categoryId=${categoryId}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch products by category");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching products by category:", error.message);
     throw error;
   }
 }
