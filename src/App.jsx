@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { lazy } from "react";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 const MainAppLayout = lazy(() => import("./pages/MainAppLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Products = lazy(() => import("./pages/Products"));
@@ -99,34 +101,36 @@ function App() {
   ]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        gutter={8}
-        containerClassName=""
-        containerStyle={{}}
-        toastOptions={{
-          className: "",
-          duration: 5000,
-          removeDelay: 1000,
-          style: {
-            background: "#efefef",
-            color: "#253d4e",
-          },
-
-          success: {
-            duration: 3000,
-            iconTheme: {
-              primary: "green",
-              secondary: "#fff",
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            className: "",
+            duration: 5000,
+            removeDelay: 1000,
+            style: {
+              background: "#efefef",
+              color: "#253d4e",
             },
-          },
-        }}
-      />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "green",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </Provider>
   );
 }
 

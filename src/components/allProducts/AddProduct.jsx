@@ -1,5 +1,4 @@
-import React, { memo, useEffect } from "react";
-import Button from "../common/Button";
+import React, { memo, useState } from "react";
 import useAddProduct from "./useAddProduct";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../common/ErrorMessage";
@@ -7,6 +6,9 @@ import useUploadImage from "@/hooks/useUploadImage";
 import Spinner from "../common/Spinner";
 import useFetchCategory from "../Category/useFetchCategory";
 import Loader from "../common/Loader";
+import { HiOutlinePlusSm } from "react-icons/hi";
+import Button from "../common/Button";
+
 const AddProduct = ({ setIsOpen }) => {
   const styleInput =
     "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green";
@@ -15,6 +17,7 @@ const AddProduct = ({ setIsOpen }) => {
   const { mutate, isPending } = useAddProduct(setIsOpen);
   const { uploadImage, isUploading } = useUploadImage();
   const { isPending: isPendingCategory, data: categories } = useFetchCategory();
+  const [sizes, setSizes] = useState([{ size: "", stock: "", price: "" }]);
 
   const {
     register,
@@ -37,10 +40,8 @@ const AddProduct = ({ setIsOpen }) => {
       avatar: imageUrls,
       description: data.description,
       categoryId: data.category,
-      price: parseFloat(data.price),
       offer: parseFloat(data.discount) || 0,
-      stock: parseInt(data.stock),
-      size: parseInt(data.size),
+      sizes: data.sizes,
       rating: 0,
     });
   }
@@ -49,6 +50,7 @@ const AddProduct = ({ setIsOpen }) => {
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(submit)}>
+      {/* Image */}
       <div>
         <label htmlFor="image" multiple className={styleLabel}>
           Image *
@@ -58,11 +60,12 @@ const AddProduct = ({ setIsOpen }) => {
           name="image"
           multiple
           className={styleInput}
-          placeholder="Enter product Images"
           {...register("image", { required: true })}
         />
         {errors.image && <ErrorMessage> image is required </ErrorMessage>}
       </div>
+
+      {/* Product Name */}
       <div>
         <label htmlFor="productName" className={styleLabel}>
           Product Name *
@@ -71,26 +74,93 @@ const AddProduct = ({ setIsOpen }) => {
           type="text"
           name="productName"
           className={styleInput}
-          placeholder="Enter your last name"
           {...register("productName", { required: true })}
         />
         {errors.productName && (
           <ErrorMessage> ProductName is required </ErrorMessage>
         )}
       </div>
+
+      {/* Dynamic Sizes */}
+      {sizes.map((item, index) => (
+        <div
+          key={index}
+          className="grid grid-cols-1 md:grid-cols-3 items-center gap-4"
+        >
+          <div>
+            <label className={styleLabel}>Size / Weight (g) *</label>
+            <input
+              type="text"
+              className={styleInput}
+              {...register(`sizes.${index}.size`, { required: true })}
+            />
+            {errors.sizes?.[index]?.size && (
+              <ErrorMessage> size/weight is required </ErrorMessage>
+            )}
+          </div>
+          <div>
+            <label htmlFor="price" className={styleLabel}>
+              Price *
+            </label>
+            <input
+              type="text"
+              name="price"
+              className={styleInput}
+              {...register(`sizes.${index}.price`, { required: true })}
+            />
+            {errors.sizes?.[index]?.price && (
+              <ErrorMessage> price is required </ErrorMessage>
+            )}
+          </div>
+          <div>
+            <label className={styleLabel}>Stock *</label>
+            <input
+              type="text"
+              className={styleInput}
+              {...register(`sizes.${index}.stock`, { required: true })}
+            />
+            {errors.sizes?.[index]?.stock && (
+              <ErrorMessage> stock is required </ErrorMessage>
+            )}
+          </div>
+        </div>
+      ))}
+
+      {/* Add More Size Button */}
+      <div className="flex justify-end-safe">
+        <Button
+          type="button"
+          variant="secondary"
+          navigate={() => setSizes([...sizes, { size: "", stock: "" }])}
+        >
+          <HiOutlinePlusSm /> Add More Size
+        </Button>
+      </div>
+
+      {/* Category & discount */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="price" className={styleLabel}>
-            Price *
+          <label htmlFor="category" className={styleLabel}>
+            Category *
           </label>
-          <input
-            type="text"
-            name="price"
+          <select
+            name="category"
             className={styleInput}
-            placeholder="Enter your first name"
-            {...register("price", { required: true })}
-          />
-          {errors.price && <ErrorMessage> price is required </ErrorMessage>}
+            {...register("category", { required: true })}
+          >
+            <option value="" disabled>
+              Select a Category
+            </option>
+            {categories &&
+              categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
+          {errors.category && (
+            <ErrorMessage> category is required </ErrorMessage>
+          )}
         </div>
         <div>
           <label htmlFor="discount" className={styleLabel}>
@@ -101,69 +171,12 @@ const AddProduct = ({ setIsOpen }) => {
             name="discount"
             defaultValue={0}
             className={styleInput}
-            placeholder="Enter your last name"
             {...register("discount")}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="size" className={styleLabel}>
-            Size / Weight (g) *
-          </label>
-          <input
-            type="text"
-            name="size"
-            className={styleInput}
-            placeholder="Enter your first name"
-            {...register("size", { required: true })}
-          />
-          {errors.size && (
-            <ErrorMessage> size/weight is required </ErrorMessage>
-          )}
-        </div>
-        <div>
-          <label htmlFor="stock" className={styleLabel}>
-            Stock *
-          </label>
-          <input
-            type="text"
-            name="stock"
-            className={styleInput}
-            placeholder="Enter your last name"
-            {...register("stock", { required: true })}
-          />
-          {errors.stock && <ErrorMessage> stock is required </ErrorMessage>}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="category" className={styleLabel}>
-          Category *
-        </label>
-
-        <select
-          name="category"
-          className={styleInput}
-          {...register("category", { required: true })}
-        >
-          <option value="" disabled>
-            Select a Category
-          </option>
-          {categories &&
-            categories.map((category) => {
-              return (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              );
-            })}
-        </select>
-
-        {errors.category && <ErrorMessage> category is required </ErrorMessage>}
-      </div>
-
+      {/* Description */}
       <div>
         <label htmlFor="description" className={styleLabel}>
           Description *
@@ -172,7 +185,6 @@ const AddProduct = ({ setIsOpen }) => {
           name="description"
           rows={4}
           className={styleInput}
-          placeholder="Please describe your inquiry..."
           {...register("description", { required: true })}
         />
         {errors.description && (
@@ -180,6 +192,7 @@ const AddProduct = ({ setIsOpen }) => {
         )}
       </div>
 
+      {/* Buttons */}
       <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
         <Button
           type="reset"

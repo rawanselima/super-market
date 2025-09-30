@@ -21,20 +21,18 @@ function TableProducts({ products, isLoading, isError }) {
       <TableHeader className="bg-light-green">
         <TableRow className="uppercase font-bold text-dark-green text-left  border-b-1 border-light-gray">
           <TableHead className={`${styleTableHead} w-20 `}>image</TableHead>
-          <TableHead className={`${styleTableHead}  md:w-52 w-32 `}>
-            name
-          </TableHead>
+          <TableHead className={`${styleTableHead} w-32 `}>name</TableHead>
           <TableHead className={`${styleTableHead} w-28`}>Category</TableHead>
           <TableHead className={`${styleTableHead} w-20`}>rating</TableHead>
-          <TableHead className={`${styleTableHead} md:w-80 w-52`}>
+          <TableHead className={`${styleTableHead} md:w-72 w-40`}>
             description
           </TableHead>
-          <TableHead className={`${styleTableHead} w-20`}>price</TableHead>
-          <TableHead className={`${styleTableHead} w-20`}>discount</TableHead>
-          <TableHead className={`${styleTableHead} w-20`}>stock</TableHead>
           <TableHead className={`${styleTableHead} w-32`}>
             size/weight
           </TableHead>
+          <TableHead className={`${styleTableHead} w-32`}>price</TableHead>
+          <TableHead className={`${styleTableHead} w-32`}>stock</TableHead>
+          <TableHead className={`${styleTableHead} w-20`}>discount</TableHead>
           <TableHead className={`${styleTableHead} w-20`}>Action</TableHead>
         </TableRow>
       </TableHeader>

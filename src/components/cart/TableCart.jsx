@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RowCart from "./RowCart";
+import { useSelector } from "react-redux";
 
 const TableCart = () => {
+  const data = useSelector((state) => state.cartStore);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <table className="rounded w-full table-fixed">
       <thead className="bg-green rounded text-white text-left">

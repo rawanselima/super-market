@@ -83,7 +83,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
         variants={containerSidebarVariant(showSidebar)}
         initial="hidden"
         animate={showSidebar ? "visible" : "hidden"}
-        className="pointer-events-none md:pointer-events-auto h-screen font-bold text-light-green bg-[linear-gradient(45deg,#def9ec_0%,#4eca92_15%,#3bb77e_30%,#2a7d64_50%,#253d4e_100%)] fixed top-0 left-0 xl:w-52 md:w-16  p-2 z-50"
+        className={`h-screen font-bold text-light-green bg-[linear-gradient(45deg,#def9ec_0%,#4eca92_15%,#3bb77e_30%,#2a7d64_50%,#253d4e_100%)] fixed top-0 left-0 xl:w-52 md:w-16  p-2 z-50 ${
+          showSidebar ? "pointer-events-auto" : "pointer-events-none"
+        } `}
       >
         <motion.div variants={sidebarVariant} className="py-5">
           <NavLink to="/">

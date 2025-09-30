@@ -7,6 +7,7 @@ import Spinner from "../common/Spinner";
 import useFetchCategory from "../Category/useFetchCategory";
 import ErrorMessage from "../common/ErrorMessage";
 import useUploadImage from "@/hooks/useUploadImage";
+import { HiOutlinePlusSm } from "react-icons/hi";
 const EditProduct = ({ product, setIsOpen }) => {
   const styleInput =
     "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green";
@@ -25,12 +26,11 @@ const EditProduct = ({ product, setIsOpen }) => {
       productName: product.name,
       price: product.price,
       discount: product.offer || 0,
-      size: product.size,
-      stock: product.stock,
       category: product.categoryId,
       description: product.description,
     },
   });
+  const [sizes, setSizes] = useState(product.sizes);
 
   function removeImage(index) {
     const updateImages = currentImages.filter((img, i) => i !== index);
@@ -53,9 +53,7 @@ const EditProduct = ({ product, setIsOpen }) => {
       updatedProduct: {
         avatar: [...currentImages, ...imageUrls],
         name: data.productName,
-        price: parseFloat(data.price),
-        size: parseFloat(data.size),
-        stock: parseInt(data.stock),
+        sizes: data.sizes,
         offer: parseFloat(data.discount),
         categoryId: data.category,
         description: data.description,
@@ -108,19 +106,86 @@ const EditProduct = ({ product, setIsOpen }) => {
           <ErrorMessage>Product name is required</ErrorMessage>
         )}
       </div>
+
+      {sizes.map((item, index) => (
+        <div
+          key={index}
+          className="grid grid-cols-1 md:grid-cols-3 items-center gap-4"
+        >
+          <div>
+            <label className={styleLabel}>Size / Weight (g) *</label>
+            <input
+              type="text"
+              className={styleInput}
+              defaultValue={item.size}
+              {...register(`sizes.${index}.size`, { required: true })}
+            />
+            {errors.sizes?.[index]?.size && (
+              <ErrorMessage> size/weight is required </ErrorMessage>
+            )}
+          </div>
+          <div>
+            <label htmlFor="price" className={styleLabel}>
+              Price *
+            </label>
+            <input
+              type="text"
+              name="price"
+              className={styleInput}
+              defaultValue={item.price}
+              {...register(`sizes.${index}.price`, { required: true })}
+            />
+            {errors.sizes?.[index]?.price && (
+              <ErrorMessage>price is required</ErrorMessage>
+            )}
+          </div>
+          <div>
+            <label className={styleLabel}>Stock *</label>
+            <input
+              type="text"
+              className={styleInput}
+              defaultValue={item.stock}
+              {...register(`sizes.${index}.stock`, { required: true })}
+            />
+            {errors.sizes?.[index]?.stock && (
+              <ErrorMessage> stock is required </ErrorMessage>
+            )}
+          </div>
+        </div>
+      ))}
+
+      {/* Add More Size Button */}
+      <div className="flex justify-end-safe">
+        <Button
+          type="button"
+          variant="secondary"
+          navigate={() => setSizes([...sizes, { size: "", stock: "" }])}
+        >
+          <HiOutlinePlusSm /> Add More Size
+        </Button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="price" className={styleLabel}>
-            Price *
+          <label htmlFor="category" className={styleLabel}>
+            Category *
           </label>
-          <input
-            type="text"
-            name="price"
+          <select
+            name="category"
             className={styleInput}
-            defaultValue={product.price}
-            {...register("price", { required: true })}
-          />
-          {errors.price && <ErrorMessage>price is required</ErrorMessage>}
+            defaultValue={product.categoryId}
+            {...register("category", { required: true })}
+          >
+            <option value={"select"} disabled>
+              Select a Category
+            </option>
+            {categories &&
+              categories.map((category) => (
+                <option value={category.id} key={category.id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
+          {errors.category && <ErrorMessage>category is required</ErrorMessage>}
         </div>
         <div>
           <label htmlFor="discount" className={styleLabel}>
@@ -136,59 +201,6 @@ const EditProduct = ({ product, setIsOpen }) => {
           {errors.discount && <ErrorMessage>discount is required</ErrorMessage>}
         </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="size" className={styleLabel}>
-            Size / Weight (g) *
-          </label>
-          <input
-            type="text"
-            name="size"
-            className={styleInput}
-            defaultValue={product.size}
-            {...register("size", { required: true })}
-          />
-          {errors.size && <ErrorMessage>size is required</ErrorMessage>}
-        </div>
-        <div>
-          <label htmlFor="stock" className={styleLabel}>
-            Stock *
-          </label>
-          <input
-            type="text"
-            name="stock"
-            className={styleInput}
-            defaultValue={product.stock}
-            {...register("stock", { required: true })}
-          />
-          {errors.stock && <ErrorMessage>stock is required</ErrorMessage>}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="category" className={styleLabel}>
-          Category *
-        </label>
-        <select
-          name="category"
-          className={styleInput}
-          defaultValue={product.categoryId}
-          {...register("category", { required: true })}
-        >
-          <option value={"select"} disabled>
-            Select a Category
-          </option>
-          {categories &&
-            categories.map((category) => (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            ))}
-        </select>
-        {errors.category && <ErrorMessage>category is required</ErrorMessage>}
-      </div>
-
       <div>
         <label htmlFor="description" className={styleLabel}>
           Description *

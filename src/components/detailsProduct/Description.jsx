@@ -5,16 +5,43 @@ import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFeed } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { addCart } from "@/redux/reducerCart";
 import {
   containerVariant,
   childTextVariants,
 } from "../../animation/animationVariable";
 import PopUp from "../common/PopUp";
 import UserFeedback from "./UserFeedback";
+import { useDispatch } from "react-redux";
+import { useLocalStorage } from "@uidotdev/usehooks";
 const Description = ({ product }) => {
   const styleSizeBtn =
     "p-1.5 border-1 border-green rounded cursor-pointer hover:bg-green hover:text-white duration-300 transition-all";
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useLocalStorage("cart", []);
+
+  const dispatch = useDispatch();
+
+  function handleAddCart() {
+    const newCart = [
+      ...cart,
+      {
+        id: Date.now(),
+        avatar: product.avatar[0],
+        name: product.name,
+        price:
+          +product.sizes[active].price -
+          +product.sizes[active].price * (+product.offer / 100),
+        size: product.sizes[active].size,
+        quantity: quantity,
+      },
+    ];
+
+    setCart(newCart);
+    dispatch(addCart(newCart));
+  }
 
   return (
     <motion.div
@@ -50,12 +77,20 @@ const Description = ({ product }) => {
         className="flex items-center gap-3 my-4 "
         variants={childTextVariants}
       >
-        <p className="font-bold text-5xl text-green"> ${product.price} </p>
+        <p className="font-bold text-5xl text-green">
+          $
+          {+product.sizes[active].price -
+            +product.sizes[active].price * (+product.offer / 100)}
+        </p>
         <div>
-          <p className="text-amber-300 text-sm"> {product.offer}% off </p>
-          <p className="text-dark-gray font-bold text-xl line-through">
-            ${Math.abs[product.price - product.offer]}
-          </p>
+          {product.offer > 0 && (
+            <>
+              <p className="text-amber-300 text-sm"> {product.offer}% off </p>
+              <p className="text-dark-gray font-bold text-xl line-through">
+                ${product.sizes[active].price}
+              </p>
+            </>
+          )}
         </div>
       </motion.div>
 
@@ -71,10 +106,19 @@ const Description = ({ product }) => {
       >
         <p className="font-bold"> size / weight : </p>
         <div className="my-2 flex items-center gap-2 text-sm">
-          <button className={styleSizeBtn}>20g</button>
-          <button className={styleSizeBtn}>30g</button>
-          <button className={styleSizeBtn}>40g</button>
-          <button className={styleSizeBtn}>50g</button>
+          {product.sizes.map((size, index) => {
+            return (
+              <button
+                className={`${styleSizeBtn} ${
+                  active === index && "bg-green text-white"
+                } `}
+                key={index}
+                onClick={() => setActive(index)}
+              >
+                {size.size}g
+              </button>
+            );
+          })}
         </div>
       </motion.div>
       <motion.form
@@ -87,8 +131,9 @@ const Description = ({ product }) => {
           min={1}
           defaultValue={1}
           className="w-20 border-1 border-green rounded py-1 px-3 text-lg text-dark-green outline-0"
+          onChange={(e) => setQuantity(e.target.value)}
         />
-        <Button type={"submit"}>
+        <Button type={"submit"} navigate={() => handleAddCart()}>
           <span className="mr-2">
             <IoCartOutline />
           </span>
@@ -98,7 +143,7 @@ const Description = ({ product }) => {
       <Button navigate={() => setIsOpen(!isOpen)}>
         <span className="mr-2">
           <MdOutlineFeed />
-        </span>{" "}
+        </span>
         Give Your Feedback
       </Button>
       {isOpen && (

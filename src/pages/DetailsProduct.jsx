@@ -33,7 +33,7 @@ const DetailsProduct = () => {
         initial="hidden"
         whileInView="visible"
       >
-        <RelatedProduct />
+        <RelatedProduct categoryId={data.categoryId} />
       </motion.section>
     </main>
   );

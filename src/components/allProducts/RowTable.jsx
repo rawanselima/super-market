@@ -34,14 +34,14 @@ const RowTable = ({ product }) => {
           />
         </button>
       </TableCell>
-      <TableCell className={`${styleTableCell} md:w-52 w-20 `}>
+      <TableCell className={`${styleTableCell} w-32 `}>
         {product.name}
       </TableCell>
       <TableCell className={`${styleTableCell} text-green font-bold w-28`}>
         {product.category.name}
       </TableCell>
       <TableCell
-        className={`${styleTableCell} w-20 flex items-center gap-1 mt-7`}
+        className={`${styleTableCell} w-20 flex items-center gap-1 mt-2`}
       >
         <span className="text-yellow-400">
           <BsFillStarFill />
@@ -49,25 +49,27 @@ const RowTable = ({ product }) => {
         {product.rating}
       </TableCell>
 
-      <TableCell className={`${styleTableCell} md:w-80 w-52`}>
-        <span>{product.description.slice(0, 90)}</span>
+      <TableCell className={`${styleTableCell} md:w-72 w-40`}>
+        <span>{product.description.slice(0, 50)}</span>
       </TableCell>
 
+      <TableCell className={`${styleTableCell} w-32 text-[14px]`}>
+        {product.sizes.map((item) => item.size).join("/ ")}g
+      </TableCell>
       <TableCell
-        className={`${styleTableCell} text-green font-bold w-20 text-[16px]`}
+        className={`${styleTableCell} text-green font-bold w-32 text-[14px]`}
       >
-        ${product.price}
+        ${product.sizes.map((item) => item.price).join("/ ")}
       </TableCell>
 
-      <TableCell className={`${styleTableCell} w-20 text-[16px]`}>
+      <TableCell className={`${styleTableCell} w-32 text-[14px]`}>
+        {product.sizes.map((item) => item.stock).join("/ ")}
+      </TableCell>
+
+      <TableCell className={`${styleTableCell} font-bold w-20 text-[14px]`}>
         ${product.offer}
       </TableCell>
-      <TableCell className={`${styleTableCell} font-bold w-20 text-[16px]`}>
-        {product.stock}
-      </TableCell>
-      <TableCell className={`${styleTableCell} w-32 text-[16px]`}>
-        {product.size}g
-      </TableCell>
+
       <TableCell
         className={`${styleTableCell} font-bold text-xl text-green w-20`}
       >

@@ -34,7 +34,6 @@ export async function fetchProducts(categoryId, page, limit, searchValue) {
 
     return { data, totalPages };
   } catch (error) {
-    console.error("Error fetching products:", error.message);
     return { data: [], totalPages: 0 };
   }
 }
@@ -46,8 +45,7 @@ export async function fetchProductsDetails(productId) {
       throw new Error("Failed Fetch Details For This Product");
     }
 
-    const data = response.json();
-    console.log("data", data);
+    const data = await response.json();
     return data;
   } catch (error) {
     console.error(error.message);
@@ -111,5 +109,19 @@ export async function editProduct({ productId, updatedProduct }) {
   } catch (error) {
     console.error("Error updating product:", error);
     throw error;
+  }
+}
+
+export async function fetchProductsCategory(categoryId) {
+  try {
+    const response = await fetch(
+      `${API_BASE}products?categoryId=${categoryId}`
+    );
+    if (!response.ok) throw new Error("failed to fetch products");
+    const data = await response.json();
+    console.log("Related data:", data);
+    return data;
+  } catch (error) {
+    return [];
   }
 }

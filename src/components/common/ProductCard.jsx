@@ -43,7 +43,7 @@ const ProductCard = ({ product }) => {
               <span className="text-light-gray">
                 <FaStar />
               </span>
-              <span className="text-dark-gray text-sm">( 5) </span>
+              <span className="text-dark-gray text-sm">(5) </span>
             </p>
             <p className="font-bold">
               <span className="text-green text-lg mt-2">$554</span>
@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
       ) : (
         <Link to={`/products/${product.id}`}>
           <motion.div
-            className="px-3 py-1 rounded border-1 border-light-gray cursor-pointer bg-white"
+            className="w-full px-3 py-1 rounded border-1 border-light-gray cursor-pointer bg-white"
             variants={boxVariant}
             whileHover={hoverVariant}
             whileTap={tabVariant}
@@ -97,15 +97,17 @@ const ProductCard = ({ product }) => {
                 <FaStar />
               </span>
               <span className="text-dark-gray text-sm">
-                {" "}
-                ( {product.rating} ){" "}
+                ( {product.rating} )
               </span>
             </p>
             <p className="font-bold">
-              <span className="text-green text-lg mt-2">${product.price}</span>
+              <span className="text-green text-lg mt-2">
+                
+                ${Math.abs(product.price - product.offer)}
+              </span>
               {product.offer > 0 && (
                 <span className="text-dark-gray line-through text-sm mx-1">
-                  ${product.offer}
+                  ${product.price}
                 </span>
               )}
             </p>

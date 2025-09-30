@@ -18,7 +18,7 @@ export default function Slider({ productImages }) {
   const nextRef = useRef(null);
   const styleImg = "object-cover rounded w-full h-full";
   const styleSlider =
-    "bg-cover bg-center rounded cursor-pointer border-light-gray border-2 shadow py-3";
+    "bg-cover bg-center rounded cursor-pointer border-light-gray border-3 shadow";
 
   return (
     <motion.div

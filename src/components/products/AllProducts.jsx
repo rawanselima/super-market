@@ -9,6 +9,7 @@ import Loader from "../common/Loader";
 const AllProducts = ({ products, isLoading, isError }) => {
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
+
   return (
     <motion.div
       className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 mt-5"
@@ -26,7 +27,7 @@ const AllProducts = ({ products, isLoading, isError }) => {
         })
       ) : (
         <p className="font-bold text-3xl text-center mt-5 w-full col-span-12">
-          ❌ Not Product Yet{" "}
+          ❌ Not Product Yet
         </p>
       )}
     </motion.div>
