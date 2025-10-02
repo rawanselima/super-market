@@ -5,7 +5,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { MdOutlineFeed } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 import { motion } from "framer-motion";
-import { addCart } from "@/services/redux/reducerCart";
+import { addCart } from "@/redux/reducerCart";
 import {
   containerVariant,
   childTextVariants,
