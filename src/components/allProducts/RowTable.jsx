@@ -29,7 +29,7 @@ const RowTable = ({ product }) => {
           <img
             src={product.avatar[0]}
             alt="productImg"
-            className="w-full object-cover cursor-pointer"
+            className="w-20 h-16 object-cover cursor-pointer"
             loading="lazy"
           />
         </button>
@@ -41,7 +41,7 @@ const RowTable = ({ product }) => {
         {product.category.name}
       </TableCell>
       <TableCell
-        className={`${styleTableCell} w-20 flex items-center gap-1 mt-2`}
+        className={`${styleTableCell} w-20 flex items-center gap-1 mt-7`}
       >
         <span className="text-yellow-400">
           <BsFillStarFill />

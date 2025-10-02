@@ -22,6 +22,7 @@ const AddCategory = ({ setIsOpen }) => {
       const imageUrl = await uploadImage(avatarFile);
 
       mutate({
+        createdAt: Date.now(),
         name: data.categoryName,
         avatar: imageUrl,
       });

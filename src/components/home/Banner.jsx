@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Button from "../common/Button";
 import HeaderSection from "../common/HeaderSection";
 import { motion } from "framer-motion";
@@ -77,4 +77,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default memo(Banner);

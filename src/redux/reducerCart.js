@@ -5,11 +5,20 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     addCart: (state, action) => {
-      console.log([...state, action.payload]);
+      console.log(action.payload);
+      return action.payload;
+    },
+    deleteCart: (state, action) => {
+      return state.filter((ele) => ele.id !== action.payload);
+    },
+    editCart: (state, action) => {
+      return state.map((ele) =>
+        ele.id === action.payload.id ? action.payload : ele
+      );
     },
   },
 });
 
-export const { addCart } = cartSlice.actions;
+export const { addCart, deleteCart, editCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

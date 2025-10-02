@@ -63,7 +63,7 @@ const ProductCard = ({ product }) => {
       ) : (
         <Link to={`/products/${product.id}`}>
           <motion.div
-            className="w-full px-3 py-1 rounded border-1 border-light-gray cursor-pointer bg-white"
+            className="w-full px-3 py-2 rounded border-1 border-light-gray cursor-pointer bg-white"
             variants={boxVariant}
             whileHover={hoverVariant}
             whileTap={tabVariant}
@@ -72,7 +72,7 @@ const ProductCard = ({ product }) => {
               src={product.avatar[0] || "/assets/product-1.png"}
               alt={product.name}
               loading="lazy"
-              className="w-full h-36 object-cover mx-auto"
+              className="w-full h-36 object-cover mx-auto rounded"
             />
             <h6 className="font-light text-dark-gray text-sm mt-3">
               {product.category.name}
@@ -102,7 +102,6 @@ const ProductCard = ({ product }) => {
             </p>
             <p className="font-bold">
               <span className="text-green text-lg mt-2">
-                
                 ${Math.abs(product.price - product.offer)}
               </span>
               {product.offer > 0 && (

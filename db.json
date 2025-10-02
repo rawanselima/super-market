@@ -1,0 +1,291 @@
+{
+  "category": [
+    {
+      "createdAt": "2025-09-25T04:23:16.413Z",
+      "name": "apple",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758845600/mzag2poaeqcf75zzlic4.png",
+      "id": "13",
+      "categoryName": "rawan",
+      "client": {}
+    },
+    {
+      "createdAt": "2025-09-24T23:21:16.388Z",
+      "name": "I'm orange",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758842377/veiubesnudrrs2d8epie.png",
+      "id": "14",
+      "client": {},
+      "image": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758829750/ir42ydshu8tsqo0sgjdc.jpg",
+      "categoryName": "rawan3"
+    },
+    {
+      "createdAt": "2025-09-25T13:07:09.292Z",
+      "name": "snack",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758845620/pwkprdawvps57ccuzyw6.png",
+      "id": "15",
+      "client": {}
+    },
+    {
+      "createdAt": "2025-09-25T14:07:52.160Z",
+      "name": "Me",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758935422/s3gkfhpvuj5kj7e4z5c8.jpg",
+      "id": "21"
+    },
+    {
+      "createdAt": "2025-09-26T12:34:41.211Z",
+      "name": "milk",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758918979/lubjfz6fpkbl74dawqzx.png",
+      "id": "22"
+    },
+    {
+      "createdAt": "2025-09-26T12:30:00.019Z",
+      "name": "Pool",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1758935474/rigthy8fpmoz5wgoww9f.jpg",
+      "id": "23"
+    },
+    {
+      "createdAt": "2025-09-28T07:53:42.462Z",
+      "name": "girl",
+      "avatar": "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759103201/epc8yjy5zlnwazalxspb.jpg",
+      "id": "24"
+    }
+  ],
+  "products": [
+    {
+      "createdAt": "2025-09-29T08:37:03.743Z",
+      "name": "test edit",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182635/g97dhsspslfj2utxnegh.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182637/uajsefregsv7cxg4h2qo.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182637/rup4yh0gw5llmb6pqefn.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182637/qa3t3p7xpqvif2fiuf14.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182637/yobrwmggx84a4dhw9s0r.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759182636/dknvuhdhzxsjwotqzvzq.jpg"
+      ],
+      "description": "fkgjio jtrij ertjwiro erjgtweril lerjglw ",
+      "categoryId": "22",
+      "offer": 10,
+      "sizes": [
+        {
+          "size": "55",
+          "price": "50",
+          "stock": "5"
+        },
+        {
+          "size": "65",
+          "price": "60",
+          "stock": "10"
+        },
+        {
+          "size": "80",
+          "price": "100",
+          "stock": "15"
+        },
+        {
+          "size": "4",
+          "price": "15",
+          "stock": "25"
+        },
+        {
+          "size": "100",
+          "price": "25",
+          "stock": "5"
+        }
+      ],
+      "rating": 0,
+      "id": "1"
+    },
+    {
+      "createdAt": "2025-09-29T04:17:54.320Z",
+      "name": "name 2",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759189579/pdsqsm2tdwutfqrlf231.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759189581/ncrrfwwg03jvrqkmwl05.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759189579/svdeoifyvc6ixlimc8su.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759189580/d5dgqu3lwu27wln7tdjs.jpg"
+      ],
+      "description": "kjglkf jglkafj kfdj  aklfjl akfa akj kjakjf ",
+      "categoryId": "22",
+      "price": 82,
+      "offer": 10,
+      "sizes": [
+        {
+          "size": "20",
+          "price": "100",
+          "stock": "25"
+        },
+        {
+          "size": "12",
+          "price": "11",
+          "stock": "32"
+        },
+        {
+          "size": "100",
+          "price": "520",
+          "stock": "10"
+        }
+      ],
+      "rating": 0,
+      "id": "2"
+    },
+    {
+      "createdAt": "2025-09-29T22:52:15.186Z",
+      "name": "Eawan",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759198921/sfpfiqyrhdtgbynkqm2q.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759198963/ho8ad9hzsrmcpohkwye1.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759198946/bvfvrhn0yjduds34j1wf.jpg"
+      ],
+      "description": "Hello world 🌎",
+      "categoryId": "21",
+      "price": 63,
+      "offer": 20,
+      "sizes": [
+        {
+          "size": "60",
+          "price": "200",
+          "stock": "1"
+        },
+        {
+          "size": "70",
+          "price": "800",
+          "stock": "1"
+        }
+      ],
+      "rating": 0,
+      "id": "3"
+    },
+    {
+      "createdAt": "2025-09-29T02:46:18.220Z",
+      "name": "Sea",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759199113/n691n5g8od91h08arwgf.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759199111/znyxqtyoqwuk15dmyjvv.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759199242/yagdeayqxv79w7d4v8hx.jpg"
+      ],
+      "description": "Ghghb hbguk",
+      "categoryId": "23",
+      "price": 32,
+      "offer": 9,
+      "sizes": [
+        {
+          "size": "6",
+          "price": "90",
+          "stock": "3"
+        },
+        {
+          "size": "7",
+          "price": "100.5",
+          "stock": "4"
+        }
+      ],
+      "rating": 0,
+      "id": "4"
+    },
+    {
+      "createdAt": "2025-10-01T20:51:29.622Z",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351146/ehbmi3bwzqm9isckvoyo.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351146/fnsiqfkhsytdhorr646w.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351146/n4oloycxdohxc9bkfkv6.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351228/kg10c6sintmaab6m2x1z.png"
+      ],
+      "name": "test json server",
+      "sizes": [
+        {
+          "size": "25",
+          "price": "100",
+          "stock": "10"
+        },
+        {
+          "size": "35",
+          "price": "125",
+          "stock": "5"
+        },
+        {
+          "size": "50",
+          "price": "150",
+          "stock": "3"
+        }
+      ],
+      "offer": 20,
+      "categoryId": "14",
+      "description": "hello json server",
+      "id": "5daf"
+    },
+    {
+      "createdAt": "2025-10-01T20:51:29.622Z",
+      "id": "6dd0",
+      "name": "name 5",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351300/bwdphqwizxhqivqcaabv.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351299/cumri8ztcd7swo2fgj5k.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351299/zxgfthqibog8sxpt2hcr.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351299/oxl07pfwofi01zg8yx6s.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351298/e6bptfgfx3etrzctnbwb.webp"
+      ],
+      "description": "fdkjl kljf lkj jflafj ajfiarf",
+      "categoryId": "15",
+      "offer": 0,
+      "sizes": [
+        {
+          "size": "50",
+          "price": "10",
+          "stock": "25"
+        },
+        {
+          "size": "30",
+          "price": "5",
+          "stock": "10"
+        }
+      ],
+      "rating": 0
+    },
+    {
+      "id": "615b",
+      "createdAt": "2025-10-01T20:51:29.622Z",
+      "name": "test 2",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351685/ksj82ioxzb3eav6gw8pd.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351685/tqhbvyq63bbyfjrgiabb.png",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351684/x9g4rrmx2z6njnw44byx.png"
+      ],
+      "description": "ihjilj ijoifj ojiofjiao iojfaoid f\n",
+      "categoryId": "14",
+      "offer": 0,
+      "sizes": [
+        {
+          "size": "20",
+          "price": "100",
+          "stock": "3"
+        }
+      ],
+      "rating": 0
+    },
+    {
+      "id": "bdd5",
+      "createdAt": "2025-10-01T20:51:29.622Z",
+      "name": "hello",
+      "avatar": [
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351894/yueptny1bgcxwxhnbfp0.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351894/q2bieslyjgtg7ii3umv0.jpg",
+        "https://res.cloudinary.com/dkkuddfuv/image/upload/v1759351893/ojyknjn5pxx0lphjsyjk.jpg"
+      ],
+      "description": "ljidjf eijf iljdsljf j iwjr ij irj \n",
+      "categoryId": "24",
+      "offer": 30,
+      "sizes": [
+        {
+          "size": "65",
+          "price": "250",
+          "stock": "40"
+        },
+        {
+          "size": "32",
+          "price": "175",
+          "stock": "20"
+        }
+      ],
+      "rating": 0
+    }
+  ]
+}

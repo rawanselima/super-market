@@ -13,9 +13,11 @@ import { IoHomeOutline } from "react-icons/io5";
 import { FaPlateWheat } from "react-icons/fa6";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import useFetchCategory from "../Category/useFetchCategory";
 const Footer = () => {
   const styleIconSocialMedia =
     "text-sm mx-1 my-3 text-white bg-green rounded-full p-2 hover:bg-dark-green transition-all duration-300 cursor-pointer";
+  const { data } = useFetchCategory();
   const dataList = [
     {
       icon: <IoLocationOutline />,
@@ -65,36 +67,22 @@ const Footer = () => {
       <div>
         <h3 className="text-dark-green font-bold text-xl"> Categories </h3>
         <ul className="text-sm py-3 font-light ">
-          <li className="hover:text-green transition-all duration-300 cursor-pointer flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            vegetables
-          </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            snack
-          </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            milk&cheese
-          </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            chicken
-          </li>
-          <li className="hover:text-green transition-all duration-300 cursor-pointer  flex items-center py-1">
-            <span className="mt-1 text-xl">
-              <RiArrowRightDoubleFill />
-            </span>
-            meat
-          </li>
+          {data &&
+            data.map((ele) => {
+              return (
+                <li
+                  key={ele.id}
+                  className="hover:text-green transition-all duration-300 cursor-pointer py-1"
+                >
+                  <Link to="/products" className="flex items-center ">
+                    <span className="mt-1 text-xl">
+                      <RiArrowRightDoubleFill />
+                    </span>
+                    {ele.name}
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </div>
       <div>

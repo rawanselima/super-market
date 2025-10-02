@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import CategoryBox from "./CategoryBox";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -42,4 +42,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default memo(Category);

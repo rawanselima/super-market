@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import HeaderSection from "../common/HeaderSection";
 import Button from "../common/Button";
 import { IoCartOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ import PopUp from "../common/PopUp";
 import UserFeedback from "./UserFeedback";
 import { useDispatch } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
+import toast from "react-hot-toast";
 const Description = ({ product }) => {
   const styleSizeBtn =
     "p-1.5 border-1 border-green rounded cursor-pointer hover:bg-green hover:text-white duration-300 transition-all";
@@ -25,22 +26,29 @@ const Description = ({ product }) => {
   const dispatch = useDispatch();
 
   function handleAddCart() {
-    const newCart = [
-      ...cart,
-      {
-        id: Date.now(),
-        avatar: product.avatar[0],
-        name: product.name,
-        price:
-          +product.sizes[active].price -
-          +product.sizes[active].price * (+product.offer / 100),
-        size: product.sizes[active].size,
-        quantity: quantity,
-      },
-    ];
+    if (product.sizes[active].stock >= quantity) {
+      const newCart = [
+        ...cart,
+        {
+          id: Date.now(),
+          avatar: product.avatar[0],
+          name: product.name,
+          price:
+            +product.sizes[active].price -
+            +product.sizes[active].price * (+product.offer / 100),
+          size: product.sizes[active].size,
+          quantity: quantity,
+        },
+      ];
 
-    setCart(newCart);
-    dispatch(addCart(newCart));
+      setCart(newCart);
+      dispatch(addCart(newCart));
+      toast.success("Add Element Successfully To Your Cart");
+    } else {
+      toast.error(
+        `UnFortunately ${product.name} exist ${product.sizes[active].stock} only `
+      );
+    }
   }
 
   return (
@@ -160,4 +168,4 @@ const Description = ({ product }) => {
 };
 2;
 
-export default Description;
+export default memo(Description);

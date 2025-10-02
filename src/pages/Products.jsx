@@ -52,7 +52,7 @@ const Products = () => {
           isError={isErrorCategory}
         />
       </motion.div>
-      <section className="col-span-9 p-3">
+      <section className="md:col-span-9 col-span-12 p-3">
         <div className="flex items-center justify-between flex-wrap">
           <h3 className="text-dark-gray font-bold text-sm text-left mb-3 flex items-center">
             We found

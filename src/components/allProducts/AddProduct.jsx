@@ -36,6 +36,7 @@ const AddProduct = ({ setIsOpen }) => {
     );
 
     mutate({
+      createdAt: new Date(Date.now()).toISOString(),
       name: data.productName,
       avatar: imageUrls,
       description: data.description,

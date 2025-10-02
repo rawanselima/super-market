@@ -2,8 +2,27 @@ import React from "react";
 import Button from "./Button";
 import PopUp from "./PopUp";
 import Spinner from "./Spinner";
+import { deleteCart } from "@/redux/reducerCart";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import toast from "react-hot-toast";
 
-const DeletePopup = ({ isOpen, setIsOpen, mutate, isPending, id }) => {
+const DeletePopup = ({
+  isOpen,
+  setIsOpen,
+  mutate,
+  isPending,
+  id,
+  dispatch,
+}) => {
+  const [cart, setCart] = useLocalStorage("cart", []);
+  function DeleteCartStorage() {
+    dispatch(deleteCart(id));
+    setCart(() => {
+      return cart.filter((ele) => ele.id != id);
+    });
+    toast.success("Deleted Element Successfully From Your Cart");
+  }
+
   return (
     <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Delete Product"}>
       <div className="space-y-4">
@@ -62,13 +81,23 @@ const DeletePopup = ({ isOpen, setIsOpen, mutate, isPending, id }) => {
           <Button variant="secondary" navigate={() => setIsOpen(false)}>
             Cancel
           </Button>
-          <Button
-            variant="destructive"
-            danger={true}
-            navigate={() => mutate(id)}
-          >
-            {isPending ? <Spinner /> : "Delete"}
-          </Button>
+          {dispatch ? (
+            <Button
+              variant="destructive"
+              danger={true}
+              navigate={() => DeleteCartStorage()}
+            >
+              {isPending ? <Spinner /> : "Delete"}
+            </Button>
+          ) : (
+            <Button
+              variant="destructive"
+              danger={true}
+              navigate={() => mutate(id)}
+            >
+              {isPending ? <Spinner /> : "Delete"}
+            </Button>
+          )}
         </div>
       </div>
     </PopUp>

@@ -1,39 +1,47 @@
 import { API_BASE } from "./APIBase";
-
 export async function fetchProducts(categoryId, page, limit, searchValue) {
   try {
-    let response;
-    let allResponse;
+    // بناء رابط الطلب الأساسي مع pagination
+    let url = `${API_BASE}products?_page=${page}&_limit=${limit}`;
 
-    const searchParam =
-      searchValue && searchValue !== "all" ? `&name=${searchValue}` : "";
-
-    if (categoryId === "all") {
-      response = await fetch(
-        `${API_BASE}products?page=${page}&limit=${limit}${searchParam}`
-      );
-      allResponse = await fetch(`${API_BASE}products?${searchParam}`);
-    } else {
-      response = await fetch(
-        `${API_BASE}products?categoryId=${categoryId}&page=${page}&limit=${limit}${searchParam}`
-      );
-      allResponse = await fetch(
-        `${API_BASE}products?categoryId=${categoryId}${searchParam}`
-      );
+    if (categoryId && categoryId !== "all") {
+      url += `&categoryId=${categoryId}`;
+    }
+    if (searchValue && searchValue !== "all") {
+      url += `&name_like=${searchValue}`; // ✅ استخدم name_like
     }
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch products");
-    }
-
+    // الطلب الأول → بيانات الصفحة
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Failed to fetch products");
     const data = await response.json();
+
+    // بناء رابط لجلب العدد الكلي (بدون pagination لكن بنفس الفلاتر)
+    let allUrl = `${API_BASE}products`;
+    const filters = [];
+
+    if (categoryId && categoryId !== "all") {
+      filters.push(`categoryId=${categoryId}`);
+    }
+    if (searchValue && searchValue !== "all") {
+      filters.push(`name_like=${searchValue}`); // ✅ خليها زي فوق
+    }
+
+    if (filters.length > 0) {
+      allUrl += `?${filters.join("&")}`;
+    }
+
+    const allResponse = await fetch(allUrl);
+    if (!allResponse.ok) throw new Error("Failed to fetch all products");
     const allData = await allResponse.json();
 
+    // حساب عدد الصفحات
     const countProducts = allData.length;
     const totalPages = Math.ceil(countProducts / limit);
 
     return { data, totalPages };
   } catch (error) {
+    console.error(error);
     return { data: [], totalPages: 0 };
   }
 }
@@ -119,7 +127,7 @@ export async function fetchProductsCategory(categoryId) {
     );
     if (!response.ok) throw new Error("failed to fetch products");
     const data = await response.json();
-    console.log("Related data:", data);
+
     return data;
   } catch (error) {
     return [];

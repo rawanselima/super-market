@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Button from "../common/Button";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { motion } from "framer-motion";
@@ -42,4 +42,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default memo(HeroSection);

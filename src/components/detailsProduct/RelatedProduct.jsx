@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import ProductCard from "../common/ProductCard";
 import HeaderSection from "../common/HeaderSection";
 import { motion } from "framer-motion";
-import { containerVariant } from "../../animation/animationVariable";
 import { childVariant } from "../../animation/animationVariable";
 import SliderContainer from "../common/SliderContainer";
 import { SwiperSlide } from "swiper/react";
@@ -15,11 +14,6 @@ const RelatedProduct = ({ categoryId }) => {
     isLoading,
     isError,
   } = useFetchProductsCategory(categoryId);
-
-  useEffect(() => {
-    console.log(isLoading);
-    console.log("data", data);
-  }, [isLoading, categoryId, data]);
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
@@ -48,4 +42,4 @@ const RelatedProduct = ({ categoryId }) => {
   );
 };
 
-export default RelatedProduct;
+export default memo(RelatedProduct);

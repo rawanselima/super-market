@@ -20,7 +20,11 @@ const AllProducts = ({ products, isLoading, isError }) => {
       {products && products.length > 0 ? (
         products.map((product) => {
           return (
-            <motion.div variants={childVariant} key={product.id}>
+            <motion.div
+              variants={childVariant}
+              key={product.id}
+              className="w-full"
+            >
               <ProductCard product={product} />
             </motion.div>
           );
