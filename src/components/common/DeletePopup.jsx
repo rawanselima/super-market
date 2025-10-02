@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 import PopUp from "./PopUp";
 import Spinner from "./Spinner";
-import { deleteCart } from "@/services/redux/reducerCart";
+import { deleteCart } from "@/redux/reducerCart";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import toast from "react-hot-toast";
 
