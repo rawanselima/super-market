@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import RowCart from "./RowCart";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { addCart } from "@/services/redux/reducerCart";
+import { addCart } from "@/redux/reducerCart";
 
 const TableCart = () => {
   const data = useSelector((state) => state.cartStore);
