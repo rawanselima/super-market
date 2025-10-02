@@ -1,22 +1,20 @@
 import { API_BASE } from "./APIBase";
 export async function fetchProducts(categoryId, page, limit, searchValue) {
   try {
-    // بناء رابط الطلب الأساسي مع pagination
     let url = `${API_BASE}products?_page=${page}&_limit=${limit}`;
 
     if (categoryId && categoryId !== "all") {
       url += `&categoryId=${categoryId}`;
     }
     if (searchValue && searchValue !== "all") {
-      url += `&name_like=${searchValue}`; // ✅ استخدم name_like
+      url += `&name_like=${searchValue}`;
     }
 
-    // الطلب الأول → بيانات الصفحة
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch products");
+
     const data = await response.json();
 
-    // بناء رابط لجلب العدد الكلي (بدون pagination لكن بنفس الفلاتر)
     let allUrl = `${API_BASE}products`;
     const filters = [];
 
@@ -24,24 +22,20 @@ export async function fetchProducts(categoryId, page, limit, searchValue) {
       filters.push(`categoryId=${categoryId}`);
     }
     if (searchValue && searchValue !== "all") {
-      filters.push(`name_like=${searchValue}`); // ✅ خليها زي فوق
+      filters.push(`name_contains=${searchValue}`);
     }
-
     if (filters.length > 0) {
       allUrl += `?${filters.join("&")}`;
     }
 
     const allResponse = await fetch(allUrl);
-    if (!allResponse.ok) throw new Error("Failed to fetch all products");
     const allData = await allResponse.json();
 
-    // حساب عدد الصفحات
     const countProducts = allData.length;
     const totalPages = Math.ceil(countProducts / limit);
 
     return { data, totalPages };
   } catch (error) {
-    console.error(error);
     return { data: [], totalPages: 0 };
   }
 }

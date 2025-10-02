@@ -3,7 +3,7 @@ import Button from "../common/Button";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import DeletePopup from "../common/DeletePopup";
 import { useDispatch } from "react-redux";
-import { editCart } from "@/redux/reducerCart";
+import { editCart } from "@/services/redux/reducerCart";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 const RowCart = ({ data }) => {

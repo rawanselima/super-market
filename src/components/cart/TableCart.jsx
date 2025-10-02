@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import RowCart from "./RowCart";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import { addCart } from "@/redux/reducerCart";
+import { addCart } from "@/services/redux/reducerCart";
 
 const TableCart = () => {
   const data = useSelector((state) => state.cartStore);
@@ -43,9 +43,7 @@ const TableCart = () => {
       <tbody className="divide-y divide-gray-200">
         {data && data.length > 0 ? (
           data.map((ele) => {
-            return (
-              <RowCart data={ele} key={ele.id} />
-            );
+            return <RowCart data={ele} key={ele.id} />;
           })
         ) : (
           <tr>
