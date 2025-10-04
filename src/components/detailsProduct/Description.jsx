@@ -26,7 +26,7 @@ const Description = ({ product }) => {
   const dispatch = useDispatch();
 
   function handleAddCart() {
-    if (product.sizes[active].stock >= quantity) {
+    if (+product.sizes[active].stock >= +quantity) {
       const newCart = [
         ...cart,
         {
@@ -38,6 +38,7 @@ const Description = ({ product }) => {
             +product.sizes[active].price * (+product.offer / 100),
           size: product.sizes[active].size,
           quantity: quantity,
+          productId: product.id,
         },
       ];
 

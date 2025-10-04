@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RxPerson } from "react-icons/rx";
 import { IoCartOutline } from "react-icons/io5";
 import { TfiWorld } from "react-icons/tfi";
 import { IoIosLogOut } from "react-icons/io";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { addCart } from "@/redux/reducerCart";
 
 const Header = () => {
   const styleLinks =
     "mx-1 text-lg cursor-pointer hover:text-green duration-300 transition-all";
   const cart = useSelector((state) => state.cartStore);
+  const dispatch = useDispatch();
+  const [cartItems] = useLocalStorage("cart", []);
+
+  useEffect(() => {
+    dispatch(addCart(cartItems));
+  }, []);
 
   return (
     <header className="flex justify-between items-center font-quicksand py-5 px-3 xl:px-0 ">

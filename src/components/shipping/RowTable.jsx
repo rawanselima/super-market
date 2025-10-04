@@ -4,15 +4,17 @@ import PopUp from "../common/PopUp";
 import { TbEdit } from "react-icons/tb";
 import EditShipping from "./EditShipping";
 
-const RowTable = () => {
+const RowTable = ({ shipping }) => {
   const styleTableCell = "p-2 text-lg";
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">
-      <TableCell className={`${styleTableCell} w-40`}> Cairo </TableCell>
+      <TableCell className={`${styleTableCell} w-40`}>
+        {shipping.name}
+      </TableCell>
       <TableCell className={`${styleTableCell} text-green font-bold w-40`}>
-        75 LE
+        {shipping.price} LE
       </TableCell>
       <TableCell className={`${styleTableCell} w-60`}>
         <button className="cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -26,7 +28,7 @@ const RowTable = () => {
           setIsOpen={setIsOpen}
           title={"Edit Price Shipping"}
         >
-          <EditShipping />
+          <EditShipping item={shipping} setIsOpen={setIsOpen} />
         </PopUp>
       )}
     </TableRow>

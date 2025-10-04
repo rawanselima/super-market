@@ -1,66 +1,112 @@
-import React from "react";
-const Payment = () => {
+import { useLocalStorage } from "@uidotdev/usehooks";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import ErrorMessage from "../common/ErrorMessage";
+import Button from "../common/Button";
+import useAddOrder from "./useAddOrder";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "@/redux/reducerCart";
+import toast from "react-hot-toast";
+import Spinner from "../common/Spinner";
+const Payment = ({ setShippingPrice }) => {
   const styleDiv = "flex flex-col my-2 text-dark-green text-green";
   const styleInput =
     "border-1 border-light-gray focus:border-green rounded px-2 py-1 my-2 outline-0 text-dark-green";
   const styleH3 = "text-lg font-bold my-3 text-dark-green";
-  const government = [
-    { value: "cairo", label: "Cairo" },
-    { value: "giza", label: "Giza" },
-    { value: "alexandria", label: "Alexandria" },
-    { value: "dakahlia", label: "Dakahlia" },
-    { value: "sharqia", label: "Sharqia" },
-    { value: "qalyubia", label: "Qalyubia" },
-    { value: "kafr_el_sheikh", label: "Kafr El Sheikh" },
-    { value: "beheira", label: "Beheira" },
-    { value: "gharbiya", label: "Gharbiya" },
-    { value: "monufia", label: "Monufia" },
-    { value: "minya", label: "Minya" },
-    { value: "beni_suef", label: "Beni Suef" },
-    { value: "faiyum", label: "Faiyum" },
-    { value: "assiut", label: "Assiut" },
-    { value: "sohag", label: "Sohag" },
-    { value: "qena", label: "Qena" },
-    { value: "luxor", label: "Luxor" },
-    { value: "aswan", label: "Aswan" },
-    { value: "red_sea", label: "Red Sea" },
-    { value: "new_valley", label: "New Valley" },
-    { value: "matrouh", label: "Matrouh" },
-    { value: "north_sinai", label: "North Sinai" },
-    { value: "south_sinai", label: "South Sinai" },
-    { value: "port_said", label: "Port Said" },
-    { value: "ismailia", label: "Ismailia" },
-    { value: "suez", label: "Suez" },
-  ];
+  const [shipping] = useLocalStorage("shipping");
+  const [cart, setCart] = useLocalStorage("cart");
+  const cartData = useSelector((state) => state.cartStore);
+  const user = useSelector((state) => state.userStore);
+  const dispatch = useDispatch();
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+  const { mutate, isPending } = useAddOrder();
+  const totalPrice =
+    cartData.length > 0 && cartData.reduce((acc, cur) => acc + cur.price, 0);
+
+  function submit(data) {
+    if (data && user.name && cart.length > 0) {
+      mutate({
+        userId: user.id,
+        userName: data.firstName + " " + data.lastName,
+        phone: data.phone,
+        address: data.address,
+        status: "pending",
+        date: Date.now(),
+        order: cartData,
+        totalPrice: totalPrice,
+      });
+      setCart([]);
+      dispatch(addCart([]));
+    }
+
+    if (!user.name) {
+      toast.error("should be Login First");
+    }
+    if (cart.length === 0) {
+      toast.error("should be add product to cart");
+    }
+  }
+
   return (
     <div className="border-1 border-light-gray rounded p-3">
-      <form>
+      <form onSubmit={handleSubmit(submit)}>
         <h3 className={styleH3}> Contact </h3>
         <div className={styleDiv}>
-          <label htmlFor="number"> Phone Number </label>
-          <input type="text" name="number" className={styleInput} />
+          <label htmlFor="phone"> Phone Number </label>
+          <input
+            type="text"
+            name="phone"
+            className={styleInput}
+            {...register("phone", { required: true })}
+          />
+          {errors.phone && (
+            <ErrorMessage> Phone Number is required </ErrorMessage>
+          )}
         </div>
 
         <h3 className={styleH3}> Delivery </h3>
         <div className="grid xl:grid-cols-2 grid-cols-1 gap-2">
           <div className={styleDiv}>
             <label htmlFor="firstName"> First Name </label>
-            <input type="text" name="firstName" className={`${styleInput}`} />
+            <input
+              type="text"
+              name="firstName"
+              className={`${styleInput}`}
+              {...register("firstName", { required: true })}
+            />
+            {errors.firstName && (
+              <ErrorMessage> First Name is required </ErrorMessage>
+            )}
           </div>
 
           <div className={styleDiv}>
             <label htmlFor="lastName"> Last Name </label>
-            <input type="text" name="lastName" className={styleInput} />
+            <input
+              type="text"
+              name="lastName"
+              className={styleInput}
+              {...register("lastName", { required: true })}
+            />
+            {errors.lastName && (
+              <ErrorMessage> last Name is required </ErrorMessage>
+            )}
           </div>
         </div>
 
         <div className="grid xl:grid-cols-2 grid-cols-1 gap-2">
           <div className={styleDiv}>
             <label htmlFor="country"> Country </label>
-            <select name="country" className={styleInput}>
+            <select
+              name="country"
+              className={styleInput}
+              {...register("country", { required: true })}
+            >
               <option value="egypt"> Egypt </option>
-              <option value="other"> other </option>
             </select>
+            {errors.country && (
+              <ErrorMessage> Country is required </ErrorMessage>
+            )}
           </div>
 
           <div className={styleDiv}>
@@ -69,13 +115,25 @@ const Payment = () => {
               className={styleInput}
               aria-label="Select Governorate"
               name="government"
+              onChange={(e) => {
+                const selected = shipping.find((g) => g.id === +e.target.value);
+                setShippingPrice(selected);
+              }}
+              {...register("government", { required: true })}
             >
-              {government.map((g) => (
-                <option key={g.value} value={g.value}>
-                  {g.label}-50LE
-                </option>
-              ))}
+              <option value="">select government </option>
+              {shipping &&
+                shipping.map((g) => {
+                  return (
+                    <option key={g.id} value={g.id}>
+                      {g.name}-{g.price}LE
+                    </option>
+                  );
+                })}
             </select>
+            {errors.government && (
+              <ErrorMessage> Government is required </ErrorMessage>
+            )}
           </div>
         </div>
         <div className={styleDiv}>
@@ -90,9 +148,13 @@ const Payment = () => {
             name="paymentWay"
             className="accent-green w-5 h-5"
             checked={true}
+            readOnly={true}
           />
           <label htmlFor="paymentWay"> Cash on delivery </label>
         </div>
+        <Button size={"full"} type={"submit"}>
+          {isPending ? <Spinner /> : "Pay Now"}
+        </Button>
       </form>
     </div>
   );

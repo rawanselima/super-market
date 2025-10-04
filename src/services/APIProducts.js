@@ -1,13 +1,13 @@
-import { API_BASE } from "./APIBase";
+import { API_BASE_1 } from "./APIBase";
 export async function fetchProducts(categoryId, page, limit, searchValue) {
   try {
-    let url = `${API_BASE}products?_page=${page}&_limit=${limit}`;
+    let url = `${API_BASE_1}products?page=${page}&limit=${limit}`;
 
     if (categoryId && categoryId !== "all") {
       url += `&categoryId=${categoryId}`;
     }
     if (searchValue && searchValue !== "all") {
-      url += `&name_like=${searchValue}`;
+      url += `&name=${searchValue}`;
     }
 
     const response = await fetch(url);
@@ -15,14 +15,14 @@ export async function fetchProducts(categoryId, page, limit, searchValue) {
 
     const data = await response.json();
 
-    let allUrl = `${API_BASE}products`;
+    let allUrl = `${API_BASE_1}products`;
     const filters = [];
 
     if (categoryId && categoryId !== "all") {
       filters.push(`categoryId=${categoryId}`);
     }
     if (searchValue && searchValue !== "all") {
-      filters.push(`name_contains=${searchValue}`);
+      filters.push(`name=${searchValue}`);
     }
     if (filters.length > 0) {
       allUrl += `?${filters.join("&")}`;
@@ -42,7 +42,7 @@ export async function fetchProducts(categoryId, page, limit, searchValue) {
 
 export async function fetchProductsDetails(productId) {
   try {
-    const response = await fetch(`${API_BASE}products/${productId}`);
+    const response = await fetch(`${API_BASE_1}products/${productId}`);
     if (!response.ok) {
       throw new Error("Failed Fetch Details For This Product");
     }
@@ -57,7 +57,7 @@ export async function fetchProductsDetails(productId) {
 
 export async function addProduct(product) {
   try {
-    const response = await fetch(`${API_BASE}products`, {
+    const response = await fetch(`${API_BASE_1}products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export async function addProduct(product) {
 
 export async function deleteProduct(productId) {
   try {
-    const response = await fetch(`${API_BASE}products/${productId}`, {
+    const response = await fetch(`${API_BASE_1}products/${productId}`, {
       method: "DELETE",
     });
 
@@ -94,7 +94,7 @@ export async function deleteProduct(productId) {
 
 export async function editProduct({ productId, updatedProduct }) {
   try {
-    const response = await fetch(`${API_BASE}products/${productId}`, {
+    const response = await fetch(`${API_BASE_1}products/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export async function editProduct({ productId, updatedProduct }) {
 export async function fetchProductsCategory(categoryId) {
   try {
     const response = await fetch(
-      `${API_BASE}products?categoryId=${categoryId}`
+      `${API_BASE_1}products?categoryId=${categoryId}`
     );
     if (!response.ok) throw new Error("failed to fetch products");
     const data = await response.json();

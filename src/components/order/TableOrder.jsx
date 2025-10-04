@@ -1,12 +1,13 @@
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
-function TableOrders() {
+function TableOrders({ orders }) {
   const styleTableHead = "font-bold px-2 py-5";
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
@@ -23,9 +24,15 @@ function TableOrders() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {orders.length > 0 ? (
+          orders.map((order) => {
+            return <RowTable order={order} key={order.id} />;
+          })
+        ) : (
+          <TableRow className="text-dark-green font-bold text-center text-xl">
+            <TableCell colSpan="6"> ❌ Not Orders Yet </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );

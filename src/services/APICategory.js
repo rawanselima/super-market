@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { API_BASE } from "./APIBase";
+import { API_BASE_1 } from "./APIBase";
 
 export const fetchCategories = async () => {
   try {
-    const response = await fetch(`${API_BASE}category`);
+    const response = await fetch(`${API_BASE_1}category`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -21,7 +21,7 @@ export const fetchCategories = async () => {
 
 export const fetchCategoryById = async (categoryId) => {
   try {
-    const response = await fetch(`${API_BASE}category/${categoryId}`);
+    const response = await fetch(`${API_BASE_1}category/${categoryId}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -39,7 +39,7 @@ export const fetchCategoryById = async (categoryId) => {
 
 export const deleteCategory = async (categoryId) => {
   try {
-    const response = await fetch(`${API_BASE}category/${categoryId}`, {
+    const response = await fetch(`${API_BASE_1}category/${categoryId}`, {
       method: "DELETE",
     });
     if (!response.ok) {
@@ -59,7 +59,7 @@ export const deleteCategory = async (categoryId) => {
 
 export const AddCategory = async (category) => {
   try {
-    const response = await fetch(`${API_BASE}category`, {
+    const response = await fetch(`${API_BASE_1}category`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export const AddCategory = async (category) => {
 
 export const EditCategory = async ({ id, newCategory }) => {
   try {
-    const response = await fetch(`${API_BASE}category/${id}`, {
+    const response = await fetch(`${API_BASE_1}category/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -6,8 +6,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import governments from "./governments";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addShipping } from "@/redux/reducerShipping";
 function TableShipping() {
   const styleTableHead = "font-bold px-2 py-5";
+  const [shipping] = useLocalStorage("shipping", []);
+  const shippingState = useSelector((state) => state.shippingStore);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (shippingState.length === 0 && shipping) {
+      dispatch(addShipping(shipping));
+    }
+  }, [dispatch, shipping, shippingState]);
+
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -18,10 +33,10 @@ function TableShipping() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {shippingState &&
+          shippingState.map((item) => {
+            return <RowTable shipping={item} key={item.id} />;
+          })}
       </TableBody>
     </Table>
   );

@@ -102,11 +102,11 @@ const ProductCard = ({ product }) => {
             </p>
             <p className="font-bold">
               <span className="text-green text-lg mt-2">
-                ${Math.abs(product.price - product.offer)}
+                ${Math.abs(product.sizes[0].price - product.offer)}
               </span>
               {product.offer > 0 && (
                 <span className="text-dark-gray line-through text-sm mx-1">
-                  ${product.price}
+                  ${product.sizes[0].price}
                 </span>
               )}
             </p>

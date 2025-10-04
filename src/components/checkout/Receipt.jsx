@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReceiptBox from "./Receipt.Box";
 import { IoReceiptOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
-const Receipt = () => {
-  const cartData = useSelector((state) => state.cartStore);
 
+const Receipt = ({ shippingPrice }) => {
+  const cartData = useSelector((state) => state.cartStore);
+  const shipping = useSelector((state) => state.shippingStore);
   const subTotalPrice = cartData.reduce(
     (acc, cur) => acc + +cur.price * +cur.quantity,
     0
@@ -13,10 +14,11 @@ const Receipt = () => {
   return (
     <section>
       <div>
-        {cartData.map((cart) => {
-          return <ReceiptBox cart={cart} />;
-        })}
+        {cartData.map((cart) => (
+          <ReceiptBox cart={cart} key={cart.id} />
+        ))}
       </div>
+
       <div className="font-bold text-dark-green border-1 border-light-gray rounded p-3 text-base/8">
         <h3 className="text-xl font-bold my-3 text-dark-green flex items-center">
           <span className="mr-2">
@@ -31,10 +33,19 @@ const Receipt = () => {
           </span>
         </p>
         <p>
-          Shipping Price : <span className="text-green text-xl"> $50 </span>
+          Shipping Price :
+          <span className="text-green text-xl">
+            ${shippingPrice ? shippingPrice.price : 0}
+          </span>
         </p>
         <p>
-          Total Price : <span className="text-green text-xl"> $550 </span>
+          Total Price :
+          <span className="text-green text-xl">
+            $
+            {(
+              subTotalPrice + (shippingPrice ? +shippingPrice.price : 0)
+            ).toFixed(2)}
+          </span>
         </p>
       </div>
     </section>

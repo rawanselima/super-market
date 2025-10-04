@@ -5,28 +5,31 @@ import PopUp from "../common/PopUp";
 import EditStatus from "./EditStatus";
 import { useNavigate } from "react-router-dom";
 import useOrderStatus from "@/hooks/useOrderStatus";
-const RowTable = () => {
+const RowTable = ({ order }) => {
   const styleTableCell = "p-2 text-sm";
-  const { styleStatus } = useOrderStatus("pending");
+  const { styleStatus } = useOrderStatus(order.status);
 
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">
-      <TableCell className={`${styleTableCell} w-36`}>rawan selima</TableCell>
+      <TableCell className={`${styleTableCell} w-36`}>
+        {order.userName}
+      </TableCell>
       <TableCell className={`${styleTableCell} text-green font-bold w-40`}>
         <a href="https://wa.me/+201060661936" target="_blank">
-          +201060661936
+          {order.phone}
         </a>
       </TableCell>
       <TableCell className={`${styleTableCell} w-60`}>
-        egypt kafer el sheikh sakha
+        {order.address}
       </TableCell>
 
       <TableCell className={`${styleTableCell} text-green font-bold w-36`}>
-        <span className={styleStatus}> pending </span>
+        <span className={styleStatus}> {order.status} </span>
       </TableCell>
-      <TableCell className={`${styleTableCell} w-36`}>10/10/2025</TableCell>
+      <TableCell className={`${styleTableCell} w-36`}> {order.date} </TableCell>
 
       <TableCell className={`${styleTableCell} font-bold w-48`}>
         <div className="flex">
@@ -44,7 +47,7 @@ const RowTable = () => {
 
       {isOpen && (
         <PopUp isOpen={isOpen} setIsOpen={setIsOpen} title={"Edit Status"}>
-          <EditStatus />
+          <EditStatus order={order} setIsOpen={setIsOpen} />
         </PopUp>
       )}
     </TableRow>
