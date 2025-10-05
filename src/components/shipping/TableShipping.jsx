@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { addShipping } from "@/redux/reducerShipping";
 function TableShipping() {
   const styleTableHead = "font-bold px-2 py-5";
-  const [shipping] = useLocalStorage("shipping", []);
+  const [shipping] = useLocalStorage("shipping", governments);
   const shippingState = useSelector((state) => state.shippingStore);
   const dispatch = useDispatch();
 

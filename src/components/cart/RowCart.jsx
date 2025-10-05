@@ -13,11 +13,11 @@ const RowCart = ({ data }) => {
 
   function handleDecreaseQuantity() {
     if (data.quantity > 1) {
-      dispatch(editCart({ ...data, quantity: data.quantity - 1 }));
+      dispatch(editCart({ ...data, quantity: +data.quantity - 1 }));
       setCart(() => {
         return cart.map((ele) => {
           return ele.id === data.id
-            ? { ...ele, quantity: data.quantity - 1 }
+            ? { ...ele, quantity: +data.quantity - 1 }
             : ele;
         });
       });
@@ -25,11 +25,11 @@ const RowCart = ({ data }) => {
   }
 
   function handleIncreaseQuantity() {
-    dispatch(editCart({ ...data, quantity: data.quantity + 1 }));
+    dispatch(editCart({ ...data, quantity: +data.quantity + 1 }));
     setCart(() => {
       return cart.map((ele) => {
         return ele.id === data.id
-          ? { ...ele, quantity: data.quantity + 1 }
+          ? { ...ele, quantity: +data.quantity + 1 }
           : ele;
       });
     });
@@ -74,7 +74,7 @@ const RowCart = ({ data }) => {
             </button>
             <input
               type="text"
-              value={data.quantity}
+              value={+data.quantity}
               className="w-8 sm:w-10 outline-0 text-center text-xs sm:text-sm"
             />
             <button
