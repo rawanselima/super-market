@@ -1,8 +1,9 @@
+import governments from "@/components/shipping/governments";
 import { createSlice } from "@reduxjs/toolkit";
 
 const shippingSlice = createSlice({
   name: "shipping",
-  initialState: [],
+  initialState: governments,
   reducers: {
     addShipping: (state, action) => {
       return action.payload;

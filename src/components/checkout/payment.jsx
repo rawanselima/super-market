@@ -8,12 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "@/redux/reducerCart";
 import toast from "react-hot-toast";
 import Spinner from "../common/Spinner";
+import governments from "../shipping/governments";
 const Payment = ({ setShippingPrice }) => {
   const styleDiv = "flex flex-col my-2 text-dark-green text-green";
   const styleInput =
     "border-1 border-light-gray focus:border-green rounded px-2 py-1 my-2 outline-0 text-dark-green";
   const styleH3 = "text-lg font-bold my-3 text-dark-green";
-  const [shipping] = useLocalStorage("shipping");
+  const [shipping] = useLocalStorage("shipping", governments);
   const [cart, setCart] = useLocalStorage("cart");
   const cartData = useSelector((state) => state.cartStore);
   const user = useSelector((state) => state.userStore);
