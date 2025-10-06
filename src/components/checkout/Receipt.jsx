@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Receipt = ({ shippingPrice }) => {
   const cartData = useSelector((state) => state.cartStore);
-  const shipping = useSelector((state) => state.shippingStore);
   const subTotalPrice = cartData.reduce(
     (acc, cur) => acc + +cur.price * +cur.quantity,
     0

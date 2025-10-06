@@ -1,5 +1,5 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../common/ErrorMessage";
 import Button from "../common/Button";
@@ -9,6 +9,7 @@ import { addCart } from "@/redux/reducerCart";
 import toast from "react-hot-toast";
 import Spinner from "../common/Spinner";
 import governments from "../shipping/governments";
+import useEditStockProduct from "./useEditStockProduct";
 const Payment = ({ setShippingPrice }) => {
   const styleDiv = "flex flex-col my-2 text-dark-green text-green";
   const styleInput =
@@ -22,10 +23,13 @@ const Payment = ({ setShippingPrice }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { mutate, isPending } = useAddOrder();
+  const { mutateAsync: mutateProduct, isPending: isPendingProduct } =
+    useEditStockProduct();
   const totalPrice =
-    cartData.length > 0 && cartData.reduce((acc, cur) => acc + cur.price, 0);
+    cartData.length > 0 &&
+    cartData.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
 
-  function submit(data) {
+  async function submit(data) {
     if (data && user.name && cart.length > 0) {
       mutate({
         userId: user.id,
@@ -37,6 +41,15 @@ const Payment = ({ setShippingPrice }) => {
         order: cartData,
         totalPrice: totalPrice,
       });
+
+      for (const ele of cart) {
+        await mutateProduct({
+          productId: ele.productId,
+          size: ele.size,
+          quantity: ele.quantity,
+        });
+      }
+
       setCart([]);
       dispatch(addCart([]));
     }
@@ -56,7 +69,7 @@ const Payment = ({ setShippingPrice }) => {
         <div className={styleDiv}>
           <label htmlFor="phone"> Phone Number </label>
           <input
-            type="text"
+            type="phone"
             name="phone"
             className={styleInput}
             {...register("phone", { required: true })}
@@ -115,12 +128,13 @@ const Payment = ({ setShippingPrice }) => {
             <select
               className={styleInput}
               aria-label="Select Governorate"
-              name="government"
-              onChange={(e) => {
-                const selected = shipping.find((g) => g.id === +e.target.value);
-                setShippingPrice(selected);
-              }}
-              {...register("government", { required: true })}
+              {...register("government", {
+                required: true,
+                onChange: (e) => {
+                  const selected = shipping.find((g) => g.id == e.target.value);
+                  setShippingPrice(selected);
+                },
+              })}
             >
               <option value="">select government </option>
               {shipping &&
@@ -154,7 +168,7 @@ const Payment = ({ setShippingPrice }) => {
           <label htmlFor="paymentWay"> Cash on delivery </label>
         </div>
         <Button size={"full"} type={"submit"}>
-          {isPending ? <Spinner /> : "Pay Now"}
+          {isPending || isPendingProduct ? <Spinner /> : "Pay Now"}
         </Button>
       </form>
     </div>

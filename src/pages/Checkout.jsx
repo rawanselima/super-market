@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Payment from "../components/checkout/payment";
 import Receipt from "../components/checkout/Receipt";
 import { motion } from "framer-motion";
 import { containerVariant, childVariant } from "../animation/animationVariable";
 const Checkout = () => {
   const [shippingPrice, setShippingPrice] = useState(null);
+
+  useEffect(() => {
+    console.log(shippingPrice);
+  }, [shippingPrice]);
+  
   return (
     <motion.main
       className="flex flex-wrap justify-center gap-5 my-5"

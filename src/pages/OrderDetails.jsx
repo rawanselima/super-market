@@ -3,18 +3,27 @@ import HeaderSection from "@/components/common/HeaderSection";
 import { FaArrowLeft } from "react-icons/fa6";
 import React from "react";
 import DataCustomer from "@/components/orderDetails/DataCustomer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TableDetailsOrder from "@/components/orderDetails/TableDetailOrder";
 import useOrderStatus from "@/hooks/useOrderStatus";
-
+import useFetchOrderDetails from "@/components/orderDetails/useFetchOrderDetails";
+import Loader from "@/components/common/Loader";
+import Error from "@/components/common/Error";
 const OrderDetails = () => {
   const navigate = useNavigate();
-  const {styleStatus} = useOrderStatus("processing")
+  const { id } = useParams();
+  const { data, isLoading, isError } = useFetchOrderDetails(id);
+  const { styleStatus } = useOrderStatus("pending");
+
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
   return (
     <main>
       <section className="flex items-center justify-between">
         <HeaderSection smallMargin={true}>
-          Details Order #Name <span className={styleStatus}> processing </span>
+          Details Order #{data.userName}
+          <span className={styleStatus}> {data.status} </span>
         </HeaderSection>
 
         <Button navigate={() => navigate(-1)}>
@@ -24,14 +33,14 @@ const OrderDetails = () => {
           Back
         </Button>
       </section>
-      <DataCustomer />
+      <DataCustomer data={data} />
       <section className="overflow-auto my-5">
-        <TableDetailsOrder />
+        <TableDetailsOrder data={data} />
       </section>
       <section className="relative">
         <div className=" absolute -bottom-30 right-0 text-xl font-bold my-3 bg-white p-5 rounded text-dark-green">
           <p>
-            <span> Total Price : </span> $1700
+            <span> Total Price : </span> ${data.totalPrice}
           </p>
         </div>
       </section>

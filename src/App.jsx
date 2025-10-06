@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { lazy } from "react";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import Login from "./pages/Login";
 const MainAppLayout = lazy(() => import("./pages/MainAppLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Products = lazy(() => import("./pages/Products"));
@@ -26,6 +27,10 @@ const ProfileUser = lazy(() => import("./pages/ProfileUser"));
 function App() {
   const queryClient = new QueryClient();
   const router = createBrowserRouter([
+    {
+      path: "/login",
+      element: <Login />,
+    },
     {
       path: "/",
       element: <MainAppLayout />,

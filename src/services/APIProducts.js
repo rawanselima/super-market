@@ -41,6 +41,8 @@ export async function fetchProducts(categoryId, page, limit, searchValue) {
 }
 
 export async function fetchProductsDetails(productId) {
+  if (!productId) return;
+
   try {
     const response = await fetch(`${API_BASE_1}products/${productId}`);
     if (!response.ok) {
@@ -56,6 +58,7 @@ export async function fetchProductsDetails(productId) {
 }
 
 export async function addProduct(product) {
+  if (!product) return;
   try {
     const response = await fetch(`${API_BASE_1}products`, {
       method: "POST",
@@ -76,6 +79,8 @@ export async function addProduct(product) {
 }
 
 export async function deleteProduct(productId) {
+  if (!productId) return;
+
   try {
     const response = await fetch(`${API_BASE_1}products/${productId}`, {
       method: "DELETE",
@@ -93,6 +98,7 @@ export async function deleteProduct(productId) {
 }
 
 export async function editProduct({ productId, updatedProduct }) {
+  if (!productId || !updatedProduct) return;
   try {
     const response = await fetch(`${API_BASE_1}products/${productId}`, {
       method: "PUT",
@@ -115,6 +121,7 @@ export async function editProduct({ productId, updatedProduct }) {
 }
 
 export async function fetchProductsCategory(categoryId) {
+  if (!categoryId) return;
   try {
     const response = await fetch(
       `${API_BASE_1}products?categoryId=${categoryId}`

@@ -6,8 +6,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
-function TableDetailsOrder() {
+
+function TableDetailsOrder({ data }) {
   const styleTableHead = "font-bold px-2 py-5";
+
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -19,7 +21,6 @@ function TableDetailsOrder() {
             Product Name
           </TableHead>
           <TableHead className={`${styleTableHead} w-24`}> Price </TableHead>
-          <TableHead className={`${styleTableHead} w-24`}> Category </TableHead>
           <TableHead className={`${styleTableHead} w-24`}>
             size/weight
           </TableHead>
@@ -31,12 +32,17 @@ function TableDetailsOrder() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {data &&
+          data.order.map((ele) => {
+            return (
+              <RowTable
+                order={ele}
+                status={data.status}
+                date={data.date}
+                key={ele.id}
+              />
+            );
+          })}
       </TableBody>
     </Table>
   );

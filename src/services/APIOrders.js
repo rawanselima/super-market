@@ -74,3 +74,16 @@ export async function editOrder({ orderId, newOrder }) {
     throw error;
   }
 }
+
+export async function fetchDetailsOrder(orderId) {
+  if (!orderId) return;
+  try {
+    const response = await fetch(`${API_BASE_2}orders/${orderId}`);
+    if (!response.ok) throw new Error("failed fetch details order");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error.message);
+    throw error;
+  }
+}

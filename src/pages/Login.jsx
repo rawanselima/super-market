@@ -1,0 +1,47 @@
+import React from "react";
+import { IoPerson } from "react-icons/io5";
+import { IoIosUnlock } from "react-icons/io";
+import { MdLogin } from "react-icons/md";
+import Button from "@/components/common/Button";
+import { Link } from "react-router-dom";
+const Login = () => {
+  const styleInput =
+    "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green mb-5";
+  const styleLabel =
+    "flex gap-2 items-center text-lg font-bold text-dark-green mb-3";
+
+  return (
+    <main className="font-family-quicksand bg-[url('/assets/background.webp')] bg-cover bg-no-repeat bg-right w-full min-h-screen pt-20">
+      <section className="bg-white px-3 md:w-[600px] w-[95%] mx-auto rounded pt-10">
+        <h1 className="mt-3 mb-6 font-bold text-dark-green text-4xl flex items-center justify-center gap-2">
+          Sigh In
+        </h1>
+        <form>
+          <div>
+            <label htmlFor="name" className={styleLabel}>
+              <IoPerson /> userName *
+            </label>
+            <input type="text" name="name" className={styleInput} />
+          </div>
+          <div>
+            <label htmlFor="password" className={styleLabel}>
+              <IoIosUnlock /> password *
+            </label>
+            <input type="password" name="password" className={styleInput} />
+          </div>
+          <Link to="/register">
+            <p className="text-dark-gray">
+              Don't have an account ?
+              <span className="text-green text-sm font-bold"> Sign up </span>
+            </p>
+          </Link>
+          <p className="py-5">
+            <Button size={"full"}> Sigh In </Button>
+          </p>
+        </form>
+      </section>
+    </main>
+  );
+};
+
+export default Login;
