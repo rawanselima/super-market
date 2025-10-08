@@ -4,19 +4,45 @@ import { FiShoppingBag } from "react-icons/fi";
 import { IoPeopleOutline } from "react-icons/io5";
 import { BsBoxes } from "react-icons/bs";
 import { FiDollarSign } from "react-icons/fi";
+import useFetchOrderMonth from "./useFetchOrderMonth";
+import Loader from "../common/Loader";
+import Error from "../common/Error";
 const Sales = () => {
+  const { data, isLoading, isError } = useFetchOrderMonth(Date.now());
+
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
+  const totalPriceCurrentMonth = data?.nowMonth.reduce(
+    (acc, cur) => acc + +cur.totalPrice,
+    0
+  );
+
+  const totalPriceLastMonth = data?.lastMonth.reduce(
+    (acc, cur) => acc + +cur.totalPrice,
+    0
+  );
+
+  const percentageTotalPrice =
+    totalPriceLastMonth === 0
+      ? totalPriceCurrentMonth > 0
+        ? 100
+        : 0
+      : ((totalPriceCurrentMonth - totalPriceLastMonth) / totalPriceLastMonth) *
+        100;
+
   const dataSales = [
     {
       text: "Total Refund",
       icon: <FiDollarSign />,
-      sales: "30000",
-      percentage: 20,
+      sales: totalPriceCurrentMonth.toFixed(2),
+      percentage: percentageTotalPrice,
     },
     {
       text: "Orders",
       icon: <FiShoppingBag />,
-      sales: "3000",
-      percentage: 100,
+      sales: data?.nowMonthOrders,
+      percentage: data?.percentageForSales,
     },
     {
       text: "Customers",
@@ -31,6 +57,7 @@ const Sales = () => {
       percentage: 27,
     },
   ];
+
   return (
     <section className="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2 my-10">
       {dataSales.map((ele, index) => {

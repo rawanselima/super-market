@@ -1,17 +1,20 @@
 import { useSearchParams } from "react-router-dom";
 
-export default function useSearch() {
+export default function useSearch(setPage) {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchValue = searchParams.get("search") || "all";
 
   const setSearchValue = (newSearchValue) => {
+    if (setPage) setPage(1);
+    const updatedParams = new URLSearchParams(searchParams);
     if (newSearchValue !== "all") {
-      searchParams.set("search", newSearchValue);
-      setSearchParams(searchParams);
+      updatedParams.set("search", newSearchValue);
     } else {
-      searchParams.set("search", "all");
-      setSearchParams(searchParams);
+      updatedParams.set("search", "all");
     }
+    updatedParams.set("page", 1);
+
+    setSearchParams(updatedParams, { replace: false });
   };
 
   return { setSearchValue, searchValue };

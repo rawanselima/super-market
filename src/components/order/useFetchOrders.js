@@ -10,7 +10,7 @@ export default function useFetchOrders(status, page, limit, searchValue) {
     queryKey: ["orders", status, page, limit, searchValue],
     queryFn: () => fetchOrders(status, page, limit, searchValue),
   });
-  console.log(results);
+
   const orders = results?.data || [];
   const totalPages = results?.totalPages || 1;
 

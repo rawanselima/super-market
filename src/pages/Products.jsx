@@ -22,7 +22,7 @@ const Products = () => {
     isError: isErrorCategory,
   } = useFetchCategory();
   const { page, limit, setPage } = usePagination(1, 8);
-  const { setSearchValue, searchValue } = useSearch();
+  const { setSearchValue, searchValue } = useSearch(setPage);
   const { categoryId, setCategoryId } = useFilterProducts(setPage);
   const { data, isLoading, isError, totalPages } = useFetchProducts(
     categoryId,

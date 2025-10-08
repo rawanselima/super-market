@@ -13,7 +13,7 @@ const OrderDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError } = useFetchOrderDetails(id);
-  const { styleStatus } = useOrderStatus("pending");
+  const { styleStatus } = useOrderStatus(data?.status);
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;

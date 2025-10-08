@@ -12,9 +12,9 @@ import React, { useEffect, useState } from "react";
 const Order = () => {
   const styleInput =
     " px-3 py-1 mx-1 border-1 border-light-gray rounded focus:outline-none focus:ring-2 focus:ring-green";
-  const { page, limit, setPage } = usePagination();
+  const { page, limit, setPage } = usePagination(1, 10);
   const { status, setStatus } = useFilterOrders(setPage);
-  const { searchValue, setSearchValue } = useSearch();
+  const { searchValue, setSearchValue } = useSearch(setPage);
   const [textSearch, setTextSearch] = useState(searchValue);
   const { orders, totalPages, isLoading, isError } = useFetchOrders(
     status,
@@ -24,7 +24,6 @@ const Order = () => {
   );
 
   const debouncedText = useDebounce(textSearch, 1000);
-
   useEffect(() => {
     if (debouncedText.trim() === "") {
       setSearchValue("all");

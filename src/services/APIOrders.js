@@ -29,7 +29,6 @@ export async function fetchOrders(status, page, limit, searchValue) {
     const countOrders = allData.length;
     const totalPages = Math.ceil(countOrders / limit);
 
-    console.log(data);
     return { data, totalPages };
   } catch (error) {
     return { data: [], totalPages: 1 };
@@ -85,5 +84,15 @@ export async function fetchDetailsOrder(orderId) {
   } catch (error) {
     console.error(error.message);
     throw error;
+  }
+}
+export async function fetchAllOrders() {
+  try {
+    const response = await fetch(`${API_BASE_2}orders`);
+    if (!response.ok) throw new Error("failed to fetch new errors");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error.message);
   }
 }
