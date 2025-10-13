@@ -1,8 +1,7 @@
-import { fetchAllOrders } from "@/services/APIOrders";
 import { useQuery } from "@tanstack/react-query";
 import { format, subMonths } from "date-fns";
 
-export default function useFetchOrderMonth(date) {
+export default function useFetchOrderMonth(date ,allOrders) {
   const currentDate = new Date(date);
   const lastMonth = subMonths(currentDate, 1);
 
@@ -13,8 +12,6 @@ export default function useFetchOrderMonth(date) {
     queryKey: ["orderMonth", { month: currentMonthAndYear }],
 
     queryFn: async () => {
-      const allOrders = await fetchAllOrders();
-
       const nowMonth = allOrders.filter((order) =>
         order.createdAt?.startsWith(currentMonthAndYear)
       );

@@ -7,15 +7,9 @@ import {
   Tooltip,
   Cell,
 } from "recharts";
-
-const data01 = [
-  { category: "cheese", order: 400, price: 1200 },
-  { category: "milk", order: 300, price: 900 },
-  { category: "snack", order: 300, price: 600 },
-  { category: "vegetables", order: 200, price: 500 },
-  { category: "fruits", order: 200, price: 700 },
-  { category: "fruits", order: 200, price: 700 },
-];
+import useSalesMonth from "./useSalesMonth";
+import Spinner from "../common/Spinner";
+import Error from "../common/Error";
 
 const COLORS = [
   "#8884d8",
@@ -35,16 +29,16 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className="bg-white p-2 border rounded shadow">
         <p className="text-sm">
-          <strong className="font-bold text-green mr-1/2">Category :</strong>{" "}
+          <strong className="font-bold text-green mr-1/2">Category :</strong>
           {data.category}
         </p>
         <p className="text-sm">
-          <strong className="font-bold text-green mr-1/2">Orders :</strong>{" "}
-          {data.order}
+          <strong className="font-bold text-green mr-1/2">Orders :</strong>
+          {data.totalOrders}
         </p>
         <p className="text-sm">
-          <strong className="font-bold text-green mr-1/2">Total Price :</strong>{" "}
-          ${data.price}
+          <strong className="font-bold text-green mr-1/2">Total Price :</strong>
+          ${data.totalSales.toFixed(2)}
         </p>
       </div>
     );
@@ -52,9 +46,13 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-export default function Chart() {
+export default function Chart({ allOrders }) {
   const isMobile = useIsMobile();
-  console.log(isMobile);
+  const { data, isLoading, isError } = useSalesMonth(allOrders);
+
+  if (isLoading) return <Spinner />;
+  if (isError) return <Error />;
+
   return (
     <div className="xl:w-1/2 w-full h-[400px] min-h-[400px] p-5  border-1 rounded border-light-green">
       <h2 className="text-dark-green text-xl mb-3 font-bold">
@@ -72,16 +70,16 @@ export default function Chart() {
           )}
 
           <Pie
-            data={data01}
-            dataKey="order"
+            data={data}
+            dataKey="totalSales"
             nameKey="category"
             cx="50%"
             cy="45%"
             innerRadius={90}
             outerRadius={120}
-            label={({ name, value }) => `${name}: ${value}`}
+            label={({ name, value }) => `${name}: ${value.toFixed(2)}`}
           >
-            {data01.map((entry, index) => (
+            {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}

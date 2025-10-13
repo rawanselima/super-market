@@ -6,7 +6,7 @@ import { formatDistanceToNow } from "date-fns";
 const OrderTodayBox = ({ order }) => {
   const { styleStatus } = useOrderStatus(order.status);
   const navigate = useNavigate();
-  const date = formatDistanceToNow(new Date(order.createdAt), {
+  const date = formatDistanceToNow(new Date(order.date), {
     addSuffix: true,
   });
 

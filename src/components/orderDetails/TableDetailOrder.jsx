@@ -20,6 +20,7 @@ function TableDetailsOrder({ data }) {
           <TableHead className={`${styleTableHead} w-48 `}>
             Product Name
           </TableHead>
+          <TableHead className={`${styleTableHead} w-20`}> Category </TableHead>
           <TableHead className={`${styleTableHead} w-24`}> Price </TableHead>
           <TableHead className={`${styleTableHead} w-24`}>
             size/weight

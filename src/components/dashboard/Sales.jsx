@@ -7,8 +7,11 @@ import { FiDollarSign } from "react-icons/fi";
 import useFetchOrderMonth from "./useFetchOrderMonth";
 import Loader from "../common/Loader";
 import Error from "../common/Error";
-const Sales = () => {
-  const { data, isLoading, isError } = useFetchOrderMonth(Date.now());
+const Sales = ({ allOrders }) => {
+  const { data, isLoading, isError } = useFetchOrderMonth(
+    Date.now(),
+    allOrders
+  );
 
   if (isLoading) return <Loader />;
   if (isError) return <Error />;

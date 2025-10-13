@@ -16,6 +16,9 @@ const RowTable = ({ order, date }) => {
         />
       </TableCell>
       <TableCell className={`${styleTableCell} w-48`}>{order.name}</TableCell>
+      <TableCell className={`${styleTableCell} text-sm text-green font-semibold w-20`}>
+        {order.categoryName}
+      </TableCell>
       <TableCell className={`${styleTableCell} font-bold w-24 px-3`}>
         ${order.price}
       </TableCell>

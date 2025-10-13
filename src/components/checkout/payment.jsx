@@ -40,6 +40,7 @@ const Payment = ({ setShippingPrice }) => {
         date: Date.now(),
         order: cartData,
         totalPrice: totalPrice,
+        payment: "cash on delivery",
       });
 
       for (const ele of cart) {
@@ -153,7 +154,13 @@ const Payment = ({ setShippingPrice }) => {
         </div>
         <div className={styleDiv}>
           <label htmlFor="address"> your Address </label>
-          <input type="text" name="address" className={styleInput} />
+          <input
+            type="text"
+            name="address"
+            className={styleInput}
+            {...register("address", { required: true })}
+          />
+          {errors.address && <ErrorMessage> Address is required </ErrorMessage>}
         </div>
         <h3 className={styleH3}> Payment Way </h3>
 

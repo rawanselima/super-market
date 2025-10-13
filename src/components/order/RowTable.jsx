@@ -9,9 +9,11 @@ import useDate from "@/hooks/useDate";
 const RowTable = ({ order }) => {
   const styleTableCell = "p-2 text-sm";
   const { styleStatus } = useOrderStatus(order.status);
-  const { formatted } = useDate(order.createdAt);
+  const { formatted } = useDate(order.date);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  console.log(order.date);
 
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">

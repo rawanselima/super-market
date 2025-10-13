@@ -15,6 +15,7 @@ import UserFeedback from "./UserFeedback";
 import { useDispatch } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import toast from "react-hot-toast";
+import useFetchCategory from "../Category/useFetchCategory";
 const Description = ({ product }) => {
   const styleSizeBtn =
     "p-1.5 border-1 border-green rounded cursor-pointer hover:bg-green hover:text-white duration-300 transition-all";
@@ -22,10 +23,12 @@ const Description = ({ product }) => {
   const [active, setActive] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useLocalStorage("cart", []);
+  const { data } = useFetchCategory();
 
   const dispatch = useDispatch();
 
   function handleAddCart() {
+    const category = data.find((ele) => ele.id === product.categoryId);
     if (+product.sizes[active].stock >= +quantity) {
       const newCart = [
         ...cart,
@@ -38,17 +41,21 @@ const Description = ({ product }) => {
             +product.sizes[active].price * (+product.offer / 100),
           size: product.sizes[active].size,
           quantity: quantity,
+          categoryName: category.name,
           productId: product.id,
         },
       ];
-
+      
       setCart(newCart);
       dispatch(addCart(newCart));
       toast.success("Add Element Successfully To Your Cart");
     } else {
-      toast.error(
-        `UnFortunately ${product.name} exist ${product.sizes[active].stock} only `
-      );
+      if (!product.sizes[active.stock])
+        toast.error(`UnFortunately ${product.name} is out of stock now `);
+      else
+        toast.error(
+          `UnFortunately ${product.name} exist ${product.sizes[active].stock} only `
+        );
     }
   }
 
