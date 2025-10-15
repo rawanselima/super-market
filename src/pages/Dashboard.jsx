@@ -26,7 +26,7 @@ const Dashboard = () => {
         <HeaderSection showByMargin={true}>
           Sales & Order Through year
         </HeaderSection>
-        <Graph />
+        <Graph allOrders={data} />
       </section>
     </main>
   );

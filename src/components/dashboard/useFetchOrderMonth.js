@@ -1,24 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import { format, subMonths } from "date-fns";
 
-export default function useFetchOrderMonth(date ,allOrders) {
+export default function useFetchOrderMonth(date, allOrders) {
   const currentDate = new Date(date);
-  const lastMonth = subMonths(currentDate, 1);
+  const lastDate = subMonths(currentDate, 1);
 
   const currentMonthAndYear = format(currentDate, "yyyy-MM");
-  const lastMonthAndYear = format(lastMonth, "yyyy-MM");
+  const lastMonthAndYear = format(lastDate, "yyyy-MM");
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["orderMonth", { month: currentMonthAndYear }],
+    queryKey: ["orderMonth", currentMonthAndYear],
 
     queryFn: async () => {
-      const nowMonth = allOrders.filter((order) =>
-        order.createdAt?.startsWith(currentMonthAndYear)
-      );
+      const nowMonth = allOrders.filter((order) => {
+        const orderDate = format(order.date, "yyyy-MM");
+        return orderDate === currentMonthAndYear && order;
+      });
 
-      const lastMonth = allOrders.filter((order) =>
-        order.createdAt?.startsWith(lastMonthAndYear)
-      );
+      const lastMonth = allOrders.filter((order) => {
+        const orderDate = format(order.date, "yyyy-MM");
+        return orderDate === lastMonthAndYear && order;
+      });
 
       const nowMonthOrders = nowMonth.length;
       const lastMonthOrders = lastMonth.length;

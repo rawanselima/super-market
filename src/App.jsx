@@ -6,6 +6,8 @@ import { lazy } from "react";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Protected from "./components/login/Protected";
 const MainAppLayout = lazy(() => import("./pages/MainAppLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Products = lazy(() => import("./pages/Products"));
@@ -30,6 +32,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
     {
       path: "/",
@@ -63,7 +69,11 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <AppLayout />,
+      element: (
+        <Protected>
+          <AppLayout />
+        </Protected>
+      ),
       children: [
         {
           index: true,

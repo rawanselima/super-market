@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import { containerVariant } from "../../animation/animationVariable";
 import { childTextVariants } from "../../animation/animationVariable";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const HeroSection = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.userStore);
 
   return (
     <section className="bg-[url(/assets/heroSection.webp)] min-h-[500px] bg-no-repeat bg-cover bg-right rounded-3xl mt-7">
@@ -35,7 +37,9 @@ const HeroSection = () => {
               <FaArrowRightLong />
             </span>
           </Button>
-          <Button navigate={() => navigate("/dashboard")}>dashboard</Button>
+          {user?.role === "admin" && (
+            <Button navigate={() => navigate("/dashboard")}>dashboard</Button>
+          )}
         </motion.div>
       </motion.div>
     </section>

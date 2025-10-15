@@ -1,9 +1,16 @@
+import Error from "@/components/common/Error";
 import HeaderSection from "@/components/common/HeaderSection";
+import Loader from "@/components/common/Loader";
 import Pagination from "@/components/common/Pagination";
 import TableCustomer from "@/components/customer/TableCusromer";
+import useFetchUsers from "@/components/customer/useFetchUsers";
 import React from "react";
 
 const Customer = () => {
+  const { data, isLoading, isError } = useFetchUsers();
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
   return (
     <main>
       <section className="flex justify-between items-center flex-wrap">
@@ -17,7 +24,7 @@ const Customer = () => {
         </form>
       </section>
       <section>
-        <TableCustomer />
+        <TableCustomer data={data} />
       </section>
 
       <section className="mx-auto w-fit">

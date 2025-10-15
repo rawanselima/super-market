@@ -6,7 +6,7 @@ export default function useSalesMonth(allOrders) {
   const currentMonth = format(currentDate, "yyyy-MM");
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["salesByCategory", currentMonth],
+    queryKey: ["salesByCategory", currentMonth, allOrders],
     queryFn: async () => {
       const ordersMonth = allOrders.filter((order) => {
         const date = new Date(order.date);
@@ -47,8 +47,8 @@ export default function useSalesMonth(allOrders) {
       );
 
       return cartOrders;
-      },
-    
+    },
+
     staleTime: 0,
   });
 

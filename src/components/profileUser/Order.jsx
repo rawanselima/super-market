@@ -8,6 +8,7 @@ import DeletePopup from "../common/DeletePopup";
 const Order = () => {
   const { styleStatus } = useOrderStatus("pending");
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <div className="bg-light-green flex items-center justify-between p-3 rounded mt-3">
@@ -25,8 +26,8 @@ const Order = () => {
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-2 items-start">
         <div>
-          <ReceiptBox />
-          <ReceiptBox />
+          {/* <ReceiptBox />
+          <ReceiptBox /> */}
         </div>
         <TotalReceipt />
       </div>

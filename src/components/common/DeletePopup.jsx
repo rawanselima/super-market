@@ -15,6 +15,7 @@ const DeletePopup = ({
   dispatch,
 }) => {
   const [cart, setCart] = useLocalStorage("cart", []);
+  
   function DeleteCartStorage() {
     dispatch(deleteCart(id));
     setCart(() => {

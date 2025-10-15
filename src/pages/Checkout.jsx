@@ -5,10 +5,6 @@ import { motion } from "framer-motion";
 import { containerVariant, childVariant } from "../animation/animationVariable";
 const Checkout = () => {
   const [shippingPrice, setShippingPrice] = useState(null);
-
-  useEffect(() => {
-    console.log(shippingPrice);
-  }, [shippingPrice]);
   
   return (
     <motion.main

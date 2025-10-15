@@ -12,7 +12,7 @@ import {
 } from "../../animation/animationVariable";
 import PopUp from "../common/PopUp";
 import UserFeedback from "./UserFeedback";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import toast from "react-hot-toast";
 import useFetchCategory from "../Category/useFetchCategory";
@@ -24,38 +24,44 @@ const Description = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const [cart, setCart] = useLocalStorage("cart", []);
   const { data } = useFetchCategory();
+  const user = useSelector((state) => state.userStore);
 
   const dispatch = useDispatch();
 
   function handleAddCart() {
-    const category = data.find((ele) => ele.id === product.categoryId);
-    if (+product.sizes[active].stock >= +quantity) {
-      const newCart = [
-        ...cart,
-        {
-          id: Date.now(),
-          avatar: product.avatar[0],
-          name: product.name,
-          price:
-            +product.sizes[active].price -
-            +product.sizes[active].price * (+product.offer / 100),
-          size: product.sizes[active].size,
-          quantity: quantity,
-          categoryName: category.name,
-          productId: product.id,
-        },
-      ];
-      
-      setCart(newCart);
-      dispatch(addCart(newCart));
-      toast.success("Add Element Successfully To Your Cart");
+    if (user !== null) {
+      if (+product.sizes[active].stock >= +quantity) {
+        const category = data.find((ele) => ele.id === product.categoryId);
+
+        const newCart = [
+          ...cart,
+          {
+            id: Date.now(),
+            avatar: product.avatar[0],
+            name: product.name,
+            price:
+              +product.sizes[active].price -
+              +product.sizes[active].price * (+product.offer / 100),
+            size: product.sizes[active].size,
+            quantity: quantity,
+            categoryName: category.name,
+            productId: product.id,
+          },
+        ];
+
+        setCart(newCart);
+        dispatch(addCart(newCart));
+        toast.success("Add Element Successfully To Your Cart");
+      } else {
+        if (!product.sizes[active.stock])
+          toast.error(`UnFortunately ${product.name} is out of stock now `);
+        else
+          toast.error(
+            `UnFortunately ${product.name} exist ${product.sizes[active].stock} only `
+          );
+      }
     } else {
-      if (!product.sizes[active.stock])
-        toast.error(`UnFortunately ${product.name} is out of stock now `);
-      else
-        toast.error(
-          `UnFortunately ${product.name} exist ${product.sizes[active].stock} only `
-        );
+      toast.error("please Login First ");
     }
   }
 
@@ -149,19 +155,25 @@ const Description = ({ product }) => {
           className="w-20 border-1 border-green rounded py-1 px-3 text-lg text-dark-green outline-0"
           onChange={(e) => setQuantity(e.target.value)}
         />
-        <Button type={"submit"} navigate={() => handleAddCart()}>
-          <span className="mr-2">
-            <IoCartOutline />
-          </span>
-          Add to cart
-        </Button>
+        {user?.role === "user " ||
+          (user === null && (
+            <Button type={"submit"} navigate={() => handleAddCart()}>
+              <span className="mr-2">
+                <IoCartOutline />
+              </span>
+              Add to cart
+            </Button>
+          ))}
       </motion.form>
-      <Button navigate={() => setIsOpen(!isOpen)}>
-        <span className="mr-2">
-          <MdOutlineFeed />
-        </span>
-        Give Your Feedback
-      </Button>
+      {user?.role === "user" ||
+        (user === null && (
+          <Button navigate={() => setIsOpen(!isOpen)}>
+            <span className="mr-2">
+              <MdOutlineFeed />
+            </span>
+            Give Your Feedback
+          </Button>
+        ))}
       {isOpen && (
         <PopUp
           isOpen={isOpen}

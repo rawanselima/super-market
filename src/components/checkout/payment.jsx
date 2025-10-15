@@ -72,6 +72,7 @@ const Payment = ({ setShippingPrice }) => {
           <input
             type="phone"
             name="phone"
+            defaultValue={user?.phone}
             className={styleInput}
             {...register("phone", { required: true })}
           />
@@ -87,6 +88,7 @@ const Payment = ({ setShippingPrice }) => {
             <input
               type="text"
               name="firstName"
+              defaultValue={user?.name.split(" ")[0]}
               className={`${styleInput}`}
               {...register("firstName", { required: true })}
             />
@@ -100,6 +102,7 @@ const Payment = ({ setShippingPrice }) => {
             <input
               type="text"
               name="lastName"
+              defaultValue={user?.name.split(" ")[1]}
               className={styleInput}
               {...register("lastName", { required: true })}
             />
