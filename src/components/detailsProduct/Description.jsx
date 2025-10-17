@@ -27,7 +27,7 @@ const Description = ({ product }) => {
   const user = useSelector((state) => state.userStore);
 
   const dispatch = useDispatch();
-
+  
   function handleAddCart() {
     if (user !== null) {
       if (+product.sizes[active].stock >= +quantity) {
@@ -155,25 +155,23 @@ const Description = ({ product }) => {
           className="w-20 border-1 border-green rounded py-1 px-3 text-lg text-dark-green outline-0"
           onChange={(e) => setQuantity(e.target.value)}
         />
-        {user?.role === "user " ||
-          (user === null && (
-            <Button type={"submit"} navigate={() => handleAddCart()}>
-              <span className="mr-2">
-                <IoCartOutline />
-              </span>
-              Add to cart
-            </Button>
-          ))}
-      </motion.form>
-      {user?.role === "user" ||
-        (user === null && (
-          <Button navigate={() => setIsOpen(!isOpen)}>
+        {(user?.role === "user" || user === null) && (
+          <Button type={"submit"} navigate={() => handleAddCart()}>
             <span className="mr-2">
-              <MdOutlineFeed />
+              <IoCartOutline />
             </span>
-            Give Your Feedback
+            Add to cart
           </Button>
-        ))}
+        )}
+      </motion.form>
+      {(user?.role === "user" || user === null) && (
+        <Button navigate={() => setIsOpen(!isOpen)}>
+          <span className="mr-2">
+            <MdOutlineFeed />
+          </span>
+          Give Your Feedback
+        </Button>
+      )}
       {isOpen && (
         <PopUp
           isOpen={isOpen}

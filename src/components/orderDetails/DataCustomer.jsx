@@ -3,7 +3,7 @@ import { IoPerson } from "react-icons/io5";
 import { PiHeadsetFill } from "react-icons/pi";
 import { FaAddressBook } from "react-icons/fa";
 import { FaSackDollar } from "react-icons/fa6";
-const DataCustomer = ({ data }) => {
+const DataCustomer = ({ data , address }) => {
   const styleSpan = "font-bold text-dark-green flex items-center gap-2";
   const styleList = "py-2 flex items-center gap-2";
 
@@ -15,7 +15,7 @@ const DataCustomer = ({ data }) => {
             <IoPerson />
             Name :
           </span>
-          {data.userName}
+          {data.userName || data.name}
         </li>
         <li className={styleList}>
           <span className={styleSpan}>
@@ -27,7 +27,7 @@ const DataCustomer = ({ data }) => {
           <span className={styleSpan}>
             <FaAddressBook /> Address :
           </span>
-          {data.address}
+          {data.address || address}
         </li>
         <li className={styleList}>
           <span className={styleSpan}>

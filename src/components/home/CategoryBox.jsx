@@ -18,16 +18,16 @@ const CategoryBox = ({ item }) => {
 
   return (
     <motion.div
-      className={`${randomColor} rounded-lg text-center cursor-pointer md:w-52 w-48 h-60 relative overflow-hidden`}
+      className={`${randomColor} rounded-lg text-center cursor-pointer md:w-52 w-40 h-60 relative overflow-hidden`}
       whileHover={hoverVariant}
       whileTap={tabVariant}
     >
       <Link to={`/products?categoryId=${item.id}`}>
-        <div className="md:w-52 w-48  h-42 overflow-hidden">
+        <div className="md:w-52 w-40  h-42 overflow-hidden">
           <motion.img
             src={item.avatar}
             alt={item.name}
-            className="mx-auto w-52  h-42 object-cover"
+            className="mx-auto md:w-52 w-40  h-42 object-cover"
             loading="lazy"
             whileHover={{
               scale: 1.1,

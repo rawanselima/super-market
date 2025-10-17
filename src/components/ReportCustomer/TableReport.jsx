@@ -7,13 +7,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
-import RowTest from "../orderDetails/RowTable";
+import useFetchUserOrders from "./useFetchUserOrders";
+import Loader from "../common/Loader";
+import Error from "../common/Error";
 
-//    كل الي معمول ده بس علاشن يوضح الفكره و منساش
-
-function TableReport() {
+function TableReport({data}) {
   const styleTableHead = "font-bold px-2 py-5";
-  const styleTableCell = "p-2 text-sm";
+
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -31,49 +31,19 @@ function TableReport() {
             total price
           </TableHead>
           <TableHead className={`${styleTableHead} w-28`}>Date</TableHead>
-          <TableHead className={`${styleTableHead} w-24`}> Status </TableHead>
+          <TableHead className={`${styleTableHead} w-28`}> Status </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable /> {/* ده الاساسي الي هنشتغل بيه */}
-        <TableRow className="b-light-green border-b-1 border-light-gray">
-          <TableCell className={`${styleTableCell} w-48`}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo enim
-            animi quam
-          </TableCell>
-          <TableCell className={`${styleTableCell} font-bold w-24 px-3`}>
-            $230
-          </TableCell>
-          <TableCell
-            className={`${styleTableCell} w-24 px-3 text-green font-bold`}
-          >
-            20g
-          </TableCell>
-          <TableCell className={`${styleTableCell} text-lg w-20`}>2</TableCell>
-          <TableCell className={`${styleTableCell} text-green font-bold w-24`}>
-            $6200
-          </TableCell>
-          <TableCell className={`${styleTableCell} w-28`}>10/10/2025</TableCell>
-        </TableRow>
-        <TableRow className="b-light-green border-b-1 border-light-gray">
-          <TableCell className={`${styleTableCell} w-48`}>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo enim
-            animi quam
-          </TableCell>
-          <TableCell className={`${styleTableCell} font-bold w-24 px-3`}>
-            $230
-          </TableCell>
-          <TableCell
-            className={`${styleTableCell} w-24 px-3 text-green font-bold`}
-          >
-            20g
-          </TableCell>
-          <TableCell className={`${styleTableCell} text-lg w-20`}>2</TableCell>
-          <TableCell className={`${styleTableCell} text-green font-bold w-24`}>
-            $6200
-          </TableCell>
-          <TableCell className={`${styleTableCell} w-28`}>10/10/2025</TableCell>
-        </TableRow>
+        {data?.length > 0 ? (
+          data.map((ele) => {
+            return <RowTable data={ele} key={ele.id} />;
+          })
+        ) : (
+          <TableRow className="text-dark-green font-bold text-center text-xl">
+            <TableCell colSpan="6"> ❌ Not Orders Yet </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );

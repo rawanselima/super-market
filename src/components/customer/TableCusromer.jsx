@@ -1,6 +1,7 @@
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -8,6 +9,7 @@ import {
 import RowTable from "./RowTable";
 function TableCustomer({ data }) {
   const styleTableHead = "font-bold px-2 py-5";
+
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -21,10 +23,15 @@ function TableCustomer({ data }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data &&
+        {data.length > 0 ? (
           data.map((user) => {
             return <RowTable user={user} key={user.id} />;
-          })}
+          })
+        ) : (
+          <TableRow className="text-dark-green font-bold text-center text-xl">
+            <TableCell colSpan="4"> ❌ Not Users With That Name </TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );

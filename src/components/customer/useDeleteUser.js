@@ -1,6 +1,5 @@
 import { deleteUser } from "@/services/APIUsers";
 import {
-  QueryClientProvider,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";

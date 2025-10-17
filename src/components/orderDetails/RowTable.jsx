@@ -16,7 +16,9 @@ const RowTable = ({ order, date }) => {
         />
       </TableCell>
       <TableCell className={`${styleTableCell} w-48`}>{order.name}</TableCell>
-      <TableCell className={`${styleTableCell} text-sm text-green font-semibold w-20`}>
+      <TableCell
+        className={`${styleTableCell} text-sm text-green font-semibold w-20`}
+      >
         {order.categoryName}
       </TableCell>
       <TableCell className={`${styleTableCell} font-bold w-24 px-3`}>
@@ -29,7 +31,7 @@ const RowTable = ({ order, date }) => {
         {order.quantity}
       </TableCell>
       <TableCell className={`${styleTableCell} text-green font-bold w-24`}>
-        ${+order.price * +order.quantity}
+        ${(+order.price * +order.quantity).toFixed(2)}
       </TableCell>
       <TableCell className={`${styleTableCell} w-28`}>{formatted}</TableCell>
     </TableRow>

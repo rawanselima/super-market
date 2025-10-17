@@ -12,7 +12,6 @@ const Login = () => {
     "w-full px-3 py-2 border-2 border-light-green  rounded focus:outline-none focus:ring-2 focus:ring-green mb-5";
   const styleLabel =
     "flex gap-2 items-center text-lg font-bold text-dark-green mb-3";
-  const [user, setUser] = useState();
 
   const {
     register,
@@ -43,7 +42,7 @@ const Login = () => {
               <IoPerson /> Phone Number *
             </label>
             <input
-              type="phone"
+              type="tel"
               name="phone"
               className={styleInput}
               {...register("phone", { required: "phone number is required" })}

@@ -25,7 +25,7 @@ const RowTable = ({ user }) => {
         <div className="flex">
           <button
             className="mr-3 cursor-pointer bg-light-green text-dark-green px-3 py-1 text-sm  rounded-lg  my-2"
-            onClick={() => navigate("1")}
+            onClick={() => navigate(user.id)}
           >
             Report
           </button>

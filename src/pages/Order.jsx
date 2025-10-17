@@ -24,6 +24,7 @@ const Order = () => {
   );
 
   const debouncedText = useDebounce(textSearch, 1000);
+  
   useEffect(() => {
     if (debouncedText.trim() === "") {
       setSearchValue("all");

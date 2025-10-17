@@ -70,7 +70,7 @@ const Payment = ({ setShippingPrice }) => {
         <div className={styleDiv}>
           <label htmlFor="phone"> Phone Number </label>
           <input
-            type="phone"
+            type="tel"
             name="phone"
             defaultValue={user?.phone}
             className={styleInput}

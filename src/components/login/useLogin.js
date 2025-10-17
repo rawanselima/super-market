@@ -1,5 +1,5 @@
 import { addUser } from "@/redux/reducerUser";
-import { users } from "@/services/APIUsers";
+import { allUsers } from "@/services/APIUsers";
 import { useMutation } from "@tanstack/react-query";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import toast from "react-hot-toast";
@@ -13,11 +13,11 @@ export default function useLogin() {
 
   const { mutate, isPending, isError } = useMutation({
     mutationFn: async (user) => {
-      const allUsers = await users();
-      const isLogin = allUsers.find(
+      const users = await allUsers();
+      const isLogin = users.find(
         (ele) => ele.phone === user.phone && ele.password === user.password
       );
-      console.log(isLogin);
+
       if (isLogin !== undefined) {
         if (isLogin.role === "user") navigate("/");
         else if (isLogin.role === "admin") navigate("/dashboard");
