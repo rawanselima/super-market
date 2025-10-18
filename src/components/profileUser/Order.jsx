@@ -4,35 +4,60 @@ import Button from "../common/Button";
 import useOrderStatus from "@/hooks/useOrderStatus";
 import TotalReceipt from "./TotalReceipt";
 import DeletePopup from "../common/DeletePopup";
+import useDate from "@/hooks/useDate";
+import useEditOrder from "../order/useEditOrder";
 
-const Order = () => {
-  const { styleStatus } = useOrderStatus("pending");
+const Order = ({ order }) => {
+  const { styleStatus } = useOrderStatus(order.status);
   const [isOpen, setIsOpen] = useState(false);
+  const { formatted } = useDate(order.date);
+  const { mutate, isPending } = useEditOrder(setIsOpen);
 
   return (
     <div>
       <div className="bg-light-green flex items-center justify-between p-3 rounded mt-3">
-        <h2 className="font-bold text-2xl text-dark-green"> Order #Id </h2>
+        <div>
+          <h2 className="font-bold text-2xl text-dark-green">
+            Order #{order.id}
+          </h2>
+          <p className="text-dark-gray text-xs font-bold"> {formatted} </p>
+        </div>
         <div className="flex gap-2 items-center">
-          <p className={styleStatus}> Pending </p>
-          <Button
-            danger={true}
-            small={true}
-            navigate={() => setIsOpen(!isOpen)}
-          >
-            cancel
-          </Button>
+          <p className={styleStatus}> {order.status} </p>
+          {order.status === "pending" && (
+            <Button
+              danger={true}
+              small={true}
+              navigate={() => setIsOpen(!isOpen)}
+              isPending={isPending}
+            >
+              cancel
+            </Button>
+          )}
         </div>
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 gap-2 items-start">
         <div>
-          {/* <ReceiptBox />
-          <ReceiptBox /> */}
+          {order.order.map((ele) => {
+            return <ReceiptBox cart={ele} />;
+          })}
         </div>
-        <TotalReceipt />
+        <TotalReceipt order={order} />
       </div>
 
-      {isOpen && <DeletePopup isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <DeletePopup
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          mutate={() =>
+            mutate({
+              orderId: order.id,
+              newOrder: { ...order, status: "cancel" },
+            })
+          }
+          isPending={isPending}
+        />
+      )}
     </div>
   );
 };

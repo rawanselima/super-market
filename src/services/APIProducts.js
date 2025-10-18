@@ -134,3 +134,15 @@ export async function fetchProductsCategory(categoryId) {
     return [];
   }
 }
+
+export async function fetchAllProducts() {
+  try {
+    const response = await fetch(`${API_BASE_1}products`);
+    if (!response.ok) throw new Error("failed to fetch products");
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    return [];
+  }
+}

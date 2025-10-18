@@ -7,22 +7,38 @@ import { FiDollarSign } from "react-icons/fi";
 import useFetchOrderMonth from "./useFetchOrderMonth";
 import Loader from "../common/Loader";
 import Error from "../common/Error";
+import useFetchAllProducts from "./useFetchAllProducts";
+import useFetchUsersMonth from "./useFetchUsersMonth";
 const Sales = ({ allOrders }) => {
   const { data, isLoading, isError } = useFetchOrderMonth(
     Date.now(),
     allOrders
   );
 
-  if (isLoading) return <Loader />;
-  if (isError) return <Error />;
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+  } = useFetchAllProducts();
+
+  const {
+    data: allUsers,
+    isLoading: isLoadingAllUsers,
+    isErrorAllUsers,
+  } = useFetchUsersMonth();
+
+  if (isLoading || isLoadingProducts || isLoadingAllUsers) return <Loader />;
+  if (isError || isErrorProducts || isErrorAllUsers) return <Error />;
+
+  const allProducts = products.length;
 
   const totalPriceCurrentMonth = data?.nowMonth.reduce(
-    (acc, cur) => acc + +cur.totalPrice,
+    (acc, cur) => cur.status !== "cancel" && acc + +cur.totalPrice,
     0
   );
 
   const totalPriceLastMonth = data?.lastMonth.reduce(
-    (acc, cur) => acc + +cur.totalPrice,
+    (acc, cur) => cur.status !== "cancel" && acc + +cur.totalPrice,
     0
   );
 
@@ -50,14 +66,13 @@ const Sales = ({ allOrders }) => {
     {
       text: "Customers",
       icon: <IoPeopleOutline />,
-      sales: "35000",
-      percentage: 50,
+      sales: allUsers?.allUsersSigh?.length,
+      percentage: allUsers?.percentageForUsers,
     },
     {
       text: "Products",
       icon: <BsBoxes />,
-      sales: "650",
-      percentage: 27,
+      sales: allProducts,
     },
   ];
 

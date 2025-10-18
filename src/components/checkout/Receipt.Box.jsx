@@ -1,6 +1,7 @@
 import React from "react";
 
 const ReceiptBox = ({ cart }) => {
+  
   return (
     <div className="border-1 border-light-gray p-3 rounded flex items-center gap-3 text-dark-green my-2">
       <div>

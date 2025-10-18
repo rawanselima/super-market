@@ -1,7 +1,14 @@
 import React from "react";
+import useFetchUserDetails from "../ReportCustomer/useFetchUserDetails";
+import Loader from "../common/Loader";
+import Error from "../common/Error";
 
-const InfoUser = () => {
+const InfoUser = ({ userId }) => {
   const styleSpan = "font-bold text-green text-lg";
+  const { data, isLoading, isError } = useFetchUserDetails(userId);
+  if (isLoading) return <Loader />;
+  if (isError) return <Error />;
+
   return (
     <section className="flex items-center gap-3 border-1 border-light-gray rounded p-5 text-dark-green text-sm font-bold">
       <div className="w-36">
@@ -9,13 +16,13 @@ const InfoUser = () => {
       </div>
       <div>
         <p>
-          <span className={styleSpan}> Name : </span> rawan selima
+          <span className={styleSpan}> Name : </span> {data.name}
         </p>
         <p>
-          <span className={styleSpan}> Email :</span> rawanselima@gmail.com
+          <span className={styleSpan}> Email :</span> {data.email}
         </p>
         <p>
-          <span className={styleSpan}> Phone Number : </span> +201060661936
+          <span className={styleSpan}> Phone Number : </span> {data.phone}
         </p>
       </div>
     </section>

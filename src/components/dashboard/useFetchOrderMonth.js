@@ -14,12 +14,12 @@ export default function useFetchOrderMonth(date, allOrders) {
     queryFn: async () => {
       const nowMonth = allOrders.filter((order) => {
         const orderDate = format(order.date, "yyyy-MM");
-        return orderDate === currentMonthAndYear && order;
+        return orderDate === currentMonthAndYear && order.status !== "cancel";
       });
 
       const lastMonth = allOrders.filter((order) => {
         const orderDate = format(order.date, "yyyy-MM");
-        return orderDate === lastMonthAndYear && order;
+        return orderDate === lastMonthAndYear && order.status !== "cancel";
       });
 
       const nowMonthOrders = nowMonth.length;

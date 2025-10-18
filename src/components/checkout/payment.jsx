@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import Spinner from "../common/Spinner";
 import governments from "../shipping/governments";
 import useEditStockProduct from "./useEditStockProduct";
-const Payment = ({ setShippingPrice }) => {
+const Payment = ({ setShippingPrice, shippingPrice }) => {
   const styleDiv = "flex flex-col my-2 text-dark-green text-green";
   const styleInput =
     "border-1 border-light-gray focus:border-green rounded px-2 py-1 my-2 outline-0 text-dark-green";
@@ -41,6 +41,7 @@ const Payment = ({ setShippingPrice }) => {
         order: cartData,
         totalPrice: totalPrice,
         payment: "cash on delivery",
+        shippingPrice: shippingPrice,
       });
 
       for (const ele of cart) {
@@ -48,6 +49,7 @@ const Payment = ({ setShippingPrice }) => {
           productId: ele.productId,
           size: ele.size,
           quantity: ele.quantity,
+          isIncrease: false,
         });
       }
 

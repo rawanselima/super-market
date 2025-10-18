@@ -5,22 +5,32 @@ export default function useEditStockProduct() {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: async ({ productId, size, quantity }) => {
+    mutationFn: async ({ productId, size, quantity, isIncrease }) => {
       const product = await fetchProductsDetails(productId);
 
-      const newSizes = product.sizes.map((ele) =>
-        ele.size === size ? { ...ele, stock: +ele.stock - +quantity } : ele
+      if (!product?.sizes) throw new Error("Product sizes not found");
+
+      const updatedSizes = product.sizes.map((ele) =>
+        ele.size === size
+          ? {
+              ...ele,
+              stock: isIncrease
+                ? Number(ele.stock) + Number(quantity)
+                : Number(ele.stock) - Number(quantity),
+            }
+          : ele
       );
 
-      const newProduct = { ...product, sizes: newSizes };
+      const updatedProduct = { ...product, sizes: updatedSizes };
 
       const data = await editProduct({
-        productId: productId,
-        updatedProduct: newProduct,
+        productId,
+        updatedProduct,
       });
 
       return data;
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries(["products"]);
     },

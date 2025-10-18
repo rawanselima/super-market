@@ -29,7 +29,7 @@ export default function useFetchOrdersYear(allOrders) {
       allOrders.forEach((order) => {
         const orderYear = getYear(order.date);
         const dateOrder = getMonth(order.date);
-        if (orderYear === currentYear) {
+        if (orderYear === currentYear && order.status !== "cancel") {
           ordersYear[dateOrder].orders += 1;
           ordersYear[dateOrder].totalSales += Number(order.totalPrice || 0);
         }

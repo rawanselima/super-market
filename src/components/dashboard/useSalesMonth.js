@@ -11,7 +11,7 @@ export default function useSalesMonth(allOrders) {
       const ordersMonth = allOrders.filter((order) => {
         const date = new Date(order.date);
         const orderDate = format(date, "yyyy-MM");
-        return orderDate === currentMonth;
+        return orderDate === currentMonth && order.status !== "cancel";
       });
 
       const allOrdersMonth = ordersMonth.flatMap((order) => order.order);

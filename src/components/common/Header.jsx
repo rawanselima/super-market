@@ -30,8 +30,6 @@ const Header = () => {
     navigate("/");
   }
 
-  console.log(user);
-
   return (
     <header className="flex justify-between items-center font-quicksand py-5 px-3 xl:px-0 ">
       <NavLink to="/">

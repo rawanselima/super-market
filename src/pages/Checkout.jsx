@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { containerVariant, childVariant } from "../animation/animationVariable";
 const Checkout = () => {
   const [shippingPrice, setShippingPrice] = useState(null);
-  
+
   return (
     <motion.main
       className="flex flex-wrap justify-center gap-5 my-5"
@@ -14,7 +14,10 @@ const Checkout = () => {
       animate="visible"
     >
       <motion.section className="w-full xl:w-1/3" variants={childVariant}>
-        <Payment setShippingPrice={setShippingPrice} />
+        <Payment
+          setShippingPrice={setShippingPrice}
+          shippingPrice={shippingPrice}
+        />
       </motion.section>
       <motion.section className="w-full xl:w-1/3" variants={childVariant}>
         <Receipt shippingPrice={shippingPrice} />
