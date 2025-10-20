@@ -168,7 +168,13 @@ const Description = ({ product }) => {
         )}
       </motion.form>
       {(user?.role === "user" || user === null) && (
-        <Button navigate={() => setIsOpen(!isOpen)}>
+        <Button
+          navigate={() => {
+            user === null
+              ? toast.error("login first please")
+              : setIsOpen(!isOpen);
+          }}
+        >
           <span className="mr-2">
             <MdOutlineFeed />
           </span>
