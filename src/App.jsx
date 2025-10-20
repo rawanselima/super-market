@@ -26,6 +26,7 @@ const Shipping = lazy(() => import("./pages/Shipping"));
 const Feedback = lazy(() => import("./pages/Feedback"));
 const ProfileUser = lazy(() => import("./pages/ProfileUser"));
 
+// password and phone admin 1478963 
 function App() {
   const queryClient = new QueryClient();
   const router = createBrowserRouter([
