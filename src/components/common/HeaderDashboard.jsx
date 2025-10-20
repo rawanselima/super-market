@@ -1,13 +1,12 @@
 import React from "react";
-import { TfiWorld } from "react-icons/tfi";
 import { IoIosLogOut } from "react-icons/io";
 import { RxPerson } from "react-icons/rx";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { logout } from "@/redux/reducerUser";
 const HeaderDashboard = ({ setShowSidebar, showSidebar }) => {
-  const [user , setUser] = useLocalStorage("user");
+  const [user, setUser] = useLocalStorage("user");
   const dispatch = useDispatch();
 
   function handleLogout() {
@@ -26,9 +25,6 @@ const HeaderDashboard = ({ setShowSidebar, showSidebar }) => {
             onClick={() => setShowSidebar(!showSidebar)}
           >
             <FaBarsStaggered />
-          </li>
-          <li className={styleLinks}>
-            <TfiWorld />
           </li>
           <li className={styleLinks} onClick={() => handleLogout()}>
             <IoIosLogOut />

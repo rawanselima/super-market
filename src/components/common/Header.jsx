@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { RxPerson } from "react-icons/rx";
 import { IoCartOutline } from "react-icons/io5";
-import { TfiWorld } from "react-icons/tfi";
 import { IoIosLogOut } from "react-icons/io";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,9 +53,6 @@ const Header = () => {
               </NavLink>
             </li>
           )}
-          <li className={styleLinks}>
-            <TfiWorld />
-          </li>
           {user !== null && (
             <li className={styleLinks} onClick={() => handleLogout()}>
               <IoIosLogOut />
@@ -84,10 +80,11 @@ const Header = () => {
                 </span>
               </NavLink>
             ) : (
-              <Button size={"small"} navigate={() => navigate("/login")}>
-                {" "}
-                Login{" "}
-              </Button>
+              <NavLink className="ml-4 text-lg cursor-pointer flex items-center" >
+                <Button size={"small"} navigate={() => navigate("/login")}>
+                  Login
+                </Button>
+              </NavLink>
             )}
           </li>
         </ul>

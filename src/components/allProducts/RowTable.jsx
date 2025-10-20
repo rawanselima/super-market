@@ -67,7 +67,7 @@ const RowTable = ({ product }) => {
       </TableCell>
 
       <TableCell className={`${styleTableCell} font-bold w-20 text-[14px]`}>
-        ${product.offer}
+        {product.offer}%
       </TableCell>
 
       <TableCell

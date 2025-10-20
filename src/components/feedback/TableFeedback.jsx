@@ -6,15 +6,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import RowTable from "./RowTable";
-function TableFeedback() {
+function TableFeedback({ data }) {
   const styleTableHead = "font-bold px-2 py-5";
   return (
     <Table className=" border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
         <TableRow className="uppercase font-bold text-dark-green text-left border-b-1 border-light-gray">
-          <TableHead className={`${styleTableHead} w-20 `}>
-            image
-          </TableHead>
+          <TableHead className={`${styleTableHead} w-20 `}>image</TableHead>
           <TableHead className={`${styleTableHead} w-50 `}>
             product name
           </TableHead>
@@ -29,9 +27,10 @@ function TableFeedback() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <RowTable />
-        <RowTable />
-        <RowTable />
+        {data &&
+          data.map((ele) => {
+            return <RowTable feedback={ele} key={ele.id} />;
+          })}
       </TableBody>
     </Table>
   );

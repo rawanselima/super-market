@@ -4,3 +4,6 @@ export const API_BASE_1 =
 
 export const API_BASE_2 =
   "https://68e0173893207c4b4793ada1.mockapi.io/supermarket/";
+
+export const API_BASE_3 =
+  "https://68f3e5fafd14a9fcc42a24a1.mockapi.io/supermarket/";

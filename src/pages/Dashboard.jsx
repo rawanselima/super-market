@@ -7,6 +7,7 @@ import Chart from "@/components/dashboard/Chart";
 import useFetchAllOrders from "@/components/dashboard/useFetchAllOrders";
 import Loader from "@/components/common/Loader";
 import Error from "@/components/common/Error";
+import TableTopSales from "@/components/dashboard/TableTopSales";
 
 const Dashboard = () => {
   const { data, isLoading, isError } = useFetchAllOrders();
@@ -27,6 +28,10 @@ const Dashboard = () => {
           Sales & Order Through year
         </HeaderSection>
         <Graph allOrders={data} />
+      </section>
+      <section>
+        <HeaderSection showByMargin={true}> Best Sellers </HeaderSection>
+        <TableTopSales />
       </section>
     </main>
   );

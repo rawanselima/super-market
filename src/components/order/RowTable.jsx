@@ -13,8 +13,6 @@ const RowTable = ({ order }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  console.log(order.date);
-
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">
       <TableCell className={`${styleTableCell} w-36`}>

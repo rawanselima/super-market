@@ -62,6 +62,7 @@ export default function useEditOrder(setIsOpen) {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
+      queryClient.invalidateQueries({ queryKey: ["userOrders"] });
       toast.success("Order updated successfully");
       setIsOpen(false);
     },

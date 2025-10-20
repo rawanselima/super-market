@@ -10,6 +10,7 @@ const ProfileUser = () => {
   const [user, setUser] = useLocalStorage("user");
 
   const { data, isLoading, isError } = useFetchUserOrders(user.id);
+
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
 
@@ -17,9 +18,15 @@ const ProfileUser = () => {
     <main className="mx-auto">
       <InfoUser userId={user.id} />
       <section>
-        {data.map((order) => {
-          return <Order key={order.id} order={order} />;
-        })}
+        {data.length > 0 ? (
+          data.map((order) => {
+            return <Order key={order.id} order={order} />;
+          })
+        ) : (
+          <p className="text-center font-bold text-dark-green text-2xl">
+            ❌ not orders Yet
+          </p>
+        )}
       </section>
     </main>
   );

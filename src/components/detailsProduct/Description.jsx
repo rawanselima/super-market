@@ -27,7 +27,7 @@ const Description = ({ product }) => {
   const user = useSelector((state) => state.userStore);
 
   const dispatch = useDispatch();
-  
+
   function handleAddCart() {
     if (user !== null) {
       if (+product.sizes[active].stock >= +quantity) {
@@ -76,24 +76,27 @@ const Description = ({ product }) => {
         <HeaderSection showByMargin={false}>{product.name}</HeaderSection>
       </motion.div>
       <motion.div variants={childTextVariants}>
-        <p className="mt-5 flex items-center gap-1 text-xl text-yellow-500 cursor-pointer">
-          <span>
-            <FaStar />
+        <div className="mt-5 flex items-center gap-1 text-xl text-yellow-500 cursor-pointer">
+          {
+            <p className="flex gap-1">
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={`${
+                    index < product?.rating
+                      ? "text-yellow-500"
+                      : "text-light-gray"
+                  }`}
+                >
+                  <FaStar />
+                </span>
+              ))}
+            </p>
+          }
+          <span className="text-dark-gray text-sm">
+            ( {product.rating || 0} )
           </span>
-          <span>
-            <FaStar />
-          </span>
-          <span>
-            <FaStar />
-          </span>
-          <span>
-            <FaStar />
-          </span>
-          <span>
-            <FaStar />
-          </span>
-          <span className="text-dark-gray text-sm"> ( {product.rating} ) </span>
-        </p>
+        </div>
       </motion.div>
       <motion.div
         className="flex items-center gap-3 my-4 "
@@ -178,7 +181,7 @@ const Description = ({ product }) => {
           setIsOpen={setIsOpen}
           title={"Give Your Feedback"}
         >
-          <UserFeedback />
+          <UserFeedback product={product} setIsOpen={setIsOpen} />
         </PopUp>
       )}
     </motion.div>

@@ -5,7 +5,10 @@ import FeedbackBox from "./FeedbackBox";
 import { motion } from "framer-motion";
 import { containerVariant } from "../../animation/animationVariable";
 import { childVariant } from "../../animation/animationVariable";
+import useFetchAllFeedback from "../detailsProduct/useFetchAllFeedback";
 const Feedback = () => {
+  const { data, isLoading, isError } = useFetchAllFeedback();
+  if (isLoading || isError) return;
   return (
     <motion.div
       className="my-5"
@@ -20,21 +23,16 @@ const Feedback = () => {
         mediumScreen={2}
         smallScreen={1}
       >
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <FeedbackBox />
-          </motion.div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <FeedbackBox />
-          </motion.div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <motion.div variants={childVariant}>
-            <FeedbackBox />
-          </motion.div>
-        </SwiperSlide>
+        {data &&
+          data.map((ele) => {
+            return (
+              <SwiperSlide key={ele.id}>
+                <motion.div variants={childVariant}>
+                  <FeedbackBox data={ele} />
+                </motion.div>
+              </SwiperSlide>
+            );
+          })}
       </SliderContainer>
     </motion.div>
   );

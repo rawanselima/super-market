@@ -91,7 +91,7 @@ const Register = () => {
               Phone Number *
             </label>
             <input
-              type="phone"
+              type="tel"
               name="phone"
               className={styleInput}
               {...register("phone", { required: true })}

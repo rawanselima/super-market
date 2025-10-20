@@ -33,7 +33,6 @@ export default function useFetchUsersMonth() {
             ? 100
             : 0
           : ((nowMonthUsers - lastMonthUsers) / lastMonthUsers) * 100;
-      console.log("fd", allUsersSigh);
 
       return {
         allUsersSigh,

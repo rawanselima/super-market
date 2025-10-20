@@ -31,7 +31,9 @@ export default function useFetchOrdersYear(allOrders) {
         const dateOrder = getMonth(order.date);
         if (orderYear === currentYear && order.status !== "cancel") {
           ordersYear[dateOrder].orders += 1;
-          ordersYear[dateOrder].totalSales += Number(order.totalPrice || 0);
+          ordersYear[dateOrder].totalSales += Number(
+            order.totalPrice || 0
+          );
         }
       });
 

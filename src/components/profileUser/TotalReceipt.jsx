@@ -2,6 +2,7 @@ import React from "react";
 import { IoReceiptOutline } from "react-icons/io5";
 
 const TotalReceipt = ({ order }) => {
+  console.log(order);
   return (
     <div className="font-bold text-dark-green border-1 border-light-gray rounded p-3 text-base/8 mt-3">
       <h3 className="text-xl font-bold my-3 text-dark-green flex items-center">
@@ -16,12 +17,14 @@ const TotalReceipt = ({ order }) => {
       </p>
       <p>
         Shipping Price :
-        <span className="text-green text-xl">${order.shippingPrice || 0}</span>
+        <span className="text-green text-xl">
+          ${order.shippingPrice?.price || 0}
+        </span>
       </p>
       <p>
         Total Price :
         <span className="text-green text-xl">
-          ${+order.totalPrice + (+order.shippingPrice || 0)}
+          ${+order.totalPrice + (+order.shippingPrice?.price || 0)}
         </span>
       </p>
     </div>

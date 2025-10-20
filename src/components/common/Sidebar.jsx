@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { FaRegChartBar } from "react-icons/fa";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -17,12 +17,22 @@ import {
   sidebarVariant,
   tabVariant,
 } from "../../animation/animationVariable";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/reducerUser";
+import { useLocalStorage } from "@uidotdev/usehooks";
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const styleList =
     "relative flex items-center gap-2 px-2 py-3 cursor-pointer rounded ";
   const styleIconSocialMedia =
     "text-xs mx-1 mt-5 mb-1 text-green bg-dark-green rounded-full p-1.5 hover:bg-green hover:text-dark-green transition-all duration-300 cursor-pointer";
   const styleSpan = "md:hidden xl:block block";
+  const dispatch = useDispatch();
+  const [user, setUser] = useLocalStorage("user");
+
+  function handleLogout() {
+    setUser(null);
+    dispatch(logout());
+  }
 
   const dataList = [
     {
@@ -59,11 +69,6 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
       icon: <BiSolidMessageSquareDetail />,
       text: "Feedback",
       function: "feedback",
-    },
-    {
-      icon: <MdLogout />,
-      text: "Logout",
-      function: "logout",
     },
   ];
 
@@ -164,6 +169,15 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
                 </motion.li>
               );
             })}
+            <motion.li
+              variants={sidebarVariant}
+              whileHover={hoverVariant}
+              whileTap={tabVariant}
+              className={styleList}
+              onClick={() => handleLogout()}
+            >
+              <MdLogout /> <span className={styleSpan}> Logout </span>
+            </motion.li>
           </motion.ul>
         </nav>
       </motion.aside>

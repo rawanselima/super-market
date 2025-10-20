@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-export default function usePagination(defaultPage = 1, defaultLimit = 5) {
+export default function usePagination(defaultPage = 1, defaultLimit = 10) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const page = parseInt(searchParams.get("page")) || defaultPage;

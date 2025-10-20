@@ -28,7 +28,6 @@ const ReportCustomer = () => {
   if (loadingUser || loadingOrders) return <Loader />;
   if (errorOrders || errorUser) return <Error />;
 
-  console.log(ordersData);
   const address = [...new Set(ordersData.map((order) => order.address))].join(
     " / "
   );
