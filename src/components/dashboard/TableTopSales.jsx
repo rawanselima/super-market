@@ -17,6 +17,8 @@ function TableTopSales() {
   if (isLoading) return <Loader />;
   if (isError) return <Error />;
 
+  console.log(data);
+
   return (
     <Table className="border-2 rounded border-light-green table-fixed">
       <TableHeader className="bg-light-green">
@@ -33,7 +35,7 @@ function TableTopSales() {
 
       <TableBody>
         {data?.map((item) => (
-          <RowTable key={item.productId} item={item} />
+          <RowTable key={item.id} item={item} />
         ))}
       </TableBody>
     </Table>

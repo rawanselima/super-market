@@ -24,15 +24,17 @@ export default function useFetchTopSales() {
       }));
 
       const orders = allOrders?.flatMap((ele) => ele?.order || []) || [];
+      console.log(orders);
 
       orders.forEach((order) => {
         const product = bestSellers.find(
-          (p) => p.productId === order.productId
+          (p) => p.id === order.productId
         );
         if (product) {
           product.price = +order.price;
           product.orderNumber += +order.quantity;
           product.totalPrice += +order.quantity * +order.price;
+          console.log(product);
         }
       });
 

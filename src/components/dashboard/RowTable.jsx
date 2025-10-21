@@ -4,9 +4,7 @@ const RowTable = ({ item }) => {
   const styleTableCell = "p-3 text-[16px]";
   return (
     <TableRow className="b-light-green border-b-1 border-light-gray">
-      <TableCell className={`${styleTableCell} w-50`}>
-        {item.name}
-      </TableCell>
+      <TableCell className={`${styleTableCell} w-50`}>{item.name}</TableCell>
       <TableCell className={`${styleTableCell} font-bold w-32 text-green`}>
         {item.category.name}
       </TableCell>
@@ -18,7 +16,7 @@ const RowTable = ({ item }) => {
       </TableCell>
 
       <TableCell className={`${styleTableCell} w-36`}>
-        ${item.totalPrice}
+        ${(+item.totalPrice).toFixed(2)}
       </TableCell>
     </TableRow>
   );
