@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { hoverVariant } from "../../animation/animationVariable";
 import { tabVariant } from "../../animation/animationVariable";
 import { Link } from "react-router-dom";
-import useFilterProducts from "../allProducts/useFilterProducts";
+import useFetchProductsCategory from "../products/useFetchProductsCategory";
 const CategoryBox = ({ item }) => {
   const colors = [
     "bg-[#F2FCE4]",
@@ -15,6 +15,7 @@ const CategoryBox = ({ item }) => {
   ];
 
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const { data } = useFetchProductsCategory(item.id);
 
   return (
     <motion.div
@@ -59,7 +60,7 @@ const CategoryBox = ({ item }) => {
               transition: { duration: 0.2 },
             }}
           >
-            28 Items
+            {data && data.length} Items
           </motion.p>
         </div>
       </Link>
