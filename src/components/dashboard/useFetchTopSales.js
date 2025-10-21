@@ -11,8 +11,6 @@ export default function useFetchTopSales() {
       const allOrders = await fetchAllOrders();
       const allCategories = await fetchCategories();
 
-      console.log(allProducts);
-
       let bestSellers = allProducts.map((product) => ({
         ...product,
         category: allCategories.find(
@@ -24,23 +22,21 @@ export default function useFetchTopSales() {
       }));
 
       const orders = allOrders?.flatMap((ele) => ele?.order || []) || [];
-      console.log(orders);
 
       orders.forEach((order) => {
-        const product = bestSellers.find(
-          (p) => p.id === order.productId
-        );
+        const product = bestSellers.find((p) => p.id === order.productId);
         if (product) {
           product.price = +order.price;
           product.orderNumber += +order.quantity;
           product.totalPrice += +order.quantity * +order.price;
-          console.log(product);
         }
       });
 
       bestSellers.sort((a, b) => b.orderNumber - a.orderNumber);
 
-      const top10 = bestSellers.slice(0, 10);
+      const top10 = bestSellers
+        .filter((ele) => +ele.orderNumber > 0)
+        .slice(0, 10);
 
       return top10;
     },

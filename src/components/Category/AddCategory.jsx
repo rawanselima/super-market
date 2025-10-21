@@ -75,7 +75,7 @@ const AddCategory = ({ setIsOpen }) => {
           variant="default"
           disabled={isUploading || isPending}
         >
-          {isPending || isUploading ? <Spinner /> : " Add Product"}
+          {isPending || isUploading ? <Spinner /> : " Add Category"}
         </Button>
       </div>
     </form>

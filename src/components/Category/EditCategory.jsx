@@ -63,7 +63,7 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
 
   function handleDeleteImage() {
     setPreviewImage(null);
-    setValue("image", ""); // تصفير قيمة الفورم
+    setValue("image", "");
   }
 
   if (isLoading) return <Loader />;
@@ -117,7 +117,7 @@ const EditCategory = ({ categoryId, setIsOpen }) => {
           Cancel
         </Button>
         <Button type="submit" variant="default">
-          {isPending || isUploading ? <Spinner /> : " Edit Product"}
+          {isPending || isUploading ? <Spinner /> : " Edit Category"}
         </Button>
       </div>
     </form>

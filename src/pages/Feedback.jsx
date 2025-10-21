@@ -43,7 +43,7 @@ const Feedback = () => {
         <form onSubmit={(e) => e.preventDefault()}>
           <select
             name="rating"
-            className={styleInput}
+            className={`${styleInput} mb-5`}
             value={filterValue}
             onChange={(e) => setFilterValue(e.target.value)}
           >
