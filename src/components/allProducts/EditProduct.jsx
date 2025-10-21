@@ -225,7 +225,11 @@ const EditProduct = ({ product, setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button type="submit" variant="default">
+        <Button
+          type="submit"
+          variant="default"
+          disabled={isPending || isUploading}
+        >
           {isPending || isUploading ? <Spinner /> : "Edit Product"}
         </Button>
       </div>

@@ -202,7 +202,11 @@ const AddProduct = ({ setIsOpen }) => {
         >
           Cancel
         </Button>
-        <Button type="submit" variant="default">
+        <Button
+          type="submit"
+          variant="default"
+          disabled={isPending || isUploading}
+        >
           {isPending || isUploading ? <Spinner /> : "Add Product"}
         </Button>
       </div>

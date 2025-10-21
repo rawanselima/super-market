@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Button = ({ children, size, type, navigate, danger }) => {
+const Button = ({ children, size, type, navigate, danger, disabled }) => {
   return (
     <motion.button
       onClick={navigate}
       type={type}
+      disabled={disabled}
       className={`${
         size === "small"
           ? "px-3 py-1 text-sm"
@@ -14,7 +15,8 @@ const Button = ({ children, size, type, navigate, danger }) => {
           : "text-lg px-5 py-1"
       }
         ${danger ? "bg-red-900" : "bg-green"}
-        text-white  rounded-lg flex items-center justify-center my-2 cursor-pointer font-medium relative overflow-hidden`}
+        ${disabled ? `cursor-not-allowed ` : "cursor-pointer"}
+        text-white  rounded-lg flex items-center justify-center my-2 font-medium relative overflow-hidden`}
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{

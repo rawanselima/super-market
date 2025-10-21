@@ -11,7 +11,7 @@ import { addUser, logout } from "@/redux/reducerUser";
 
 const Header = () => {
   const styleLinks =
-    "mx-1 text-lg cursor-pointer hover:text-green duration-300 transition-all";
+    "mx-1.5 text-lg cursor-pointer hover:text-green duration-300 transition-all";
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cartStore);
   const dispatch = useDispatch();
@@ -76,11 +76,11 @@ const Header = () => {
               >
                 <RxPerson />
                 <span className="font-light text-dark-gray text-sm">
-                  {user.name}
+                  {user.name.split(" ")[0]}
                 </span>
               </NavLink>
             ) : (
-              <NavLink className="ml-4 text-lg cursor-pointer flex items-center" >
+              <NavLink className="ml-4 text-lg cursor-pointer flex items-center">
                 <Button size={"small"} navigate={() => navigate("/login")}>
                   Login
                 </Button>
@@ -88,7 +88,7 @@ const Header = () => {
             )}
           </li>
         </ul>
-      </nav> 
+      </nav>
     </header>
   );
 };
